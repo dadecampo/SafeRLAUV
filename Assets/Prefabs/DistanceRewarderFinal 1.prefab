@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6062645229573170151}
   - component: {fileID: 6062645229573170144}
   - component: {fileID: 6062645229573170145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistancePlane (2)
   m_TagString: DistancePlane
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 6062645230480356010}
   - component: {fileID: 6062645230480356011}
   - component: {fileID: 6062645230480356004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistancePlane
   m_TagString: DistancePlane
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 6062645230632143730}
   - component: {fileID: 6062645230632143731}
   - component: {fileID: 6062645230632143724}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistancePlane (5)
   m_TagString: DistancePlane
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 6062645230798843662}
   - component: {fileID: 6062645230798843663}
   - component: {fileID: 6062645230798843656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistancePlane (1)
   m_TagString: DistancePlane
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 6062645230849830310}
   - component: {fileID: 6062645230849830311}
   - component: {fileID: 6062645230849830304}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistancePlane (4)
   m_TagString: DistancePlane
   m_Icon: {fileID: 0}
@@ -608,7 +608,7 @@ GameObject:
   - component: {fileID: 6062645231152918720}
   - component: {fileID: 6062645231152918721}
   - component: {fileID: 6062645231152918722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistancePlane (3)
   m_TagString: DistancePlane
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6062645231213483528}
   - component: {fileID: 6062645231213483529}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistanceRewarderFinal 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

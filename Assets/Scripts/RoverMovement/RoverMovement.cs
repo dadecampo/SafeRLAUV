@@ -1,13 +1,19 @@
+using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
+using System.IO.Abstractions;
+using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using Unity.Mathematics;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
+using static Unity.MLAgents.Sensors.RayPerceptionOutput;
 using static UnityEngine.GraphicsBuffer;
 
 public class RoverMovement : Agent
@@ -26,9 +32,13 @@ public class RoverMovement : Agent
     public Transform goalTransform;
     public List<Transform> startPointList;
     public DistanceRewarder distanceRewarder;
+    public List<RayPerceptionSensorComponent3D> rayPerceptionSensorComponents;
+    private List<double> distanceFromWallsForEachEpisode = new List<double>();
     public long collisions = 0;
+    private List<double> collisionsForEachEpisode = new List<double>();
+    private List<Vector3> historyPositions = new List<Vector3>();
 
-    private float distanceToGoal = 1000.0f;
+    private float distanceToGoal;
     private float oldDistanceToGoal;
     private float angleToGoal_x;
     private float angleToGoal_y;
@@ -36,26 +46,31 @@ public class RoverMovement : Agent
     private bool isPassed;
     private float _timeSpend = 0;
     private bool alreadyGetCheckpoint = false;
+    private double meanDistanceFromWalls = 0.0f;
+    private int measurementsMeanDistanceFromWalls = 0;
+    private int episode = 0;
 
     private EnvironmentParameters m_ResetParams;
 
     public override void Initialize()
     {
         m_ResetParams = Academy.Instance.EnvironmentParameters;
-
         float target_x = m_ResetParams.GetWithDefault("target_x", goalTransform.position.x);
         float target_y = m_ResetParams.GetWithDefault("target_y", goalTransform.position.y);
         float target_z = m_ResetParams.GetWithDefault("target_z", goalTransform.position.z);
         float waterEnabled = m_ResetParams.GetWithDefault("waterEnabled", 1f);
-        float fastRestart = m_ResetParams.GetWithDefault("fastRestart", 0);
+        float fastRestart = m_ResetParams.GetWithDefault("fastRestart", 1f);
         float distancePlanesN = m_ResetParams.GetWithDefault("distancePlanesN", 6);
+        float safeTraining = m_ResetParams.GetWithDefault("safeTraining", 1f);
         if (GameManager.Instance != null)
         {
-            if (GameManager.Instance.Water != null)
+            if (GameManager.Instance.Water != null && !GameManager.Instance.WaterActive)
             {
+                GameManager.Instance.WaterActive = true;
                 GameManager.Instance.Water.SetActive(waterEnabled == 1f);
             }
             GameManager.Instance.FastRestart = fastRestart == 1f;
+            GameManager.Instance.SafeTraining = safeTraining == 1f;
         }
         goalTransform.position = new Vector3(target_x, target_y, target_z);
         inCollision = false;
@@ -70,25 +85,53 @@ public class RoverMovement : Agent
     {
         if (StepCount > 12000)
         {
-            //Debug.Log(GetCumulativeReward());
+            AddDistanceFromWalls();
+            collisionsForEachEpisode.Add(collisions);
+            CreateCollisionsCSV();
+
             GameManager.Instance.AddCollisions(collisions);
             GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
             GameManager.Instance.AddSuccess(0);
             GameManager.Instance.PrintResults();
             EndEpisode();
         }
-        float differenceScaled = (oldDistanceToGoal - distanceToGoal) * 100;
-        AddReward(differenceScaled);
+        CalculateInfoToGoal();
+        //SavePosition();
+        float differenceScaled = (oldDistanceToGoal - distanceToGoal) * Constants.RWD_MULTIPLIER_DISTANCE;
+        //Debug.Log(differenceScaled);
+        AddReward(differenceScaled + Constants.RWD_TIMESTEP_PENALITY);
+        AddSensorRewards();
         Stabilize();
     }
 
     private void Update()
     {
-        CalculateInfoToGoal();
         if (Input.GetKeyDown(KeyCode.C))
         {
             ChangeCamera();
         }
+    }
+
+    private void SavePosition()
+    {
+        historyPositions.Add(rb.transform.position);
+    }
+
+    private void SavePositionHistory()
+    {
+        //Crea il nome del file CSV
+        string csvFileName = String.Format("C:\\Users\\david\\Desktop\\Thesis\\CSV\\position_{0}.csv",this.name);
+
+        using (StreamWriter writer = new StreamWriter(csvFileName))
+        {
+            // Scrive i dati
+            for (int i = 0; i < historyPositions.Count; i++)
+            {
+                writer.WriteLine($"{historyPositions[i].x.ToString()}: {historyPositions[i].y.ToString()}: {historyPositions[i].z.ToString()}");
+            }
+        }
+
+        Console.WriteLine("Dati scritti nel file CSV.");
     }
 
     #region MLAgents
@@ -110,7 +153,8 @@ public class RoverMovement : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(distanceToGoal);
+        
+        FixObservations();
         sensor.AddObservation(angleToGoal_x);
         sensor.AddObservation(angleToGoal_y);
         sensor.AddObservation(rb.velocity.normalized);
@@ -124,27 +168,42 @@ public class RoverMovement : Agent
         float target_y = m_ResetParams.GetWithDefault("target_y", goalTransform.position.y);
         float target_z = m_ResetParams.GetWithDefault("target_z", goalTransform.position.z);
         float waterEnabled = m_ResetParams.GetWithDefault("waterEnabled", 1f);
-        float fastRestart = m_ResetParams.GetWithDefault("fastRestart", 0);
+        float fastRestart = m_ResetParams.GetWithDefault("fastRestart", 1f);
         float distancePlanesN = m_ResetParams.GetWithDefault("distancePlanesN", 6);
-
+        float safeTraining = m_ResetParams.GetWithDefault("safeTraining", 1f);
         if (GameManager.Instance != null)
         {
-            if (GameManager.Instance.Water != null)
+            if (GameManager.Instance.Water != null && !GameManager.Instance.WaterActive)
             {
+                GameManager.Instance.WaterActive = true;
                 GameManager.Instance.Water.SetActive(waterEnabled == 1f);
             }
             GameManager.Instance.FastRestart = fastRestart == 1f;
+            GameManager.Instance.SafeTraining = safeTraining == 1f;
         }
 
         collisions = 0;
+        meanDistanceFromWalls = 0;
+        measurementsMeanDistanceFromWalls = 0;
         goalTransform.position = new Vector3(target_x, target_y, target_z);
 
         rb.velocity = new Vector3(0, 0, 0);
         rb.angularVelocity = new Vector3(0, 0, 0);
         int choice = UnityEngine.Random.Range(0, startPointList.Count);
-        rb.position = startPointList[choice].position + new Vector3(UnityEngine.Random.Range(-1, 1), UnityEngine.Random.Range(-1, 1), UnityEngine.Random.Range(-1, 1));
-        bouyancy.FloatingPower = 250;
-        rb.rotation = Quaternion.Euler(0, 180, 0);
+        if (this != GameManager.Instance.FirstRover && GameManager.Instance.StartSavePosition)
+        {
+            rb.position = GameManager.Instance.FirstRover.transform.position;
+            rb.rotation = GameManager.Instance.FirstRover.transform.rotation;
+            bouyancy.FloatingPower = GameManager.Instance.FirstRover.bouyancy.FloatingPower;
+
+        }
+        else
+        {
+            rb.position = startPointList[choice].position;
+            rb.rotation = Quaternion.Euler(0, 180, 0);
+            bouyancy.FloatingPower = 250;
+        }
+
         _timeSpend = 0;
         inCollision = false;
         if (distanceRewarder == null)
@@ -153,6 +212,7 @@ public class RoverMovement : Agent
         }
         distanceRewarder.SetOnlyNCrossedPlanes((int)distancePlanesN);
         distanceRewarder.SetCommonTarget(this.gameObject);
+        episode += 1;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -185,6 +245,11 @@ public class RoverMovement : Agent
     #region Actions
     private void GoStraight(float straightPower)
     {
+        if (straightPower < 0)
+        {
+            AddReward(Constants.RWD_BACKWARD_PENALITY);
+            straightPower /= 2;
+        }
         foreach (Transform t in turboRightForwards)
         {
             rb.AddForce((t.up * currSpeedForward / 2 * straightPower), ForceMode.Impulse);
@@ -238,6 +303,29 @@ public class RoverMovement : Agent
     #endregion
 
     #region Utility
+
+    private void AddSensorRewards()
+    {
+        if (!GameManager.Instance.SafeTraining)
+            return;
+
+        // Read the observations from the RayPerceptionSensor3D
+        float cum = 0.0f;
+        foreach (RayPerceptionSensorComponent3D rayPerceptionSensor in rayPerceptionSensorComponents){
+            var r1 = rayPerceptionSensor.GetRayPerceptionInput();
+            var r3 = RayPerceptionSensor.Perceive(r1);
+            {
+                foreach (RayPerceptionOutput.RayOutput rayOutput in r3.RayOutputs)
+                {
+                    AddReward( - ( 1-rayOutput.HitFraction )*Constants.RWD_MULTIPLIER_SENSORS);
+                    cum += r1.RayLength*(rayOutput.HitFraction);
+                }
+            }
+        }
+        cum /= 28;
+        measurementsMeanDistanceFromWalls += 1;
+        meanDistanceFromWalls += cum;
+    }
     private void CalculateInfoToGoal()
     {
         //Distance to goal
@@ -265,43 +353,68 @@ public class RoverMovement : Agent
 
         //Debug.Log(String.Format("Distance to goal: {0}, Angle_X: {1}, Angle_Y: {2} , way: {3}", distanceToGoal, angleToGoal_x, angleToGoal_y, whichWay));
     }
+
     void Stabilize()
     {
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), stabilizationSmoothing)); // Smoothly and slowly rotate the submarine to be upright
     }
 
+    private void FixObservations()
+    {
+        if (distanceToGoal is float.NaN)
+        {
+            distanceToGoal = 0.0f;
+        }
+        if (angleToGoal_x is float.NaN)
+        {
+            angleToGoal_x = 0.0f;
+        }
+        if (angleToGoal_y is float.NaN)
+        {
+            angleToGoal_y = 0.0f;
+        }
+    }
+
     private void OnCollisionStay(Collision collision)
     {
+        inCollision = true;
         if (GameManager.Instance.FastRestart)
             return;
 
         if (collision.collider.CompareTag("StartWall"))
         {
-            inCollision = true;
-            AddReward(-0.05f);
+            AddReward(Constants.RWD_WALL_RESTART_FALSE);
         }
         if (collision.collider.CompareTag("Cave"))
         {
-            inCollision = true;
-            AddReward(-0.05f);
+            AddReward(Constants.RWD_WALL_RESTART_FALSE);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        inCollision = true;
+        collisions += 1;
+
         if (collision.collider.CompareTag("StartWall"))
         {
             if (!GameManager.Instance.FastRestart)
             {
-                inCollision = true;
-                collisions += 1;
-                AddReward(-0.05f);
+                AddReward(Constants.RWD_WALL_RESTART_FALSE);
             }
             else
             {
-                inCollision = true;
-                AddReward(-2000f);
-                Debug.Log(GetCumulativeReward());
+                AddReward(Constants.RWD_WALL_RESTART_TRUE);
+                AddDistanceFromWalls();
+                collisionsForEachEpisode.Add(collisions);
+
+                CreateMeanDistanceFromWallsCSV();
+                CreateCollisionsCSV();
+
+                GameManager.Instance.AddCollisions(collisions);
+                GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
+                GameManager.Instance.AddSuccess(0);
+                GameManager.Instance.PrintResults();
                 EndEpisode();
             }
         }
@@ -309,18 +422,30 @@ public class RoverMovement : Agent
         {
             if (!GameManager.Instance.FastRestart)
             {
-                inCollision = true;
-                collisions += 1;
-                AddReward(-0.05f);
+                AddReward(Constants.RWD_WALL_RESTART_FALSE);
             }
             else
             {
-                inCollision = true;
-                AddReward(-2000f);
-                Debug.Log(GetCumulativeReward());
+                AddReward(Constants.RWD_WALL_RESTART_TRUE);
+                AddDistanceFromWalls();
+                collisionsForEachEpisode.Add(collisions);
+                CreateMeanDistanceFromWallsCSV();
+                CreateCollisionsCSV();
+
+                GameManager.Instance.AddCollisions(collisions);
+                GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
+                GameManager.Instance.AddSuccess(0);
+                GameManager.Instance.PrintResults();
                 EndEpisode();
             }
         }
+    }
+
+    private void AddDistanceFromWalls()
+    {
+        string meanString = (meanDistanceFromWalls / measurementsMeanDistanceFromWalls).ToString().Replace(",",".");
+        Debug.Log("Mean Distance From Walls: " + meanString);
+        distanceFromWallsForEachEpisode.Add(meanDistanceFromWalls / measurementsMeanDistanceFromWalls);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -347,8 +472,11 @@ public class RoverMovement : Agent
     {
         if (other.CompareTag("GOAL"))
         {
-            AddReward(2000f);
-            //Debug.Log(GetCumulativeReward());
+            AddReward(Constants.RWD_GOAL);
+            AddDistanceFromWalls();
+            collisionsForEachEpisode.Add(collisions);
+            CreateMeanDistanceFromWallsCSV();
+            CreateCollisionsCSV();
             GameManager.Instance.AddCollisions(collisions);
             GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
             GameManager.Instance.AddSuccess(1);
@@ -357,7 +485,7 @@ public class RoverMovement : Agent
         }
         else if (other.CompareTag("CHECKPOINT") && !alreadyGetCheckpoint)
         {
-            AddReward(500f);
+            AddReward(Constants.RWD_CHECKPOINT);
             alreadyGetCheckpoint = true;
         }
 
@@ -365,5 +493,54 @@ public class RoverMovement : Agent
 
     #endregion
 
+    #region CSV
+    private void CreateMeanDistanceFromWallsCSV()
+    {
+        if (!GameManager.Instance.CreateCSVMeanDistanceFromWalls)
+        {
+            return;
+        }
+        //Crea il nome del file CSV
+        string csvFileName = String.Format("C:\\Users\\david\\Desktop\\Thesis\\CSV\\datiMeanDistanceFromWalls_{0}.csv", this.name);
+
+        using (StreamWriter writer = new StreamWriter(csvFileName))
+        {
+            // Scrive l'intestazione
+            writer.WriteLine("Episode, MeanDistanceFromWalls");
+
+            // Scrive i dati
+            for (int i = 0; i < distanceFromWallsForEachEpisode.Count; i++)
+            {
+                writer.WriteLine($"{i + 1}, {distanceFromWallsForEachEpisode[i]}");
+            }
+        }
+
+        Console.WriteLine("Dati scritti nel file CSV.");
+    }
+
+    private void CreateCollisionsCSV()
+    {
+        if (!GameManager.Instance.CreateCSVCollisions)
+        {
+            return;
+        }
+        //Crea il nome del file CSV
+        string csvFileName = String.Format("C:\\Users\\david\\Desktop\\Thesis\\CSV\\datiCollisions_{0}.csv", this.name);
+
+        using (StreamWriter writer = new StreamWriter(csvFileName))
+        {
+            // Scrive l'intestazione
+            writer.WriteLine("Episode, Collisions");
+
+            // Scrive i dati
+            for (int i = 0; i < collisionsForEachEpisode.Count; i++)
+            {
+                writer.WriteLine($"{i + 1}, {collisionsForEachEpisode[i]}");
+            }
+        }
+
+        Console.WriteLine("Dati scritti nel file CSV.");
+    }
+    #endregion
 
 }

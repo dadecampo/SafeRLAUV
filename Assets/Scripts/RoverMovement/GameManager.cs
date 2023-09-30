@@ -1,14 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject Water;
+    public bool WaterActive;
     public bool FastRestart;
+    public bool SafeTraining;
 
+    public RoverMovement FirstRover;
+    public bool StartSavePosition;
+    public bool CreateCSVMeanDistanceFromWalls;
+    public bool CreateCSVCollisions;
+
+    private EnvironmentParameters m_ResetParams;
     private List<float> CumulativeRewards = new List<float>();
     private List<long> CollisionTimesteps = new List<long>();
     private List<int> SuccessRate = new List<int>();
@@ -22,6 +31,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
             return;
         }
+
         Instance = this;
     }
 
@@ -47,7 +57,8 @@ public class GameManager : MonoBehaviour
         for (int index = 0; index < CumulativeRewards.Count; index++)
         {
             meanCumulative += (CumulativeRewards[index] / CumulativeRewards.Count);
-            meanCollisions += ((float)(CollisionTimesteps[index]) / CollisionTimesteps.Count);
+            //meanCollisions += ((float)(CollisionTimesteps[index]) / CollisionTimesteps.Count);
+            meanCollisions += (float)(CollisionTimesteps[index]);
             successRate += SuccessRate[index];
         }
         Debug.Log("CumulativeRewards: " + meanCumulative);
