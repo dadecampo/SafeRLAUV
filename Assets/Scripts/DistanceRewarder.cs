@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-
 public class DistanceRewarder : MonoBehaviour
 {
     [SerializeField]

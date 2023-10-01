@@ -1,24 +1,13 @@
 using Assets.Scripts;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Drawing;
-using System.IO;
-using System.IO.Abstractions;
-using System.IO.Abstractions.TestingHelpers;
-using System.Linq;
-using Unity.Mathematics;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
-using static Unity.MLAgents.Sensors.RayPerceptionOutput;
-using static UnityEngine.GraphicsBuffer;
 
 public class RoverMovement : Agent
 {
-
     private Rigidbody rb;
     public float currSpeedForward;
     public BouyancyObject bouyancy;
@@ -36,19 +25,15 @@ public class RoverMovement : Agent
     private List<double> distanceFromWallsForEachEpisode = new List<double>();
     public long collisions = 0;
     private List<double> collisionsForEachEpisode = new List<double>();
-    private List<Vector3> historyPositions = new List<Vector3>();
+    private List<Vector3> collisionsLocationForEachEpisode = new List<Vector3>();
+
 
     private float distanceToGoal;
     private float oldDistanceToGoal;
     private float angleToGoal_x;
     private float angleToGoal_y;
-    private bool inCollision;
-    private bool isPassed;
-    private float _timeSpend = 0;
-    private bool alreadyGetCheckpoint = false;
     private double meanDistanceFromWalls = 0.0f;
     private int measurementsMeanDistanceFromWalls = 0;
-    private int episode = 0;
 
     private EnvironmentParameters m_ResetParams;
 
@@ -73,10 +58,8 @@ public class RoverMovement : Agent
             GameManager.Instance.SafeTraining = safeTraining == 1f;
         }
         goalTransform.position = new Vector3(target_x, target_y, target_z);
-        inCollision = false;
         base.Initialize();
         rb = GetComponent<Rigidbody>();
-        alreadyGetCheckpoint = false;
         distanceRewarder = Instantiate(distanceRewarder);
         distanceRewarder.SetOnlyNCrossedPlanes((int)distancePlanesN);
     }
@@ -87,7 +70,7 @@ public class RoverMovement : Agent
         {
             AddDistanceFromWalls();
             collisionsForEachEpisode.Add(collisions);
-            CreateCollisionsCSV();
+            CSVManager.Instance.CreateCollisionsCSV(this.name, collisionsForEachEpisode);
 
             GameManager.Instance.AddCollisions(collisions);
             GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
@@ -112,28 +95,6 @@ public class RoverMovement : Agent
         }
     }
 
-    private void SavePosition()
-    {
-        historyPositions.Add(rb.transform.position);
-    }
-
-    private void SavePositionHistory()
-    {
-        //Crea il nome del file CSV
-        string csvFileName = String.Format("C:\\Users\\david\\Desktop\\Thesis\\CSV\\position_{0}.csv",this.name);
-
-        using (StreamWriter writer = new StreamWriter(csvFileName))
-        {
-            // Scrive i dati
-            for (int i = 0; i < historyPositions.Count; i++)
-            {
-                writer.WriteLine($"{historyPositions[i].x.ToString()}: {historyPositions[i].y.ToString()}: {historyPositions[i].z.ToString()}");
-            }
-        }
-
-        Console.WriteLine("Dati scritti nel file CSV.");
-    }
-
     #region MLAgents
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
@@ -153,7 +114,7 @@ public class RoverMovement : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        
+
         FixObservations();
         sensor.AddObservation(angleToGoal_x);
         sensor.AddObservation(angleToGoal_y);
@@ -190,29 +151,16 @@ public class RoverMovement : Agent
         rb.velocity = new Vector3(0, 0, 0);
         rb.angularVelocity = new Vector3(0, 0, 0);
         int choice = UnityEngine.Random.Range(0, startPointList.Count);
-        if (this != GameManager.Instance.FirstRover && GameManager.Instance.StartSavePosition)
-        {
-            rb.position = GameManager.Instance.FirstRover.transform.position;
-            rb.rotation = GameManager.Instance.FirstRover.transform.rotation;
-            bouyancy.FloatingPower = GameManager.Instance.FirstRover.bouyancy.FloatingPower;
+        rb.position = startPointList[choice].position;
+        rb.rotation = Quaternion.Euler(0, 180, 0);
+        bouyancy.FloatingPower = 250;
 
-        }
-        else
-        {
-            rb.position = startPointList[choice].position;
-            rb.rotation = Quaternion.Euler(0, 180, 0);
-            bouyancy.FloatingPower = 250;
-        }
-
-        _timeSpend = 0;
-        inCollision = false;
         if (distanceRewarder == null)
         {
             distanceRewarder = Instantiate(distanceRewarder);
         }
         distanceRewarder.SetOnlyNCrossedPlanes((int)distancePlanesN);
         distanceRewarder.SetCommonTarget(this.gameObject);
-        episode += 1;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -310,34 +258,35 @@ public class RoverMovement : Agent
             return;
 
         // Read the observations from the RayPerceptionSensor3D
-        float cum = 0.0f;
-        foreach (RayPerceptionSensorComponent3D rayPerceptionSensor in rayPerceptionSensorComponents){
+        float sum = 0.0f;
+        foreach (RayPerceptionSensorComponent3D rayPerceptionSensor in rayPerceptionSensorComponents)
+        {
             var r1 = rayPerceptionSensor.GetRayPerceptionInput();
             var r3 = RayPerceptionSensor.Perceive(r1);
             {
                 foreach (RayPerceptionOutput.RayOutput rayOutput in r3.RayOutputs)
                 {
-                    AddReward( - ( 1-rayOutput.HitFraction )*Constants.RWD_MULTIPLIER_SENSORS);
-                    cum += r1.RayLength*(rayOutput.HitFraction);
+                    AddReward(-(1 - rayOutput.HitFraction) * Constants.RWD_MULTIPLIER_SENSORS);
+                    sum += r1.RayLength * (rayOutput.HitFraction);
                 }
             }
         }
-        cum /= 28;
+        sum /= 28;
         measurementsMeanDistanceFromWalls += 1;
-        meanDistanceFromWalls += cum;
+        meanDistanceFromWalls += sum;
     }
     private void CalculateInfoToGoal()
     {
         //Distance to goal
         oldDistanceToGoal = distanceToGoal;
         distanceToGoal = distanceRewarder.GetCumulativeDistanceToGoal();
-        //distanceToGoal=Vector3.Distance(transform.position, goalTransform.position);
+
         //Angle direction
         Vector3 normalizedDirection = goalTransform.position - transform.position;
         float whichWay = Vector3.Cross(transform.forward, normalizedDirection).y;
         whichWay /= Math.Abs(whichWay);
 
-        //Angle degree
+        //Angle degree X
         Vector3 targetDir_x = new Vector3(goalTransform.position.x, 0, goalTransform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
         targetDir_x = targetDir_x.normalized;
         float dot = Vector3.Dot(targetDir_x, transform.forward);
@@ -345,18 +294,17 @@ public class RoverMovement : Agent
 
         whichWay = 1;
 
-        //Angle degree
+        //Angle degree Y
         Vector3 targetDir_y = new Vector3(goalTransform.position.x, goalTransform.position.y, goalTransform.position.z) - new Vector3(transform.position.x, transform.position.y, transform.position.z);
         targetDir_y = targetDir_y.normalized;
         dot = Vector3.Dot(targetDir_y, transform.up);
         angleToGoal_y = Mathf.Asin(dot) * Mathf.Rad2Deg * whichWay;
-
-        //Debug.Log(String.Format("Distance to goal: {0}, Angle_X: {1}, Angle_Y: {2} , way: {3}", distanceToGoal, angleToGoal_x, angleToGoal_y, whichWay));
     }
 
     void Stabilize()
     {
-        rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), stabilizationSmoothing)); // Smoothly and slowly rotate the submarine to be upright
+        // Smoothly and slowly rotate the submarine to be upright
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.Euler(new Vector3(0, rb.rotation.eulerAngles.y, 0)), stabilizationSmoothing));
     }
 
     private void FixObservations()
@@ -377,7 +325,6 @@ public class RoverMovement : Agent
 
     private void OnCollisionStay(Collision collision)
     {
-        inCollision = true;
         if (GameManager.Instance.FastRestart)
             return;
 
@@ -393,9 +340,8 @@ public class RoverMovement : Agent
 
     private void OnCollisionEnter(Collision collision)
     {
-        inCollision = true;
         collisions += 1;
-
+        collisionsLocationForEachEpisode.Add(this.transform.position);
         if (collision.collider.CompareTag("StartWall"))
         {
             if (!GameManager.Instance.FastRestart)
@@ -408,8 +354,9 @@ public class RoverMovement : Agent
                 AddDistanceFromWalls();
                 collisionsForEachEpisode.Add(collisions);
 
-                CreateMeanDistanceFromWallsCSV();
-                CreateCollisionsCSV();
+                CSVManager.Instance.CreateMeanDistanceFromWallsCSV(this.name, distanceFromWallsForEachEpisode);
+                CSVManager.Instance.CreateCollisionsCSV(this.name, collisionsForEachEpisode);
+                CSVManager.Instance.CreateCollisionLocationCSV(this.name, collisionsLocationForEachEpisode);
 
                 GameManager.Instance.AddCollisions(collisions);
                 GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
@@ -429,8 +376,10 @@ public class RoverMovement : Agent
                 AddReward(Constants.RWD_WALL_RESTART_TRUE);
                 AddDistanceFromWalls();
                 collisionsForEachEpisode.Add(collisions);
-                CreateMeanDistanceFromWallsCSV();
-                CreateCollisionsCSV();
+
+                CSVManager.Instance.CreateMeanDistanceFromWallsCSV(this.name, distanceFromWallsForEachEpisode);
+                CSVManager.Instance.CreateCollisionsCSV(this.name, collisionsForEachEpisode);
+                CSVManager.Instance.CreateCollisionLocationCSV(this.name, collisionsLocationForEachEpisode);
 
                 GameManager.Instance.AddCollisions(collisions);
                 GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
@@ -443,21 +392,9 @@ public class RoverMovement : Agent
 
     private void AddDistanceFromWalls()
     {
-        string meanString = (meanDistanceFromWalls / measurementsMeanDistanceFromWalls).ToString().Replace(",",".");
+        string meanString = (meanDistanceFromWalls / measurementsMeanDistanceFromWalls).ToString().Replace(",", ".");
         Debug.Log("Mean Distance From Walls: " + meanString);
         distanceFromWallsForEachEpisode.Add(meanDistanceFromWalls / measurementsMeanDistanceFromWalls);
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("StartWall"))
-        {
-            inCollision = false;
-        }
-        if (collision.collider.CompareTag("Cave"))
-        {
-            inCollision = false;
-        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -475,72 +412,21 @@ public class RoverMovement : Agent
             AddReward(Constants.RWD_GOAL);
             AddDistanceFromWalls();
             collisionsForEachEpisode.Add(collisions);
-            CreateMeanDistanceFromWallsCSV();
-            CreateCollisionsCSV();
+
+            CSVManager.Instance.CreateMeanDistanceFromWallsCSV(this.name, distanceFromWallsForEachEpisode);
+            CSVManager.Instance.CreateCollisionsCSV(this.name, collisionsForEachEpisode);
+            CSVManager.Instance.CreateCollisionLocationCSV(this.name, collisionsLocationForEachEpisode);
+
             GameManager.Instance.AddCollisions(collisions);
             GameManager.Instance.AddCumulativeReward(GetCumulativeReward());
             GameManager.Instance.AddSuccess(1);
             GameManager.Instance.PrintResults();
             EndEpisode();
         }
-        else if (other.CompareTag("CHECKPOINT") && !alreadyGetCheckpoint)
-        {
-            AddReward(Constants.RWD_CHECKPOINT);
-            alreadyGetCheckpoint = true;
-        }
 
     }
 
     #endregion
 
-    #region CSV
-    private void CreateMeanDistanceFromWallsCSV()
-    {
-        if (!GameManager.Instance.CreateCSVMeanDistanceFromWalls)
-        {
-            return;
-        }
-        //Crea il nome del file CSV
-        string csvFileName = String.Format("C:\\Users\\david\\Desktop\\Thesis\\CSV\\datiMeanDistanceFromWalls_{0}.csv", this.name);
-
-        using (StreamWriter writer = new StreamWriter(csvFileName))
-        {
-            // Scrive l'intestazione
-            writer.WriteLine("Episode, MeanDistanceFromWalls");
-
-            // Scrive i dati
-            for (int i = 0; i < distanceFromWallsForEachEpisode.Count; i++)
-            {
-                writer.WriteLine($"{i + 1}, {distanceFromWallsForEachEpisode[i]}");
-            }
-        }
-
-        Console.WriteLine("Dati scritti nel file CSV.");
-    }
-
-    private void CreateCollisionsCSV()
-    {
-        if (!GameManager.Instance.CreateCSVCollisions)
-        {
-            return;
-        }
-        //Crea il nome del file CSV
-        string csvFileName = String.Format("C:\\Users\\david\\Desktop\\Thesis\\CSV\\datiCollisions_{0}.csv", this.name);
-
-        using (StreamWriter writer = new StreamWriter(csvFileName))
-        {
-            // Scrive l'intestazione
-            writer.WriteLine("Episode, Collisions");
-
-            // Scrive i dati
-            for (int i = 0; i < collisionsForEachEpisode.Count; i++)
-            {
-                writer.WriteLine($"{i + 1}, {collisionsForEachEpisode[i]}");
-            }
-        }
-
-        Console.WriteLine("Dati scritti nel file CSV.");
-    }
-    #endregion
 
 }
