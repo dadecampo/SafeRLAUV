@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 2208694099172813699, guid: 4e47489b114187949a4c5a64becb9ba3, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 9111333208119570942, guid: f452b8e8c9628884bb902321347fea7b, type: 3}
+      objectReference: {fileID: 9111333208119570942, guid: 761f8ffecf438f74fa94d9f00c9969a7, type: 3}
     - target: {fileID: 2208694099172813699, guid: 4e47489b114187949a4c5a64becb9ba3, type: 3}
       propertyPath: m_RootBone
       value: 
