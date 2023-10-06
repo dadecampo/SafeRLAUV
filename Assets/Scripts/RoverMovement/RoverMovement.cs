@@ -195,7 +195,6 @@ public class RoverMovement : Agent
     {
         if (straightPower < 0)
         {
-            AddReward(Constants.RWD_BACKWARD_PENALITY);
             straightPower /= 2;
         }
         foreach (Transform t in turboRightForwards)

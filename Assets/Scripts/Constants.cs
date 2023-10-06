@@ -15,7 +15,6 @@ namespace Assets.Scripts
         public static float RWD_MULTIPLIER_DISTANCE = 10.0f;
         public static float RWD_MULTIPLIER_SENSORS = 0.020f;
         public static float RWD_TIMESTEP_PENALITY = -0.01f;
-        public static float RWD_BACKWARD_PENALITY = 0.0f;
 
     }
 }
