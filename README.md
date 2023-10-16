@@ -22,14 +22,14 @@ First of all, let's enter the folder where the training XAML files are located.
 
 ### Lesson 1
 
-    mlagents-learn .\trainer_config_final_medium_lastpoint_e2e.yaml --run-id=EXPERIMENTS_MEDIUM_E2E_NN128_NOSAFE --env=../Builds/Build_Medium_FIXED/SafeRLAUV.app --time-scale=1 --quality-level=0 --width=512 --height=512 --force --base-port=2
+    mlagents-learn .\trainer_lesson_1.yaml --run-id=LESSON_1 --env=../Builds/NoWater_Env/SafeRLAUV.app --width=512 --height=512
 
 ### Lesson 2
-	mlagents-learn .\trainer_config_final_medium_lastpoint_e2e.yaml --run-id=EXPERIMENTS_MEDIUM_E2E_NN128_NOSAFE --env=../Builds/Build_Medium_FIXED/SafeRLAUV.app --time-scale=1 --quality-level=0 --width=512 --height=512 --force --base-port=2
+	mlagents-learn .\trainer_lesson_2.yaml --run-id=LESSON_2 --env=../Builds/HalfWater_Env/SafeRLAUV.app --width=512 --height=512 --initialize-from=LESSON_1
 
 ### Lesson 3
-	mlagents-learn .\trainer_config_final_medium_lastpoint_e2e.yaml --run-id=EXPERIMENTS_MEDIUM_E2E_NN128_NOSAFE --env=../Builds/Build_Medium_FIXED/SafeRLAUV.app --time-scale=1 --quality-level=0 --width=512 --height=512 --force --base-port=2
+	mlagents-learn .\trainer_lesson_3.yaml --run-id=LESSON_3 --env=../Builds/FullWater_Env/SafeRLAUV.app --width=512 --height=512 --initialize-from=LESSON_2
 
 ## End-to-End
 
-	mlagents-learn .\trainer_config_final_medium_lastpoint_e2e.yaml --run-id=EXPERIMENTS_MEDIUM_E2E_NN128_NOSAFE --env=../Builds/Build_Medium_FIXED/SafeRLAUV.app --time-scale=1 --quality-level=0 --width=512 --height=512 --force --base-port=2
+	mlagents-learn .\trainer_e2e.yaml --run-id=LESSON_E2E --env=../Builds/FullWater_Env/SafeRLAUV.app --width=512 --height=512
