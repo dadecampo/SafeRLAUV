@@ -8,7 +8,7 @@ This project aims to create a series of underwater environments in Unity, in ord
 # Environment Setup
 > We have developed and tested this project on Windows 11, so we recommend using the same platform. Through the environment settings, it will be possible to test and replicate the training experiments. By purchasing, or requesting a demo of ZibraAI Liquids Pro, you will also be able to modify the objects affected by the plugin within the Unity project.
 
-1.  Download  [Anaconda](https://www.anaconda.com/distribution/#download-section)  for your System.
+1.  Download  [Anaconda](https://www.anaconda.com/)  for your System.
 
 2.  Install Anaconda
 
