@@ -1,6 +1,7 @@
 # Safe Reinforcement Learning for Autonomous Underwater Vehicles
 
 This project aims to create a series of underwater environments in Unity, in order to test different Deep Reinforcement Learning approaches for solving the problem of an AUV's underwater cave traversal. We simulated the water using ZibraAI Liquids Pro and used ML-agents for the agent's training phase.
+
 ![](https://i.imgur.com/oY8Z1El.jpg)
 >( a ) Rover overview. ( b ) In this image, you can see how the proximity sensors of the rover are organized. Thanks to these sensors, it is possible to understand the proximity to obstacles and make decisions accordingly
 
