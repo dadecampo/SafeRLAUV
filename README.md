@@ -16,9 +16,8 @@ Inside the 'Trainers' folder, you will find XAML files that define hyperparamete
 
 This section has been created to allow you to reproduce the trainings we have conducted. We will provide you with the commands to execute the different phases of our training.
 First of all, let's enter the folder where the training XAML files are located.
-<p  align="center">
-<img src="https://i.imgur.com/Xq0oO3o.jpg" width="678" height="400" align="center">
-</p>
+
+<img src="https://i.imgur.com/Xq0oO3o.jpg" width="678" height="400">
 
 	cd Trainers
 
