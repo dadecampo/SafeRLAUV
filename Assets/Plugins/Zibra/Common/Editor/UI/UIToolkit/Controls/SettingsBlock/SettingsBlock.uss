@@ -1,0 +1,17 @@
+.zibraai-settings-block {
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+}
+
+.zibraai-settings-block__header {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    -unity-font-style: bold;
+}
+
+.zibraai-settings-block__content {
+    margin-left: 10px;
+}

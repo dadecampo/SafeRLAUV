@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:sa="ZibraAi.Foundation.UIElements">
+    <sa:SettingsBlock label="Optional Settings">
+        <uie:ObjectField label="Landing Scene" name="landing-scene" />
+    </sa:SettingsBlock>
+
+    <sa:SettingsBlock label="Registered Stacks View">
+        <ui:VisualElement name="StackVisualizersRoot"/>
+    </sa:SettingsBlock>
+</ui:UXML>

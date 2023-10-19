@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Plugins/Zibra/Common/Editor/CheckUpdate/ZibraCheckUpdate.uss?fileID=7433441132597879392&amp;guid=20c4b12a1544dac44b6c04777afe69db&amp;type=3#ZibraCheckUpdate" />
+    <ui:VisualElement class="root" style="width: 100%; height: 100%;">
+        <ui:VisualElement style="align-items: center;">
+            <ui:Label tabindex="-1" display-tooltip-when-elided="true" class="image image-logo" />
+        </ui:VisualElement>
+        <ui:VisualElement class="ContentCenter">
+            <ui:Label tabindex="-1" name="Version" class="hyperlink" style="height: 20; font-size: 12px;" />
+        </ui:VisualElement>
+        <ui:VisualElement class="ContentCenter" style="margin-top: 40px;">
+            <ui:Button tabindex="-1" name="UpdateButton" class="hyperlink ContentCenter ButtonRadius" style="height: 40px; font-size: 16px; background-color: white;"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="position: absolute; right: 0; bottom: 0;">
+            <ui:Toggle tabindex="-1" name="Check" text="Automatic check" class="hyperlink" style="height: 23px; font-size: 12px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

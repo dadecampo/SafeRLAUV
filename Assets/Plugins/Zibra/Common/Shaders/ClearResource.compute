@@ -1,0 +1,62 @@
+#pragma kernel CS_ClearTexture3DFloat
+#pragma kernel CS_ClearTexture3DFloat2
+#pragma kernel CS_ClearTexture3DFloat3
+#pragma kernel CS_ClearTexture3DFloat4
+
+#define TEXTURE3D_CLEAR_GROUPSIZE 4
+
+RWTexture3D<float> Texture3DFloat;
+float3 Texture3DFloatDimensions;
+
+[numthreads(TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE)] 
+void CS_ClearTexture3DFloat(uint3 id : SV_DispatchThreadID)
+{
+    if (any((float3(id) + 0.5) > Texture3DFloatDimensions))
+    {
+        return;
+    }
+
+    Texture3DFloat[id] = 0.0f;
+}
+
+RWTexture3D<float2> Texture3DFloat2;
+float3 Texture3DFloat2Dimensions;
+
+[numthreads(TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE)] void
+CS_ClearTexture3DFloat2(uint3 id : SV_DispatchThreadID) 
+{
+    if (any((float3(id) + 0.5) > Texture3DFloat2Dimensions))
+    {
+        return;
+    }
+
+    Texture3DFloat2[id] = float2(0.0f, 0.0f);
+}
+
+RWTexture3D<float3> Texture3DFloat3;
+float3 Texture3DFloat3Dimensions;
+
+[numthreads(TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE)] void
+CS_ClearTexture3DFloat3(uint3 id : SV_DispatchThreadID)
+{
+    if (any((float3(id) + 0.5) > Texture3DFloat3Dimensions))
+    {
+        return;
+    }
+
+    Texture3DFloat3[id] = float3(0.0f, 0.0f, 0.0f);
+}
+
+RWTexture3D<float4> Texture3DFloat4;
+float3 Texture3DFloat4Dimensions;
+
+[numthreads(TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE, TEXTURE3D_CLEAR_GROUPSIZE)] void
+CS_ClearTexture3DFloat4(uint3 id : SV_DispatchThreadID) 
+{
+    if (any((float3(id) + 0.5) > Texture3DFloat4Dimensions))
+    {
+        return;
+    }
+
+    Texture3DFloat4[id] = float4(0.0f, 0.0f, 0.0f, 0.0f);
+}

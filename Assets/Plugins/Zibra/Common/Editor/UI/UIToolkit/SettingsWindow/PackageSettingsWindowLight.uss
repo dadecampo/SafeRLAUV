@@ -1,0 +1,4 @@
+SettingsBlock,
+.tabs-bar {
+    background-color: rgb(190, 190, 190);
+}

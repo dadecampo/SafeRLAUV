@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/ZibraEffectsOnboarding.uss?fileID=7433441132597879392&amp;guid=664ce6fd278825c4fa4798d5a1079a0d&amp;type=3#ZibraEffectsOnboarding" />
+    <ui:VisualElement name="VisualElement" class="BackgroundAuth root" style="height: 100%;">
+        <ui:VisualElement name="VisualElement" style="position: relative; width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/icons/3.png?fileID=2800000&amp;guid=4db0ccc5bfbae9e4ab1496a066cf0ac0&amp;type=3#3&apos;);">
+            <ui:VisualElement>
+                <ui:Label display-tooltip-when-elided="true" style="font-size: 16px; background-image: url(&apos;project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/icons/back.png?fileID=2800000&amp;guid=fad51fbe7ddeb204fb80182322104911&amp;type=3#back&apos;); width: 8px; height: 8px; margin-top: 16px; margin-left: 16px; color: rgb(215, 213, 213);" />
+                <ui:Button name="BackToRegistration" text="Back" class="ButtonBackIcon" style="height: 25px; font-size: 14px; position: absolute; width: 15%; left: 8px; top: 2px; margin-top: 5px; margin-left: 5px; margin-bottom: 5px; margin-right: 5px; background-color: rgba(255, 255, 255, 0); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); color: rgb(152, 152, 152); background-image: none;" />
+            </ui:VisualElement>
+            <ui:Label text="Activate your Zibra Effects License" display-tooltip-when-elided="true" class="HeaderTextStyle" style="margin-top: 50px; margin-bottom: 25px;" />
+            <ui:Label text="Ready to start? Enter license key sent to your email and start your Zibra Effects experience." display-tooltip-when-elided="true" name="AuthorizationMessage" class="MessageTextStyle" style="margin-top: 25px; margin-bottom: 25px; margin-left: 16px; margin-right: 16px; padding-left: 16px; padding-right: 16px; display: flex; visibility: visible;" />
+            <ui:VisualElement name="ValidationMessages" style="position: relative; left: 0; right: 0; top: 0; bottom: 0; display: none;">
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="AuthMessageLiquids" class="MessageTextStyle" style="margin-top: 30px; display: flex;" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="AuthMessageSmoke" class="MessageTextStyle" style="margin-top: 30px; margin-left: 0; margin-right: 0; margin-bottom: 0;" />
+            </ui:VisualElement>
+            <ui:TextField name="ActivationField" readonly="false" is-delayed="false" multiline="false" text="Enter your license key" style="width: 70%; left: 15%; height: 25px; padding-top: 0; margin-top: 50px; margin-bottom: 0; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; color: rgb(149, 149, 149); -unity-text-outline-width: 0; -unity-text-outline-color: rgb(144, 144, 144); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(77, 77, 77); border-right-color: rgb(77, 77, 77); border-top-color: rgb(77, 77, 77); border-bottom-color: rgb(77, 77, 77);" />
+            <ui:Button name="Activate" text="Activate" class="ButtonRadius" style="height: 30px; width: 30%; left: 35%; right: auto; bottom: auto; top: auto; margin-top: 50px; margin-bottom: 0;" />
+            <ui:Button name="GetStart" text="Start using Zibra Effects" class="ButtonRadius" style="height: 30px; width: 60%; left: 20%; right: auto; bottom: auto; top: 240px; margin-top: 50px; margin-bottom: 0; position: absolute; display: none; align-items: stretch;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

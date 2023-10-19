@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['zibra_20effects_20api_20reference_0',['Zibra Effects API Reference',['../index.html',1,'']]]
+];

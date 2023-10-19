@@ -1,0 +1,48 @@
+{
+    "name": "ZibraAI.ZibraEffects.Liquid.Editor",
+    "rootNamespace": "com.zibra.liquid.Editor",
+    "references": [
+        "ZibraAI.ZibraEffects.Liquid",
+        "ZibraAI.ZibraEffects",
+        "Unity.RenderPipelines.HighDefinition.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.high-definition",
+            "expression": "",
+            "define": "UNITY_PIPELINE_HDRP"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "",
+            "define": "UNITY_PIPELINE_URP"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "9.0",
+            "define": "UNITY_PIPELINE_URP_9_0_OR_HIGHER"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "10.0",
+            "define": "UNITY_PIPELINE_URP_10_0_OR_HIGHER"
+        },
+        {
+            "name": "com.unity.render-pipelines.high-definition",
+            "expression": "9.0",
+            "define": "UNITY_PIPELINE_HDRP_9_0_OR_HIGHER"
+        }
+    ],
+    "noEngineReferences": false
+}

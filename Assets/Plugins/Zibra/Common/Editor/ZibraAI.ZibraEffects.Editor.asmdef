@@ -1,0 +1,46 @@
+{
+    "name": "ZibraAI.ZibraEffects.Editor",
+    "rootNamespace": "com.zibra.common.Editor",
+    "references": [
+        "ZibraAI.ZibraEffects.Liquid.Bridge",
+        "ZibraAI.ZibraEffects.SmokeAndFire.Bridge",
+        "ZibraAI.ZibraEffects"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.high-definition",
+            "expression": "",
+            "define": "UNITY_PIPELINE_HDRP"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "",
+            "define": "UNITY_PIPELINE_URP"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "9.0",
+            "define": "UNITY_PIPELINE_URP_9_0_OR_HIGHER"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "10.0",
+            "define": "UNITY_PIPELINE_URP_10_0_OR_HIGHER"
+        },
+        {
+            "name": "com.unity.render-pipelines.high-definition",
+            "expression": "9.0",
+            "define": "UNITY_PIPELINE_HDRP_9_0_OR_HIGHER"
+        }
+    ],
+    "noEngineReferences": false
+}

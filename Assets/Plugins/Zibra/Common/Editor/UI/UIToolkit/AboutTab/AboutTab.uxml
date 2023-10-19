@@ -1,0 +1,71 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" sa="com.zibra.liquid.Foundation.UIElements" editor-extension-mode="False">
+    <com.zibra.liquid.Foundation.UIElements.SettingsBlock label="Registration" name="registrationBlock">
+        <ui:TextField picking-mode="Ignore" label="Server Authentication Key" name="authKeyInputField"/>
+        <ui:Button name="validateAuthKeyBtn" text="Check Authentication Key"/>
+        <ui:Label name="validationProgress" text=""/>
+        <ui:Label name="registeredKeyLabel" text="Product is registered"/>
+        <ui:Button name="removeAuthKeyBtn" text="Remove Authentication Key"/>
+    </com.zibra.liquid.Foundation.UIElements.SettingsBlock>
+    <com.zibra.liquid.Foundation.UIElements.SettingsBlock label="Who we are">
+        <ui:Label text="We take 3D processing to the next level with an AI-based approach. It brings in-game physics improvement, graphics optimization, and 3D content generation.&#10;&#10;We’re bringing a new level of interactive, realistic, and high-quality visual effects to low-end PCs and even mobile devices by applying AI to represent 3D geometry.&#10;&#10;" name="descriptionWhoWeAre" class="description" />
+    </com.zibra.liquid.Foundation.UIElements.SettingsBlock>
+    <com.zibra.liquid.Foundation.UIElements.SettingsBlock label="What we do">
+        <ui:Label text="Our core technology has various possible applications: real-time liquid, particle, and clothing simulations, lighting techniques such as Ambient Occlusion, Global Illumination, and other approaches that involve scene raymarching.&#10;&#10;We are launching a series of real-time particle physically correct simulation plugins for Unity3D &amp; Unreal Engine to show our core technology’s full potential and create the first platform-agnostic solution. We offer better graphics and new possibilities for low-end GPUs. We accelerate the performance with our AI algorithms that can simulate millions of particles on high-end hardware, hundreds of thousands on the low-end, and tens of thousands of particles on mobile devices. " name="descriptionWhatWeDo" class="description" />
+        <ui:VisualElement name="contactContainer" class="contact-container">
+            <ui:VisualElement class="contact-element">
+                <com.zibra.liquid.Foundation.UIElements.Hyperlink name="GamesElement" link="https://zibra.ai">
+                    <ui:Label name="GamesIcon" class="icon icon-game" />
+                    <ui:Label text="Our Website" name="GamesText" class="contact-text" />
+                </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </com.zibra.liquid.Foundation.UIElements.SettingsBlock>
+    <com.zibra.liquid.Foundation.UIElements.SettingsBlock label="How to get in touch">
+        <ui:Label text="If you have any technical issues or questions, don’t hesitate to drop us a message at:" name="descriptionWhatWeDo" class="description" />
+        <ui:VisualElement class="mail">
+            <com.zibra.liquid.Foundation.UIElements.Hyperlink link="mailto:support@zibra.ai" name="supportEmail">
+                <ui:Label text="support@zibra.ai" name="supportEmailText" />
+            </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+        </ui:VisualElement>
+        <ui:Label text="or join our Discord.&#10;" name="descriptionJoinDiscord" class="description" />
+        <ui:Label text="For a non technical or business related questions, please use:" name="descriptionWhatWeDo" class="description" />
+        <ui:VisualElement class="mail">
+            <com.zibra.liquid.Foundation.UIElements.Hyperlink link="mailto:hello@zibra.ai" name="ceoEmail">
+                <ui:Label text="hello@zibra.ai" name="ceoEmailText" />
+            </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+        </ui:VisualElement>
+        <ui:VisualElement name="contactContainer" class="contact-container">
+            <ui:VisualElement class="contact-element">
+                <com.zibra.liquid.Foundation.UIElements.Hyperlink name="LinkedinElement" link="https://www.linkedin.com/company/zibra-ai/" style="height: 17px;">
+                    <ui:Label name="LinkedinIcon" class="icon icon-linkedin" />
+                    <ui:Label text="Linkedin" name="LinkedinText" class="contact-text" />
+                </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+            </ui:VisualElement>
+            <ui:VisualElement class="contact-element">
+                <com.zibra.liquid.Foundation.UIElements.Hyperlink name="FacebookElement" link="https://www.facebook.com/zibraAI/">
+                    <ui:Label name="FacebookIcon" class="icon icon-facebook" />
+                    <ui:Label text="Facebook" name="FacebookText" class="contact-text" />
+                </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="contactContainer" class="contact-container">
+            <ui:VisualElement class="contact-element">
+                <com.zibra.liquid.Foundation.UIElements.Hyperlink name="YoutubeElement" link="https://www.youtube.com/channel/UC2AkLxzSIFTB1E2lvNs73xg">
+                    <ui:Label name="YoutubeIcon" class="icon icon-youtube" />
+                    <ui:Label text="Youtube" name="YoutubeText" class="contact-text" />
+                </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+            </ui:VisualElement>
+            <ui:VisualElement class="contact-element">
+                <com.zibra.liquid.Foundation.UIElements.Hyperlink name="DicordElement" link="https://discord.gg/G4FNajB3D9">
+                    <ui:Label name="DiscordIcon" class="icon icon-discord" />
+                    <ui:Label text="Discord" name="DiscordText" class="contact-text" />
+                </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="logo-container">
+            <com.zibra.liquid.Foundation.UIElements.Hyperlink name="LogoElement" link="https://zibra.ai/">
+                <ui:Label name="Logo" class="icon-logo" />
+            </com.zibra.liquid.Foundation.UIElements.Hyperlink>
+        </ui:VisualElement>
+    </com.zibra.liquid.Foundation.UIElements.SettingsBlock>
+</ui:UXML>

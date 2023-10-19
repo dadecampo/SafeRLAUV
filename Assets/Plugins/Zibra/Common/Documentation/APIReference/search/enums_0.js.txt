@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['effect_0',['Effect',['../classcom_1_1zibra_1_1common_1_1_editor_1_1_s_d_f_objects_1_1_server_auth_manager.html#acd9c2a1cf576f0fd9da232d337d9720c',1,'com::zibra::common::Editor::SDFObjects::ServerAuthManager']]]
+];

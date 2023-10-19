@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FireMaterial
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: f27a8e84a3c948abb4f60cb4690075e7,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FluidMaterial
+    value: 
+    objectReference: {fileID: 2100000, guid: da8617007329412ab87c55abaedad79e, type: 2}
+  - target: {fileID: 0}
+    propertyPath: FluidMeshMaterial
+    value: 
+    objectReference: {fileID: 2100000, guid: 7246813b959848a28c439cc0e41ae98f, type: 2}
+  - target: {fileID: 0}
+    propertyPath: UpscaleMaterial
+    value: 
+    objectReference: {fileID: 2100000, guid: 5db2c81e302e40efb0419ec664a50f01, type: 2}
+  - target: {fileID: 0}
+    propertyPath: NoOpMaterial
+    value: 
+    objectReference: {fileID: 2100000, guid: 08f2a0310a8448dd828b0c1e6b46a11f, type: 2}
+  - target: {fileID: 0}
+    propertyPath: SmokeDensity
+    value: 775
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FuelDensity
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AbsorptionColor.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AbsorptionColor.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AbsorptionColor.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AbsorptionColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ScatteringColor.r
+    value: 0.2735849
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ScatteringColor.g
+    value: 0.2735849
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ScatteringColor.b
+    value: 0.2735849
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ScatteringColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowColor.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowColor.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowColor.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ScatteringAttenuation
+    value: 0.204
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ScatteringContribution
+    value: 0.06
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ObjectPrimaryShadows
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ObjectIlluminationShadows
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: IlluminationBrightness
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: IlluminationSoftness
+    value: 0.692
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: BlackBodyBrightness
+    value: 40
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FireBrightness
+    value: 100
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FireColor.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FireColor.g
+    value: 0.37516904
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FireColor.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: FireColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: TemperatureDensityDependence
+    value: 8.68
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ObjectShadowIntensity
+    value: 0.75
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowDistanceDecay
+    value: 1.08
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowIntensity
+    value: 0.862
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: VolumeEdgeFadeoff
+    value: 0.029
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RayMarchingStepSize
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowResolution
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowStepSize
+    value: 1.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ShadowMaxSteps
+    value: 256
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: IlluminationResolution
+    value: 0.15
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: IlluminationStepSize
+    value: 1.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: IlluminationMaxSteps
+    value: 64
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MaxEffectParticles
+    value: 4194304
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ParticleLifetime
+    value: 150
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ParticleOcclusionResolution
+    value: 0.25
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

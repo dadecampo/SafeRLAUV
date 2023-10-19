@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['serializecurrentliquidstate_0',['SerializeCurrentLiquidState',['../classcom_1_1zibra_1_1liquid_1_1_solver_1_1_zibra_liquid.html#a53cae94c098143f58dbca8408985f88b',1,'com::zibra::liquid::Solver::ZibraLiquid']]],
+  ['stopsolver_1',['StopSolver',['../classcom_1_1zibra_1_1smoke__and__fire_1_1_solver_1_1_zibra_smoke_and_fire.html#a03f1d1aa875dc4704958831ef7eaea9d',1,'com::zibra::smoke_and_fire::Solver::ZibraSmokeAndFire']]]
+];

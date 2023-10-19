@@ -1,0 +1,13 @@
+.window-root {
+    background-color: rgb(41, 41, 41);
+}
+
+.version,
+.description {
+    color: rgb(130, 130, 130);
+}
+
+SettingsBlock,
+.tabs-bar {
+    background-color: rgb(56, 56, 56);
+}

@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['bakedinitialstate_0',['BakedInitialState',['../classcom_1_1zibra_1_1liquid_1_1_solver_1_1_zibra_liquid_1_1_baked_initial_state.html',1,'com::zibra::liquid::Solver::ZibraLiquid']]]
+];

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/ZibraEffectsOnboarding.uss?fileID=7433441132597879392&amp;guid=664ce6fd278825c4fa4798d5a1079a0d&amp;type=3#ZibraEffectsOnboarding" />
+    <ui:VisualElement class="BackgroundRegister" style="height: 100%; background-image: url(&apos;project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/icons/2.png?fileID=2800000&amp;guid=90306328d0631ec40b2c58e992668249&amp;type=3#2&apos;);">
+        <ui:VisualElement class="Main" style="height: auto; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+            <ui:Label display-tooltip-when-elided="true" name="TextTitle" class="HeaderTextStyle" style="margin-top: 0; margin-bottom: 0; position: absolute; width: 90%; left: 19px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; top: 38px; right: 19px; height: 61px; white-space: normal;" />
+            <ui:Label display-tooltip-when-elided="true" name="TextMessage" class="MessageTextStyle" style="margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; width: 90%; position: absolute; top: 126px; height: 205px; left: 5%; right: 95%;" />
+            <ui:Button display-tooltip-when-elided="true" name="ButtonText" class="ButtonRadius" style="left: 20%; position: absolute; bottom: auto; right: 80%; height: 30px; top: 370px; margin-bottom: 0; margin-top: 0; width: 60%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

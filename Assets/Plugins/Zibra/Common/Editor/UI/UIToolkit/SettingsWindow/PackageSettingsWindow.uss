@@ -1,0 +1,61 @@
+.title {
+    -unity-font-style: bold;
+    font-size: 18px;
+    margin-left: 10px;
+    flex-grow: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.description {
+    white-space: normal;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.toolbar {
+    flex-direction: row;
+}
+
+.toolbar__search-field {
+    width: 200px;
+}
+
+.toolbar__flexible-space {
+    flex-grow: 1;
+}
+
+.window-root {
+    flex-grow: 1;
+}
+
+.tabs-container {
+    flex-grow: 1;
+}
+
+.version {
+    -unity-text-align: upper-right;
+    margin-right: 20px;
+    margin-top: 8px;
+}
+
+.title-bar {
+    flex-direction: row;
+}
+
+.tabs-bar {
+    flex-direction: row;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.zibraai-button-strip__button {
+    cursor: link;
+    -unity-font-style: bold;
+    border-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.zibraai-button-strip__button--active {
+    background-color: rgba(0, 0, 0, 0);
+}

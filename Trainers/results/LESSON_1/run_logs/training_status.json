@@ -1,0 +1,28 @@
+{
+    "target_x": {
+        "lesson_num": 0
+    },
+    "target_y": {
+        "lesson_num": 0
+    },
+    "target_z": {
+        "lesson_num": 0
+    },
+    "waterEnabled": {
+        "lesson_num": 0
+    },
+    "fastRestart": {
+        "lesson_num": 0
+    },
+    "distancePlanesN": {
+        "lesson_num": 0
+    },
+    "safeTraining": {
+        "lesson_num": 0
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

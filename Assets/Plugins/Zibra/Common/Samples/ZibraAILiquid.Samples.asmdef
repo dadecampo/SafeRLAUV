@@ -1,0 +1,25 @@
+{
+    "name": "ZibraAI.ZibraEffects.Samples",
+    "rootNamespace": "com.zibra.common.Samples",
+    "references": [
+        "ZibraAI.ZibraEffects.Liquid",
+        "ZibraAI.ZibraEffects.SmokeAndFire",
+        "ZibraAI.ZibraEffects"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS",
+        "macOSStandalone",
+        "WSA",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

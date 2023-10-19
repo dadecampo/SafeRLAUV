@@ -1,0 +1,68 @@
+.root {
+    background-color: rgb(0, 0, 0);
+}
+
+.Main {
+    height: 42px;
+    padding-left: 12px;
+}
+
+.ContentCenter {
+    height: 42px;
+    padding-left: 12px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.ButtonRadius {
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.hyperlink {
+    background-color: initial;
+    border-width: 0;
+    margin: 0;
+    width: auto;
+    flex-shrink: 0;
+    flex-direction: row;
+    margin-top: 2px;
+}
+
+.hyperlink:hover Label {
+    -unity-background-image-tint-color: cornflowerblue;
+    border-color: cornflowerblue;
+    color: cornflowerblue;
+    cursor: link;
+}
+
+.hyperlink:hover VisualElement {
+    -unity-background-image-tint-color: cornflowerblue;
+    border-color: cornflowerblue;
+    color: cornflowerblue;
+    cursor: link;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    margin-right: 3px;
+}
+
+.image {
+    width: 480px;
+    height: 160px;
+    flex-shrink: 0;
+}
+
+.image-logo {
+}
