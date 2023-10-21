@@ -20,6 +20,7 @@ This project aims to create a series of underwater environments in Unity, in ord
 	- `pip3 install mlagents==0.30.0`
 	- `pip3 install protobuf==3.19.6`
 	- `pip3 install six`
+ 	- `pip3 install --upgrade Pillow` 
 
 # Repository organization
 Inside the 'Trainers' folder, you will find XAML files that define hyperparameters and characteristics of the various training phases, so you will find:
