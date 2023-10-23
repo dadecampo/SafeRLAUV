@@ -5,6 +5,28 @@ This project aims to create a series of underwater environments in Unity, in ord
 ![](https://i.imgur.com/oY8Z1El.jpg)
 >( a ) Rover overview. ( b ) In this image, you can see how the proximity sensors of the rover are organized. Thanks to these sensors, it is possible to understand the proximity to obstacles and make decisions accordingly 
 
+# Environment Setup
+> We have developed and tested this project on Windows 11, so we recommend using the same platform. Through the environment settings, it will be possible to test and replicate the training experiments. By purchasing, or requesting a demo of ZibraAI Liquids Pro, you will also be able to modify the objects affected by the plugin within the Unity project.
+> It's necessary the use of Git LFS.
+
+1. Download  [Anaconda](https://www.anaconda.com/)  for your System.
+
+2. Install Anaconda
+
+3. Setup enviroment:
+	
+	- `conda create --name safeRLAUV python=3.8.16`
+	- `conda activate safeRLAUV`
+	- `conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.0 -c pytorch`
+	- `pip3 install mlagents==0.30.0`
+	- `pip3 install protobuf==3.19.6`
+	- `pip3 install six`
+ 	- `pip3 install --upgrade Pillow`
+
+4. Clone SafeRLAUV repository using Git LFS.
+
+   	- `git lfs clone https://github.com/dadecampo/SafeRLAUV`
+
 # Repository organization
 Inside the 'Trainers' folder, you will find XAML files that define hyperparameters and characteristics of the various training phases, so you will find:
 
