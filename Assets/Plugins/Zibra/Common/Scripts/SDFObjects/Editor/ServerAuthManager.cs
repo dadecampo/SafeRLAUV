@@ -273,6 +273,7 @@ namespace com.zibra.common.Editor.SDFObjects
 
         static ServerAuthManager()
         {
+            FixMacOSBundles();
             Instance = new ServerAuthManager();
         }
 
@@ -582,6 +583,39 @@ namespace com.zibra.common.Editor.SDFObjects
             }
 
             return generationURL;
+        }
+
+        // Hack to make .bundle plugins work after import from .unitypackage
+        // Deletes all .meta files inside .bundle plugins
+        // If macOS Sonoma sees any .meta files inside plugin it will fail signature check
+        // So we need to remove them before trying to load said .bundle
+        static private void FixMacOSBundles()
+        {
+            bool needAssetDatabaseRefresh = false;
+            string[] bundleGUIDs = { "9d66c504b4c3c499fb1cacd335311051", "d25c9220fa93842e3b3577e6014e8794", "f2d0aa902f86543378fb230ed30e178a", "789b505a3e8447f99bf855d586ee9991" };
+            // Loops over all guids
+            foreach (string guid in bundleGUIDs)
+            {
+                // Converts the guid to a path
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+
+                // Do nothing if asset is not found
+                if (path == "")
+                    continue;
+
+                // Deletes the asset
+                System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
+                foreach (System.IO.FileInfo file in dir.GetFiles("*.meta", System.IO.SearchOption.AllDirectories))
+                {
+                    needAssetDatabaseRefresh = true;
+                    file.Delete();
+                }
+            }
+
+            if (needAssetDatabaseRefresh)
+            { 
+                AssetDatabase.Refresh();
+            }
         }
 #endregion
     }

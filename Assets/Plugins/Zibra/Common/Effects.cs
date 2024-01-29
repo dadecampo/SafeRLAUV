@@ -15,7 +15,7 @@ namespace com.zibra.common
         /// <remarks>
         ///     This is the version that liquid assemblies will have
         /// </remarks>
-        public const string VersionStandard = "2.0.0.0";
+        public const string VersionStandard = "2.0.1.0";
 
         /// <summary>
         ///     Zibra Effects version in human readable form.
@@ -28,7 +28,7 @@ namespace com.zibra.common
         ///         May contain arbitrary text depending on the version.
         ///     </para>
         /// </remarks>
-        public const string Version = "2.0.0";
+        public const string Version = "2.0.1";
 
         /// <summary>
         ///     Signals whether current Zibra Effects version is pre-release one.
