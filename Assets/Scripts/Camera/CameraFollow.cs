@@ -7,6 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform target; // Reference to the object that will be followed
     public float movSmoothing; // The smoothing applied to the movement
     public float rotSmoothing; // The smoothing applied to the rotation
+    public float offsetY;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position, movSmoothing); // Smoothly follows the target's position
+        transform.position = Vector3.Lerp(transform.position, target.position, movSmoothing) + new Vector3(0, offsetY, 0); // Smoothly follows the target's position
         transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, rotSmoothing); // Smoothly follows the target's rotation
     }
 }
