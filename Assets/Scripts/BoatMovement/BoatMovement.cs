@@ -20,6 +20,8 @@ public class BoatMovement : Agent
     public List<Transform> startPointList;
     public DistanceRewarder distanceRewarder;
     public List<RayPerceptionSensorComponent3D> rayPerceptionSensorComponents;
+    public Transform centerOfMass;
+
     private List<double> distanceFromWallsForEachEpisode = new List<double>();
     public long collisions = 0;
     private List<double> collisionsForEachEpisode = new List<double>();
@@ -57,6 +59,7 @@ public class BoatMovement : Agent
         goalTransform.position = new Vector3(target_x, target_y, target_z);
         base.Initialize();
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = centerOfMass.localPosition;
         distanceRewarder = Instantiate(distanceRewarder);
         distanceRewarder.SetOnlyNCrossedPlanes((int)distancePlanesN);
         distanceRewarder.SetCommonTarget(this.gameObject);
