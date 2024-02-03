@@ -86,6 +86,8 @@ public class BoatMovement : Agent
         AddReward(differenceScaled + Constants.RWD_TIMESTEP_PENALITY);
         AddSensorRewards();
         Stabilize();
+        if(rb != null)
+            Debug.Log(string.Format("Velocity: {0}.",rb.velocity.magnitude.ToString()));
     }
 
     private void Update()
