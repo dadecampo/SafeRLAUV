@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5093981528448777077}
   - component: {fileID: 5093981528448777076}
   - component: {fileID: 5093981528448777075}
-  - component: {fileID: 5093981528448777074}
+  - component: {fileID: 8068220467317505602}
   m_Layer: 7
   m_Name: DistancePlane (2)
   m_TagString: DistancePlane
@@ -106,7 +106,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5093981528448777074
+--- !u!114 &8068220467317505602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,10 +115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093981528448777073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 5093981528448777077}
+  m_targetMesh: {fileID: 5093981528448777077}
 --- !u!1 &5093981529519969278
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5093981529519969250}
   - component: {fileID: 5093981529519969249}
   - component: {fileID: 5093981529519969248}
-  - component: {fileID: 5093981529519969279}
+  - component: {fileID: 3927804633717977435}
   m_Layer: 7
   m_Name: DistancePlane (5)
   m_TagString: DistancePlane
@@ -225,7 +225,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5093981529519969279
+--- !u!114 &3927804633717977435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,10 +234,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093981529519969278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 5093981529519969250}
+  m_targetMesh: {fileID: 5093981529519969250}
 --- !u!1 &5093981529621965366
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 5093981529621965370}
   - component: {fileID: 5093981529621965369}
   - component: {fileID: 5093981529621965368}
-  - component: {fileID: 5093981529621965367}
+  - component: {fileID: 3633055568374127227}
   m_Layer: 7
   m_Name: DistancePlane
   m_TagString: DistancePlane
@@ -344,7 +344,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5093981529621965367
+--- !u!114 &3633055568374127227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -353,10 +353,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093981529621965366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 5093981529621965370}
+  m_targetMesh: {fileID: 5093981529621965370}
 --- !u!1 &5093981529739031858
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 5093981529739031862}
   - component: {fileID: 5093981529739031861}
   - component: {fileID: 5093981529739031860}
-  - component: {fileID: 5093981529739031859}
+  - component: {fileID: 5445811134737388417}
   m_Layer: 7
   m_Name: DistancePlane (4)
   m_TagString: DistancePlane
@@ -463,7 +463,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5093981529739031859
+--- !u!114 &5445811134737388417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -472,10 +472,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093981529739031858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 5093981529739031862}
+  m_targetMesh: {fileID: 5093981529739031862}
 --- !u!1 &5093981529806272410
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 5093981529806272414}
   - component: {fileID: 5093981529806272413}
   - component: {fileID: 5093981529806272412}
-  - component: {fileID: 5093981529806272411}
+  - component: {fileID: 8677545656415333105}
   m_Layer: 7
   m_Name: DistancePlane (1)
   m_TagString: DistancePlane
@@ -582,7 +582,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5093981529806272411
+--- !u!114 &8677545656415333105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,10 +591,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093981529806272410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 5093981529806272414}
+  m_targetMesh: {fileID: 5093981529806272414}
 --- !u!1 &5093981529962040985
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5093981529962040987}
-  - component: {fileID: 5093981529962040986}
+  - component: {fileID: 2568790376105795230}
   m_Layer: 7
   m_Name: DistanceRewarder
   m_TagString: Untagged
@@ -633,7 +633,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5093981529962040986
+--- !u!114 &2568790376105795230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -642,16 +642,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093981529962040985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dea3f7e9b83b3845b6d35ad9aa624e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a8417f27d77ea34aa2bb9c60f141e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_divisionPlanes:
-  - {fileID: 5093981529621965367}
-  - {fileID: 5093981529806272411}
-  - {fileID: 5093981528448777074}
-  - {fileID: 5093981530039920721}
-  - {fileID: 5093981529739031859}
-  - {fileID: 5093981529519969279}
+  m_targetRewarders:
+  - {fileID: 3633055568374127227}
+  - {fileID: 8677545656415333105}
+  - {fileID: 8068220467317505602}
+  - {fileID: 1558975840532443427}
+  - {fileID: 5445811134737388417}
+  - {fileID: 3927804633717977435}
 --- !u!1 &5093981530039920720
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +664,7 @@ GameObject:
   - component: {fileID: 5093981530039920724}
   - component: {fileID: 5093981530039920723}
   - component: {fileID: 5093981530039920722}
-  - component: {fileID: 5093981530039920721}
+  - component: {fileID: 1558975840532443427}
   m_Layer: 7
   m_Name: DistancePlane (3)
   m_TagString: DistancePlane
@@ -758,7 +758,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5093981530039920721
+--- !u!114 &1558975840532443427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093981530039920720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 5093981529739031862}
+  m_targetMesh: {fileID: 5093981530039920724}

@@ -44,7 +44,7 @@ public class BoatMovement : Agent
         float target_z = m_ResetParams.GetWithDefault("target_z", goalTransform.position.z);
         float waterEnabled = m_ResetParams.GetWithDefault("waterEnabled", 1f);
         float fastRestart = m_ResetParams.GetWithDefault("fastRestart", 1f);
-        float distancePlanesN = m_ResetParams.GetWithDefault("distancePlanesN", 6);
+        float distancePlanesN = m_ResetParams.GetWithDefault("distancePlanesN", 5);
         float safeTraining = m_ResetParams.GetWithDefault("safeTraining", 1f);
         if (GameManager.Instance != null)
         {
@@ -86,8 +86,6 @@ public class BoatMovement : Agent
         AddReward(differenceScaled + Constants.RWD_TIMESTEP_PENALITY);
         AddSensorRewards();
         Stabilize();
-        if(rb != null)
-            Debug.Log(string.Format("Velocity: {0}.",rb.velocity.magnitude.ToString()));
     }
 
     private void Update()
@@ -124,7 +122,7 @@ public class BoatMovement : Agent
         float target_z = m_ResetParams.GetWithDefault("target_z", goalTransform.position.z);
         float waterEnabled = m_ResetParams.GetWithDefault("waterEnabled", 1f);
         float fastRestart = m_ResetParams.GetWithDefault("fastRestart", 1f);
-        float distancePlanesN = m_ResetParams.GetWithDefault("distancePlanesN", 6);
+        float distancePlanesN = m_ResetParams.GetWithDefault("distancePlanesN", 5);
         float safeTraining = m_ResetParams.GetWithDefault("safeTraining", 1f);
         if (GameManager.Instance != null)
         {
@@ -265,6 +263,9 @@ public class BoatMovement : Agent
         targetDir_y = targetDir_y.normalized;
         dot = Vector3.Dot(targetDir_y, transform.up);
         angleToGoal_y = Mathf.Asin(dot) * Mathf.Rad2Deg * whichWay;
+
+
+        Debug.Log(distanceToGoal);
     }
 
     void Stabilize()
