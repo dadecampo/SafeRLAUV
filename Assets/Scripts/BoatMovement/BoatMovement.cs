@@ -265,7 +265,7 @@ public class BoatMovement : Agent
         angleToGoal_y = Mathf.Asin(dot) * Mathf.Rad2Deg * whichWay;
 
 
-        Debug.Log(distanceToGoal);
+        //Debug.Log(distanceToGoal);
     }
 
     void Stabilize()
