@@ -1107,7 +1107,7 @@ namespace com.zibra.liquid.Solver
         ///     </para>
         /// </remarks>
         [Tooltip("Selects whether to update simulation in Update or FixedUpdate")]
-        public bool UseFixedTimestep = false;
+        public bool UseFixedTimestep = true;
 #endregion
 
 #region Methods

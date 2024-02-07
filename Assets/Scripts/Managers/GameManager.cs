@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+        QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        Application.targetFrameRate = 60;
     }
 
     public void AddCumulativeReward(float reward)
