@@ -194,7 +194,7 @@ public class BoatMovement : Agent
 
     private void Torque(float straightPower, float steeringPower)
     {
-        rb.AddTorque(transform.up * steerPower * steeringPower * straightPower);
+        rb.AddTorque(transform.up * steerPower * steeringPower);
     }
 
     void ChangeCamera()
