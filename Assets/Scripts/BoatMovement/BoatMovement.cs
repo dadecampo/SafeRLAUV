@@ -85,6 +85,7 @@ public class BoatMovement : Agent
         //Debug.Log(differenceScaled);
         AddReward(differenceScaled + Constants.RWD_TIMESTEP_PENALITY);
         AddSensorRewards();
+        Debug.Log(distanceToGoal);
         Stabilize();
     }
 
