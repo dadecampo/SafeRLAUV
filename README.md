@@ -81,7 +81,12 @@ In End-to-End training, the agent will undergo a typical training process, after
 In the only lesson designed for this surface drone, the agent must traverse an area with various obstacles, being careful not to collide with them before reaching the target area located at the opposite end of the scenario.
 There are two possibilities, safe or standard training.
 
+#### Safe
+
     mlagents-learn .\OnSurface\trainer_lesson_1_safe.yaml --run-id=LESSON_1 --env=../Builds/OnSurface_Env/SafeRLAUV.app --width=512 --height=512 --time-scale=1
+
+#### Standard
+    
     mlagents-learn .\OnSurface\trainer_lesson_1_standard.yaml --run-id=LESSON_1 --env=../Builds/OnSurface_Env/SafeRLAUV.app --width=512 --height=512 --time-scale=1
 
 
