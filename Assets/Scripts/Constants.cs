@@ -13,7 +13,7 @@ namespace Assets.Scripts
         public static float RWD_GOAL = 500f;
         public static float RWD_CHECKPOINT = 100f;
         public static float RWD_MULTIPLIER_DISTANCE = 10.0f;
-        public static float RWD_MULTIPLIER_SENSORS = 0.1f;
+        public static float RWD_MULTIPLIER_SENSORS = 0.020f;
         public static float RWD_TIMESTEP_PENALITY = -0.01f;
 
     }

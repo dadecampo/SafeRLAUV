@@ -232,7 +232,7 @@ public class BoatMovement : Agent
             {
                 foreach (RayPerceptionOutput.RayOutput rayOutput in r3.RayOutputs)
                 {
-                    AddReward(-(1 - rayOutput.HitFraction) * Constants.RWD_MULTIPLIER_SENSORS);
+                    AddReward(-(1 - rayOutput.HitFraction) * Constants.RWD_MULTIPLIER_SENSORS * 5);
                     sum += r1.RayLength * (rayOutput.HitFraction);
                 }
             }
