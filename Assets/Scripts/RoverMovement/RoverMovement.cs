@@ -298,6 +298,7 @@ public class RoverMovement : Agent
         targetDir_y = targetDir_y.normalized;
         dot = Vector3.Dot(targetDir_y, transform.up);
         angleToGoal_y = Mathf.Asin(dot) * Mathf.Rad2Deg * whichWay;
+        Debug.Log(distanceToGoal);
     }
 
     void Stabilize()

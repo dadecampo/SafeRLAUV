@@ -115,10 +115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889918395708207457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 1889918395708207461}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &1889918395769942985
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,10 +234,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889918395769942985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 1889918395769942989}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &1889918395926555853
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,10 +353,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889918395926555853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 1889918395926555841}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &1889918396021691653
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,10 +472,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889918396021691653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 1889918396021691673}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &1889918396540595883
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,10 +591,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889918396540595883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 1889918396540595887}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &1889918396668102754
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ Transform:
   - {fileID: 1889918395769942988}
   - {fileID: 1889918396021691672}
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1889918396668102753
 MonoBehaviour:
@@ -642,10 +642,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889918396668102754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dea3f7e9b83b3845b6d35ad9aa624e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a8417f27d77ea34aa2bb9c60f141e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_divisionPlanes:
+  m_targetRewarders:
   - {fileID: 1889918395926555852}
   - {fileID: 1889918395708207456}
   - {fileID: 1889918397102046601}
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889918397102046602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 1889918397102046606}
+  m_targetMesh: {fileID: 0}

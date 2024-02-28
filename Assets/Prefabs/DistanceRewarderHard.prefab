@@ -116,10 +116,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6402000488929161600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 6402000488929161604}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &6402000488985270089
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ Transform:
   - {fileID: 6402000489699814631}
   - {fileID: 6402000489480817203}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6402000488985270090
 MonoBehaviour:
@@ -167,10 +167,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6402000488985270089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dea3f7e9b83b3845b6d35ad9aa624e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a8417f27d77ea34aa2bb9c60f141e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_divisionPlanes:
+  m_targetRewarders:
   - {fileID: 6402000489584882663}
   - {fileID: 6402000489903369803}
   - {fileID: 6402000490557006498}
@@ -293,10 +293,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6402000489480817198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 6402000489480817202}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &6402000489584882662
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,10 +413,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6402000489584882662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 6402000489584882666}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &6402000489699814626
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,10 +533,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6402000489699814626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 6402000489699814630}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &6402000489903369802
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,10 +653,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6402000489903369802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 6402000489903369806}
+  m_targetMesh: {fileID: 0}
 --- !u!1 &6402000490557006497
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6402000490557006497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661c2ca5658aeab4981edd3881dce416, type: 3}
+  m_Script: {fileID: 11500000, guid: acc7ff17c11819a4d98da4fcac5c5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_plane: {fileID: 6402000490557006501}
+  m_targetMesh: {fileID: 0}
