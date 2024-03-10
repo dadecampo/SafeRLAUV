@@ -1,4 +1,4 @@
-# Safe Reinforcement Learning for Autonomous Underwater Vehicles
+# Aquatic Navigation: A Challenging Benchmark for Deep Reinforcement Learning
 
 This project aims to create a series of underwater and surface environments in Unity in order to test different Deep Reinforcement Learning approaches to solve the problem of autonomous agents, such as AUVs and surface drones, traversing one of these marine environments. We simulated the water using ZibraAI Liquids Pro and used ML-agents for the agent's training phase.
 
