@@ -9,13 +9,13 @@ from mlagents_envs.side_channel.engine_configuration_channel import EngineConfig
 from mlagents_envs.side_channel.environment_parameters_channel import EnvironmentParametersChannel
 
 class AuvEnvEnumeration(Enum):
-    GymEnv = 1
+    Gym_Env = 1
     FirstEnv = 1
     SecondEnv = 2
     ThirdEnv = 2
     
 def _get_side_channels(auvEnum: AuvEnvEnumeration) -> List[SideChannel]:
-    if (auvEnum == AuvEnvEnumeration.GymEnv):
+    if (auvEnum == AuvEnvEnumeration.Gym_Env):
         return _get_first_env_channels()
     elif (auvEnum == AuvEnvEnumeration.FirstEnv):
         return _get_first_env_channels()
@@ -39,6 +39,7 @@ def _get_first_env_channels() -> List[SideChannel]:
     environmentParametersChannel.set_float_parameter("safeTraining", 1)
 
     return [engineConfigChannel, environmentParametersChannel]
+
 def _get_second_env_channels() -> List[SideChannel]:
     
     engineConfigChannel = EngineConfigurationChannel()
