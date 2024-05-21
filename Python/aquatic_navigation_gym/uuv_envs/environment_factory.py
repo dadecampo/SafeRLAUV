@@ -8,18 +8,18 @@ from mlagents_envs.environment import SideChannel
 from mlagents_envs.side_channel.engine_configuration_channel import EngineConfigurationChannel
 from mlagents_envs.side_channel.environment_parameters_channel import EnvironmentParametersChannel
 
-class AuvEnvEnumeration(Enum):
+class UuvEnvEnumeration(Enum):
     Gym_Env = 1
     FirstEnv = 1
     SecondEnv = 2
     ThirdEnv = 2
     
-def _get_side_channels(auvEnum: AuvEnvEnumeration) -> List[SideChannel]:
-    if (auvEnum == AuvEnvEnumeration.Gym_Env):
+def _get_side_channels(auvEnum: UuvEnvEnumeration) -> List[SideChannel]:
+    if (auvEnum == UuvEnvEnumeration.Gym_Env):
         return _get_first_env_channels()
-    elif (auvEnum == AuvEnvEnumeration.FirstEnv):
+    elif (auvEnum == UuvEnvEnumeration.FirstEnv):
         return _get_first_env_channels()
-    elif (auvEnum == AuvEnvEnumeration.SecondEnv):
+    elif (auvEnum == UuvEnvEnumeration.SecondEnv):
         return _get_second_env_channels()
     else:
         return _get_third_env_channels()
@@ -72,7 +72,7 @@ def _get_third_env_channels() -> List[SideChannel]:
 
     return [engineConfigChannel, environmentParametersChannel]
 
-def get_env(auvEnum: AuvEnvEnumeration) -> UnityToGymWrapper:
+def get_env(auvEnum: UuvEnvEnumeration) -> UnityToGymWrapper:
     unity_env = UnityEnvironment( f"../Builds/{auvEnum.name}/SafeRLAUV", worker_id=np.random.randint(0, 1000), side_channels=_get_side_channels(auvEnum))
     env = UnityToGymWrapper(unity_env, flatten_branched=True)
     return env
