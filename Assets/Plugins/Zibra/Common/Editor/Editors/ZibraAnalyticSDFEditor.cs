@@ -2,7 +2,7 @@ using com.zibra.common.Analytics;
 using com.zibra.common.SDFObjects;
 using UnityEditor;
 
-namespace com.zibra.liquid.Editor.Solver
+namespace com.zibra.common.Editor.Solver
 {
     [CustomEditor(typeof(AnalyticSDF))]
     [CanEditMultipleObjects]
@@ -21,8 +21,6 @@ namespace com.zibra.liquid.Editor.Solver
 
         public override void OnInspectorGUI()
         {
-            EditorGUI.BeginChangeCheck();
-
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(InvertSDF);
@@ -30,11 +28,6 @@ namespace com.zibra.liquid.Editor.Solver
             EditorGUILayout.PropertyField(ChosenSDFType);
 
             serializedObject.ApplyModifiedProperties();
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                ZibraEffectsAnalytics.TrackConfiguration("SDF");
-            }
         }
     }
 }

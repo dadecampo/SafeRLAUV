@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 1849b8932e474354ab228c625f6e9c9d
+guid: 8d4570690df1af347baf07df89c2004f
 TextScriptImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Documentation/APIReference/dynsections.js.txt
+  uploadId: 663749

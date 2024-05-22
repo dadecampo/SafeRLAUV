@@ -1,66 +1,108 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine.UIElements;
-using com.zibra.liquid.Foundation.UIElements;
+using com.zibra.common.Foundation.UIElements;
 using com.zibra.common.Editor.SDFObjects;
+using com.zibra.common.Editor;
 using System;
+using com.zibra.common.Editor.Licensing;
+using static com.zibra.common.Editor.PluginManager;
+using UnityEngine;
 
 #if UNITY_2019_4_OR_NEWER
-namespace com.zibra.liquid.Plugins.Editor
+namespace com.zibra.common.Plugins.Editor
 {
     internal class AboutTab : BaseTab
     {
-        private TextField m_AuthKeyInputField;
-        private Label m_ValidationProgressLabel;
-        private Label m_RegisteredKeyLabel;
+        Label LicenseStatus;
+        Button ContantSupportButton;
+        Button RemoveLicenseButton;
 
         public AboutTab() : base($"{ZibraAIPackage.UIToolkitPath}/AboutTab/AboutTab")
         {
-            VisualElement registrationBlock = this.Q<SettingsBlock>("registrationBlock");
-            Button checkAuthKeyBtn = this.Q<Button>("validateAuthKeyBtn");
-            Button removeAuthKeyBtn = this.Q<Button>("removeAuthKeyBtn");
-            m_AuthKeyInputField = this.Q<TextField>("authKeyInputField");
-            m_ValidationProgressLabel = this.Q<Label>("validationProgress");
-            m_RegisteredKeyLabel = this.Q<Label>("registeredKeyLabel");
+            LicenseStatus = this.Q<Label>("licenseStatus");
+            ContantSupportButton = this.Q<Button>("contactSupportButton");
+            RemoveLicenseButton = this.Q<Button>("removeLicenseButton");
 
-            ServerAuthManager.GetInstance();
-            m_AuthKeyInputField.value = String.Join(",", ServerAuthManager.GetInstance().PluginLicenseKeys);
-            checkAuthKeyBtn.clicked += OnAuthKeyBtnOnClickedHandler;
-            removeAuthKeyBtn.clicked += OnRemoveKeyBtnOnClickedHandler;
-            // Hide if key is valid.
-            if (ServerAuthManager.GetInstance().IsLicenseVerified(ServerAuthManager.Effect.Liquids))
-            {
-                checkAuthKeyBtn.style.display = DisplayStyle.None;
-                m_AuthKeyInputField.style.display = DisplayStyle.None;
-                m_RegisteredKeyLabel.style.display = DisplayStyle.Flex;
-                removeAuthKeyBtn.style.display = DisplayStyle.Flex;
-            }
-            else
-            {
-                m_RegisteredKeyLabel.style.display = DisplayStyle.None;
-                removeAuthKeyBtn.style.display = DisplayStyle.None;
-            }
+            ContantSupportButton.clicked += OnRemoveKeyBtnOnClickedHandler;
+            RemoveLicenseButton.clicked += OnRemoveKeyBtnOnClickedHandler;
 
-            m_ValidationProgressLabel.style.display = DisplayStyle.None;
+            LicensingManager.Instance.OnLicenseStatusUpdate += UpdateLicenseStatus;
+            LicenseInfoQuery.Instance.OnLicenseInfoUpdate += UpdateLicenseStatus;
+            UpdateLicenseStatus();
         }
 
-        private void OnAuthKeyBtnOnClickedHandler()
+        ~AboutTab()
         {
-            string keys = m_AuthKeyInputField.text;
+            LicensingManager.Instance.OnLicenseStatusUpdate -= UpdateLicenseStatus;
+            LicenseInfoQuery.Instance.OnLicenseInfoUpdate -= UpdateLicenseStatus;
+        }
 
-            if (!ServerAuthManager.CheckKeysFormat(keys))
+        private void UpdateLicenseStatus()
+        {
+            LicenseStatus.text = "";
+            bool isLicenseKeySaved = false;
+            bool isLimitReached = false;
+            for (int i = 0; i < (int)Effect.Count; ++i)
             {
-                EditorUtility.DisplayDialog("Zibra Liquid Key Error", "Incorrect key format.", "Ok");
-                return;
+                Effect effect = (Effect)i;
+#if ZIBRA_EFFECTS_OTP_VERSION
+                string effectName = effect.ToString();
+#else
+                string effectName = "Effects";
+#endif
+
+                if (!PluginManager.IsAvailable(effect))
+                {
+                    continue;
+                }
+
+                LicenseStatus.text += "\n";
+
+                string licenseKey = LicensingManager.Instance.GetSavedLicenseKey(effect);
+                if (!string.IsNullOrEmpty(licenseKey))
+                {
+                    LicenseStatus.text += $"{effectName} license key {licenseKey}\n";
+                    isLicenseKeySaved = true;
+                }
+                else
+                {
+                    LicenseStatus.text += $"{effectName} no license key\n";
+                    continue;
+                }
+
+                if (LicensingManager.Instance.IsLicenseVerified(effect))
+                {
+                    LicenseStatus.text += $"{effectName} license validated\n";
+                }
+                else
+                {
+                    LicenseStatus.text += $"{effectName} license is not validated\n";
+                }
+
+                LicenseStatus.text += LicenseInfoQuery.Instance.GetInfo(effect);
+
+                isLimitReached = isLimitReached || LicenseInfoQuery.Instance.IsHardwareLimitHit(effect);
+
+#if !ZIBRA_EFFECTS_OTP_VERSION
+                break;
+#endif
             }
 
-            ServerAuthManager.GetInstance().RegisterKey(keys);
-            m_RegisteredKeyLabel.style.display = DisplayStyle.None;
+            if (isLimitReached)
+            {
+                LicenseStatus.text += "\nContact support to remove license from computers.";
+            }
+            ContantSupportButton.style.display = isLimitReached ? DisplayStyle.Flex : DisplayStyle.None;
+            RemoveLicenseButton.style.display = isLicenseKeySaved ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+        private void OnContactSupportBtnOnClickedHandler()
+        {
+            Application.OpenURL("mailto:support@zibra.ai");
         }
 
         private void OnRemoveKeyBtnOnClickedHandler()
         {
-            ServerAuthManager.GetInstance().RemoveKey();
+            LicensingManager.Instance.RemoveLicenses();
         }
     }
 }

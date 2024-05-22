@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 81df510b10f73d640b7b47c08dbb4d4e
+guid: 4b58800ca387c374c8a6ef742e7351b4
 TextScriptImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Documentation/APIReference/jquery.js.txt
+  uploadId: 663749

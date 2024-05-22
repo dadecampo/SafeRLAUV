@@ -56,11 +56,7 @@ namespace com.zibra.common.Utilities
             if (currentRenderer != null && currentRenderer is SkinnedMeshRenderer skinnedMeshRenderer)
             {
                 var mesh = new Mesh();
-#if UNITY_2020_3_OR_NEWER
                 skinnedMeshRenderer.BakeMesh(mesh, true);
-#else
-                skinnedMeshRenderer.BakeMesh(mesh);
-#endif
                 return mesh;
             }
 

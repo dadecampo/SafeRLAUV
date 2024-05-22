@@ -1,20 +1,18 @@
-﻿#if UNITY_2019_4_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using com.zibra.liquid.Foundation.Editor;
-using com.zibra.liquid.Foundation.UIElements;
-using UnityEditor.UIElements;
+using com.zibra.common.Foundation.Editor;
+using com.zibra.common.Foundation.UIElements;
 
-namespace com.zibra.liquid.Plugins.Editor
+namespace com.zibra.common.Plugins.Editor
 {
     /// <summary>
     ///     Base class for Plugin Settings Window
     /// </summary>
     /// <typeparam name="TWindow"></typeparam>
-    public abstract class PackageSettingsWindow<TWindow> : EditorWindow
+    internal abstract class PackageSettingsWindow<TWindow> : EditorWindow
         where TWindow : EditorWindow
     {
         internal abstract IPackageInfo GetPackageInfo();
@@ -36,7 +34,7 @@ namespace com.zibra.liquid.Plugins.Editor
             var packageInfo = GetPackageInfo();
             root.Q<Label>("display-name").text = packageInfo.displayName;
             root.Q<Label>("description").text = packageInfo.description;
-            root.Q<Label>("version").text = $"Version: {packageInfo.version}";
+            root.Q<Label>("version").text = $"Version: {packageInfo.version} {packageInfo.distributionType}";
 
             m_TabsButtons = root.Q<ButtonStrip>();
             m_TabsButtons.CleanUp();
@@ -99,4 +97,3 @@ namespace com.zibra.liquid.Plugins.Editor
         }
     }
 }
-#endif

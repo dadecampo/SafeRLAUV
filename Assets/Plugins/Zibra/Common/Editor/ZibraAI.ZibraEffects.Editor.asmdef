@@ -14,7 +14,9 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "UNITY_2021_3_OR_NEWER"
+    ],
     "versionDefines": [
         {
             "name": "com.unity.render-pipelines.high-definition",
@@ -28,18 +30,8 @@
         },
         {
             "name": "com.unity.render-pipelines.universal",
-            "expression": "9.0",
-            "define": "UNITY_PIPELINE_URP_9_0_OR_HIGHER"
-        },
-        {
-            "name": "com.unity.render-pipelines.universal",
-            "expression": "10.0",
-            "define": "UNITY_PIPELINE_URP_10_0_OR_HIGHER"
-        },
-        {
-            "name": "com.unity.render-pipelines.high-definition",
-            "expression": "9.0",
-            "define": "UNITY_PIPELINE_HDRP_9_0_OR_HIGHER"
+            "expression": "13.1",
+            "define": "UNITY_PIPELINE_URP_13_1_OR_HIGHER"
         }
     ],
     "noEngineReferences": false

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['neuralsdf_0',['NeuralSDF',['../classcom_1_1zibra_1_1common_1_1_s_d_f_objects_1_1_neural_s_d_f.html',1,'com::zibra::common::SDFObjects']]],
-  ['nodesize_1',['NodeSize',['../classcom_1_1zibra_1_1liquid_1_1_solver_1_1_zibra_liquid.html#a81786f7ffc63f3aab6e05a27a31c88be',1,'com::zibra::liquid::Solver::ZibraLiquid']]],
-  ['notifychange_2',['NotifyChange',['../classcom_1_1zibra_1_1liquid_1_1_manipulators_1_1_manipulator.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.liquid.Manipulators.Manipulator.NotifyChange()'],['../classcom_1_1zibra_1_1liquid_1_1_solver_1_1_zibra_liquid.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.liquid.Solver.ZibraLiquid.NotifyChange()'],['../classcom_1_1zibra_1_1smoke__and__fire_1_1_manipulators_1_1_manipulator.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.smoke_and_fire.Manipulators.Manipulator.NotifyChange()'],['../classcom_1_1zibra_1_1smoke__and__fire_1_1_solver_1_1_zibra_smoke_and_fire.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.NotifyChange()']]]
+  ['needactivation_0',['NeedActivation',['../a00517.html#aa11b89e3e945a641ee3e9e11943d11d1',1,'com::zibra::common::Editor::Licensing::GenerationManager']]],
+  ['neuralsdf_1',['NeuralSDF',['../a00705.html',1,'com::zibra::common::SDFObjects']]],
+  ['nodesize_2',['NodeSize',['../a00937.html#a81786f7ffc63f3aab6e05a27a31c88be',1,'com::zibra::liquid::Solver::ZibraLiquid']]],
+  ['notifychange_3',['NotifyChange',['../a00893.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.liquid.Manipulators.Manipulator.NotifyChange()'],['../a00937.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.liquid.Solver.ZibraLiquid.NotifyChange()'],['../a01085.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.smoke_and_fire.Manipulators.Manipulator.NotifyChange()'],['../a01161.html#a0af557e93137dbb3358b82ad34849b49',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.NotifyChange()']]]
 ];

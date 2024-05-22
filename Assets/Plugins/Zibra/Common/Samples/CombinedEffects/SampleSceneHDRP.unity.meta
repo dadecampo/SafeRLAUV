@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f8335ff236204cc468c5c836e4bc180d
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Samples/CombinedEffects/SampleSceneHDRP.unity
+  uploadId: 663749

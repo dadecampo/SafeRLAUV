@@ -1,0 +1,12 @@
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/ZibraEffectsOnboarding.uss?fileID=7433441132597879392&amp;guid=664ce6fd278825c4fa4798d5a1079a0d&amp;type=3#ZibraEffectsOnboarding" />
+    <ui:VisualElement name="VisualElement" class="BackgroundSuccess root" style="height: 100%;">
+        <ui:VisualElement name="VisualElement" style="position: relative; width: 100%; height: 100%;">
+            <ui:Label name="HeaderMessage"  text="!ProductName activated" display-tooltip-when-elided="true" class="SuccessText" />
+            <ui:Button name="OpenAssets" text="Explore our game-ready assets →" class="AssetStoreButton" />
+            <ui:VisualElement style="margin-top: 16px; flex-direction: row; justify-content: center;">
+                <ui:Button text="Documentation" display-tooltip-when-elided="true" name="OpenUserGuide" class="hyperlink" style="width: auto; font-size: 16px; color: rgb(93, 188, 255); margin-top: 13%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

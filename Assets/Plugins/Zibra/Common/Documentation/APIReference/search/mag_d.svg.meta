@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 3bb0ab30d2c4901468fa58d46c91c7ed
+guid: 2574edae37327774882bbab9f153cdf4
 DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Documentation/APIReference/search/mag_d.svg
+  uploadId: 663749

@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 189f262d6faed6c4cb6f464e01747ed8
+guid: 38f709357a851c04b847e9d190b39953
 TextScriptImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Documentation/APIReference/search/enums_0.js.txt
+  uploadId: 663749

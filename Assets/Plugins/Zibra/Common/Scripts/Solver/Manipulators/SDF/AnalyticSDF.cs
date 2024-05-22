@@ -17,7 +17,7 @@ namespace com.zibra.common.SDFObjects
     ///     and so doesn't require much data to store or special processing,
     ///     but also limited to simple shapes which can be represented with formula.
     /// </remarks>
-    [AddComponentMenu("Zibra Effects - SDFs/Zibra Analytic SDF")]
+    [AddComponentMenu(Effects.SDFsComponentMenuPath + "Zibra Analytic SDF")]
     [DisallowMultipleComponent]
     public class AnalyticSDF : SDFObject
     {

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cd055b4db7e953b4daff7f6e6d28d14e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Samples/Assets/Terrain/Layer.terrainlayer
+  uploadId: 663749

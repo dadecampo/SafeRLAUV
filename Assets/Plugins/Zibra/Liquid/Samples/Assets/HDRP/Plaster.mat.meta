@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 60bea2a65beb16b47823fc9a5068ceaf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Samples/Assets/HDRP/Plaster.mat
+  uploadId: 663749

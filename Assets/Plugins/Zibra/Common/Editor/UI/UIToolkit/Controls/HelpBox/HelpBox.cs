@@ -1,9 +1,8 @@
-#if UNITY_2019_4_OR_NEWER
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace com.zibra.liquid.Foundation.UIElements
+namespace com.zibra.common.Foundation.UIElements
 {
     /// <summary>
     /// The HelpBox component is a UI Toolkit analog for
@@ -52,4 +51,3 @@ namespace com.zibra.liquid.Foundation.UIElements
         }
     }
 }
-#endif

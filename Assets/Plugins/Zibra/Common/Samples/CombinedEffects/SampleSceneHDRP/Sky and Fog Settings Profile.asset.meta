@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 42f10637f200791479e5580f695184ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Samples/CombinedEffects/SampleSceneHDRP/Sky
+    and Fog Settings Profile.asset
+  uploadId: 663749

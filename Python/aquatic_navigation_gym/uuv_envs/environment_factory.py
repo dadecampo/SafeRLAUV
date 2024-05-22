@@ -9,25 +9,21 @@ from mlagents_envs.side_channel.engine_configuration_channel import EngineConfig
 from mlagents_envs.side_channel.environment_parameters_channel import EnvironmentParametersChannel
 
 class UuvEnvEnumeration(Enum):
-    Gym_Env = 1
-    FirstEnv = 1
-    SecondEnv = 2
-    ThirdEnv = 2
+    EasyEnv = 1
+    MediumEnv = 2
+    HardEnv = 3
     
 def _get_side_channels(auvEnum: UuvEnvEnumeration) -> List[SideChannel]:
-    if (auvEnum == UuvEnvEnumeration.Gym_Env):
-        return _get_first_env_channels()
-    elif (auvEnum == UuvEnvEnumeration.FirstEnv):
-        return _get_first_env_channels()
-    elif (auvEnum == UuvEnvEnumeration.SecondEnv):
-        return _get_second_env_channels()
+    if (auvEnum == UuvEnvEnumeration.EasyEnv):
+        return _get_easy_env_channels()
+    elif (auvEnum == UuvEnvEnumeration.MediumEnv):
+        return _get_medium_env_channels()
     else:
-        return _get_third_env_channels()
+        return _get_hard_env_channels()
         
-def _get_first_env_channels() -> List[SideChannel]:
+def _get_easy_env_channels() -> List[SideChannel]:
     engineConfigChannel = EngineConfigurationChannel()
-    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10.,
-                                                    target_frame_rate=-1, capture_frame_rate=60)
+    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10, capture_frame_rate=60)
     
     environmentParametersChannel = EnvironmentParametersChannel()
     environmentParametersChannel.set_float_parameter("target_x", 33.66)
@@ -40,11 +36,10 @@ def _get_first_env_channels() -> List[SideChannel]:
 
     return [engineConfigChannel, environmentParametersChannel]
 
-def _get_second_env_channels() -> List[SideChannel]:
+def _get_medium_env_channels() -> List[SideChannel]:
     
     engineConfigChannel = EngineConfigurationChannel()
-    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10.,
-                                                    target_frame_rate=-1, capture_frame_rate=60)
+    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10, capture_frame_rate=60)
     
     environmentParametersChannel = EnvironmentParametersChannel()
     environmentParametersChannel.set_float_parameter("target_x", 9.38)
@@ -56,10 +51,9 @@ def _get_second_env_channels() -> List[SideChannel]:
     environmentParametersChannel.set_float_parameter("safeTraining", 1)
 
     return [engineConfigChannel, environmentParametersChannel]
-def _get_third_env_channels() -> List[SideChannel]:
+def _get_hard_env_channels() -> List[SideChannel]:
     engineConfigChannel = EngineConfigurationChannel()
-    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10.,
-                                                    target_frame_rate=-1, capture_frame_rate=60)
+    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10, capture_frame_rate=60)
     
     environmentParametersChannel = EnvironmentParametersChannel()
     environmentParametersChannel.set_float_parameter("target_x", 9.38)

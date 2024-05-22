@@ -104,7 +104,8 @@ namespace com.zibra.common.Samples
             {
                 mainCamera.transform.position = camPos;
                 mainCamera.transform.rotation = Quaternion.Euler(camPhi, camTheta, 0);
-                mainCamera.fieldOfView = fov;
+                if (!mainCamera.stereoEnabled)
+                    mainCamera.fieldOfView = fov;
             }
         }
     }

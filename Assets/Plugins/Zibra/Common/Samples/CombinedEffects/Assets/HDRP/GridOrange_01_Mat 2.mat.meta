@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e5e977b3b4b742840a9d814a0b044880
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Samples/CombinedEffects/Assets/HDRP/GridOrange_01_Mat
+    2.mat
+  uploadId: 663749

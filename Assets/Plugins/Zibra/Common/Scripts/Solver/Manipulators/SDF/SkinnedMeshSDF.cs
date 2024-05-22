@@ -19,7 +19,7 @@ namespace com.zibra.common.SDFObjects
     ///         For generation see <see cref="Editor::SDFObjects::GenerationQueue">GenerationQueue</see>.
     ///     </para>
     /// </remarks>
-    [AddComponentMenu("Zibra Effects - SDFs/Zibra Skinned Mesh SDF")]
+    [AddComponentMenu(Effects.SDFsComponentMenuPath + "Zibra Skinned Mesh SDF")]
     [DisallowMultipleComponent]
     public class SkinnedMeshSDF : SDFObject
     {

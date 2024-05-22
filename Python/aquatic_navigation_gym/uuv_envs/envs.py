@@ -16,15 +16,15 @@ class UuvEnv(gym.Env):
         return self.env.step(action)
     
     
-class FirstUuvEnv(UuvEnv):
+class EasyUuvEnv(UuvEnv):
     def __init__(self):
-        super(FirstUuvEnv, self).__init__(UuvEnvEnumeration.FirstEnv)
+        super(EasyUuvEnv, self).__init__(UuvEnvEnumeration.EasyEnv)
         
-class SecondUuvEnv(UuvEnv):
+class MediumUuvEnv(UuvEnv):
     def __init__(self):
-        super(SecondUuvEnv, self).__init__(UuvEnvEnumeration.SecondEnv)
+        super(MediumUuvEnv, self).__init__(UuvEnvEnumeration.MediumEnv)
         
-class ThirdUuvEnv(UuvEnv):
+class HardUuvEnv(UuvEnv):
     def __init__(self):
-        super(ThirdUuvEnv, self).__init__(UuvEnvEnumeration.ThirdEnv)
+        super(HardUuvEnv, self).__init__(UuvEnvEnumeration.HardEnv)
     

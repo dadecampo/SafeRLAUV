@@ -2,39 +2,76 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using com.zibra.common.Editor.SDFObjects;
+using System;
+using System.Text.RegularExpressions;
+using com.zibra.common.Editor.Licensing;
+using static com.zibra.common.Editor.PluginManager;
+using com.zibra.common.Analytics;
 
 namespace com.zibra.common.Editor
 {
     internal class ZibraEffectsOnboarding : EditorWindow
     {
-        private const string REGISTRATION_GUID = "39f6c1ca9194bcb4d896f42e94b38b88";
-        private const string AUTHORIZATION_GUID = "c70f412c74090c8488e3e2d7ec4a6101";
-
-        private const ServerAuthManager.Effect LIQUIDS = ServerAuthManager.Effect.Liquids;
-        private const ServerAuthManager.Effect SMOKE = ServerAuthManager.Effect.Smoke;
-
+#if !ZIBRA_EFFECTS_OTP_VERSION
+        private const string ONBOARDING_GUID = "39f6c1ca9194bcb4d896f42e94b38b88";
+        private string CurrentUXMLGUID = ONBOARDING_GUID;
+#else
+        private const string REGISTRATION_GUID = "a4fb4aa3ec918b0438c0370d64ed10a9";
         private string CurrentUXMLGUID = REGISTRATION_GUID;
+#endif
+        private const string AUTHORIZATION_GUID = "c70f412c74090c8488e3e2d7ec4a6101";
+        private const string SUCCESS_GUID = "ed10b24decb1f804c9d36fc8e2b590db";
+
+        private const string IS_ONBOARDING_SHOWN_SESSION_KEY = "ZibraEffectsProOnboardingShown";
+        private Color LIGHT_RED = new Color(1f, 0.3f, 0.3f, 1f);
+
         private bool TriedToVerify = false;
 
         private TextField AuthKeyInputField;
-        private Label AuthMessage;
-        private Label AuthMessageLiquids;
+        private VisualElement BackElement;
+        private Label HeaderMessage;
+        private Label BodyMessage;
+        private Label StatusMessage;
+#if !ZIBRA_EFFECTS_OTP_VERSION
+        private Label AuthMessageLiquid;
         private Label AuthMessageSmoke;
-        private Button ActivateButton;
-        private Button GetStartedButton;
         private VisualElement ValidationMessages;
+#else
+        private TextField OrderNumber;
+        private TextField Email;
+        private TextField Name;
+        private Button Register;
+        private VisualElement RegistrationFields;
+        private Button HaveKey;
+        private Button OrderHistory;
+        private RegistrationManager.Status LatestRegistrationStatus;
+        private bool TriedToRegister = false;
+#endif
+        private Button ActivateButton;
+        private Button AssetStoreButton;
+        private Button UserGuideButton;
 
-        private ServerAuthManager.Status LatestStatusLiquids = ServerAuthManager.Status.NotInitialized;
-        private ServerAuthManager.Status LatestStatusSmoke = ServerAuthManager.Status.NotInitialized;
+#if ZIBRA_EFFECTS_OTP_VERSION
+        private Effect EffectToActivate = Effect.Count;
+#else
+        private Effect EffectToActivate = Effect.Liquid;
+#endif
+        private float PositionOffset = 0;
 
-        private ServerAuthManager ServerAuthInstance;
+        private string ProductName;
 
         public static GUIContent WindowTitle => new GUIContent("Zibra Effects Onboarding Screen");
 
-        internal static void ShowWindowDelayed()
+        internal static void ShowWindowOnStartup()
         {
-            ShowWindow();
-            EditorApplication.update -= ShowWindowDelayed;
+            ShowWindow("editor_start");
+            EditorApplication.update -= ShowWindowOnStartup;
+        }
+
+        [MenuItem(Effects.BaseMenuBarPath + "Activate License", false, 1)]
+        public static void ShowWindowFromMenu()
+        {
+            ShowWindow("onboarding_button");
         }
 
         [InitializeOnLoadMethod]
@@ -47,26 +84,55 @@ namespace com.zibra.common.Editor
             }
 
             // If user already has saved license key, don't show him this popup
-            if (ServerAuthManager.GetInstance().PluginLicenseKeys.Length > 0)
+            if (LicensingManager.Instance.GetSavedLicenseKeys().Length > 0)
             {
                 // If user removes key during editor session, don't show him popup
-                SessionState.SetBool("ZibraEffectsProOnboardingShown", false);
+                SessionState.SetBool(IS_ONBOARDING_SHOWN_SESSION_KEY, true);
                 return;
             }
 
-            if (SessionState.GetBool("ZibraEffectsProOnboardingShown", true))
+            if (SessionState.GetBool(IS_ONBOARDING_SHOWN_SESSION_KEY, false))
             {
-                SessionState.SetBool("ZibraEffectsProOnboardingShown", false);
-                EditorApplication.update += ShowWindowDelayed;
+                SessionState.SetBool(IS_ONBOARDING_SHOWN_SESSION_KEY, true);
+                EditorApplication.update += ShowWindowOnStartup;
             }
         }
-
-        [MenuItem(Effects.BaseMenuBarPath + "Open Onboarding", false, 1)]
-        private static void ShowWindow()
+        public static void ShowWindow(string activationTrigger)
         {
-            ZibraEffectsOnboarding window = (ZibraEffectsOnboarding)GetWindow(typeof(ZibraEffectsOnboarding));
-            window.titleContent = WindowTitle;
-            window.Show();
+            bool needActivation = false;
+#if !ZIBRA_EFFECTS_OTP_VERSION
+            if (!GenerationManager.Instance.IsGenerationAvailable())
+            {
+                ActivationTracking.GetInstance("effects").StoreActivationTrigger(activationTrigger);
+                ZibraEffectsOnboarding window = CreateWindow<ZibraEffectsOnboarding>($"Activate Zibra Effects");
+                window.Show();
+                needActivation = true;
+            }
+#else
+            float offset = 0;
+            const float OFFSET_STEP = 50;
+            for (int i = 0; i < (int)Effect.Count; ++i)
+            {
+                Effect effect = (Effect)i;
+                if (PluginManager.IsAvailable(effect) && !LicensingManager.Instance.IsLicenseVerified(effect))
+                {
+                    ActivationTracking.GetInstance(effect).StoreActivationTrigger(activationTrigger);
+                    ZibraEffectsOnboarding window = CreateWindow<ZibraEffectsOnboarding>($"Activate Zibra {effect}");
+                    window.EffectToActivate = effect;
+                    window.PositionOffset = offset;
+                    offset += OFFSET_STEP;
+                    window.OnEnable();
+                    window.Show();
+                    needActivation = true;
+                }
+            }
+#endif
+            if (!needActivation)
+            {
+                string errorMessage = "Plugin is already activated.";
+                EditorUtility.DisplayDialog("Activation.", errorMessage, "OK");
+                Debug.Log(errorMessage);
+            }
         }
 
         private static void CloseWindow()
@@ -77,37 +143,123 @@ namespace com.zibra.common.Editor
 
         private void OnEnable()
         {
+#if ZIBRA_EFFECTS_OTP_VERSION
+            if (EffectToActivate == Effect.Count)
+            {
+                return;
+            }
+#endif
+
+            LicensingManager.Instance.OnLicenseStatusUpdate += UpdateLicensingUI;
+
+#if !ZIBRA_EFFECTS_OTP_VERSION
+            for (int i = 0; i < (int)Effect.Count; ++i)
+            {
+                Effect effect = (Effect)i;
+                if (PluginManager.IsAvailable(effect))
+                {
+                    EffectToActivate = effect;
+                    break;
+                }
+            }
+
+            ProductName = "Zibra Effects";
+#else
+            switch (EffectToActivate)
+            {
+                case Effect.Liquid:
+                    ProductName = "Zibra Liquid";
+                    break;
+                case Effect.Smoke:
+                    ProductName = "Zibra Smoke & Fire";
+                    break;
+                default:
+                    throw new ArgumentException($"Invalid Effect Type {EffectToActivate}");
+            }
+#endif
+
             var root = rootVisualElement;
             root.Clear();
 
             int width = 456;
             int height = 442;
 
-            minSize = maxSize = new Vector2(width, height);
+            minSize = new Vector2(width, height);
+            maxSize = minSize;
+
+            Rect pos = position;
+            pos.x += PositionOffset;
+            pos.y += PositionOffset;
+            PositionOffset = 0;
+            pos.width = width;
+            pos.height = height;
+            position = pos;
 
             var uxmlAssetPath = AssetDatabase.GUIDToAssetPath(CurrentUXMLGUID);
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uxmlAssetPath);
             visualTree.CloneTree(root);
 
-            if (CurrentUXMLGUID == REGISTRATION_GUID)
+            root.Query<TextElement>().ToList().ForEach(e => { e.text = e.text.Replace("!ProductName", ProductName); });
+
+#if !ZIBRA_EFFECTS_OTP_VERSION
+            if (CurrentUXMLGUID == ONBOARDING_GUID)
             {
                 root.Q<Button>("GetKey").clicked += GetKeyClick;
                 root.Q<Button>("HaveKey").clicked += HaveKeyClick;
                 root.Q<Button>("PrivacyPolicy").clicked += PrivacyPolicyClick;
                 root.Q<Button>("TermsAndConditions").clicked += TermsAndConditionsClick;
             }
+#endif
+#if ZIBRA_EFFECTS_OTP_VERSION
+            if (CurrentUXMLGUID == REGISTRATION_GUID)
+            {
+                if (LicensingManager.Instance.IsLicenseVerified(EffectToActivate))
+                {
+                    CurrentUXMLGUID = AUTHORIZATION_GUID;
+                    OnEnable();
+                    return;
+                }
+
+                StatusMessage = root.Q<Label>("StatusMessage");
+                OrderNumber = root.Q<TextField>("OrderNumber");
+                Email = root.Q<TextField>("Email");
+                Name = root.Q<TextField>("Name");
+                Register = root.Q<Button>("Register");
+                Register.clicked += RegisterClick;
+                RegistrationFields = root.Q<VisualElement>("RegistrationFields");
+                HaveKey = root.Q<Button>("HaveKey");
+                HaveKey.clicked += HaveKeyClick;
+                OrderHistory = root.Q<Button>("OrderHistory");
+                OrderHistory.clicked += OrderHistoryClick;
+
+                EventCallback<KeyDownEvent> RegisterLambda = (evt =>
+                {
+                    if (evt.keyCode == KeyCode.Return)
+                    {
+                        RegisterClick();
+                        evt.StopPropagation();
+                    }
+                });
+                OrderNumber.RegisterCallback(RegisterLambda);
+                Email.RegisterCallback(RegisterLambda);
+                Name.RegisterCallback(RegisterLambda);
+            }
+#endif
             if (CurrentUXMLGUID == AUTHORIZATION_GUID)
             {
-                ServerAuthInstance = ServerAuthManager.GetInstance();
-                root.Q<Button>("BackToRegistration").clicked += BackToRegistrationClick;
+                root.Q<Button>("BackButton").clicked += BackClick;
 
-                AuthMessage = root.Q<Label>("AuthorizationMessage");
-                AuthMessageLiquids = root.Q<Label>("AuthMessageLiquids");
+                BackElement = root.Q<VisualElement>("BackElement");
+                HeaderMessage = root.Q<Label>("HeaderMessage");
+                BodyMessage = root.Q<Label>("BodyMessage");
+                StatusMessage = root.Q<Label>("StatusMessage");
+#if !ZIBRA_EFFECTS_OTP_VERSION
+                AuthMessageLiquid = root.Q<Label>("AuthMessageLiquid");
                 AuthMessageSmoke = root.Q<Label>("AuthMessageSmoke");
-                ActivateButton = root.Q<Button>("Activate");
-                GetStartedButton = root.Q<Button>("GetStart");
-                AuthKeyInputField = root.Q<TextField>("ActivationField");
                 ValidationMessages = root.Q<VisualElement>("ValidationMessages");
+#endif
+                ActivateButton = root.Q<Button>("Activate");
+                AuthKeyInputField = root.Q<TextField>("ActivationField");
 
                 AuthKeyInputField.RegisterCallback<KeyDownEvent>(evt =>
                                                                  {
@@ -118,16 +270,32 @@ namespace com.zibra.common.Editor
                                                                      }
                                                                  });
                 ActivateButton.clicked += ActivateClick;
-                GetStartedButton.clicked += GetStartedClick;
 
-                IsKeyValidated();
+                UpdateActivationUI();
             }
+
+            if (CurrentUXMLGUID == SUCCESS_GUID)
+            {
+                AssetStoreButton = root.Q<Button>("OpenAssets");
+                UserGuideButton = root.Q<Button>("OpenUserGuide");
+                AssetStoreButton.clicked += AssetStoreClick;
+                UserGuideButton.clicked += UserGuideClick;
+            }
+        }
+        
+        private void OnDisable()
+        {
+            LicensingManager.Instance.OnLicenseStatusUpdate -= UpdateLicensingUI;
         }
 
         private void GetKeyClick()
         {
+#if !ZIBRA_EFFECTS_OTP_VERSION
             Application.OpenURL("https://license.zibra.ai/api/stripeTrial?source=plugin");
             CurrentUXMLGUID = AUTHORIZATION_GUID;
+#else
+            CurrentUXMLGUID = REGISTRATION_GUID;
+#endif
             OnEnable();
         }
 
@@ -139,174 +307,206 @@ namespace com.zibra.common.Editor
 
         private void PrivacyPolicyClick()
         {
-            Application.OpenURL("https://zibra.ai/privacy-policy/");
+            Application.OpenURL("https://effects.zibra.ai/privacy-policy");
         }
 
         private void TermsAndConditionsClick()
         {
-            Application.OpenURL("https://zibra.ai/terms-of-service/");
+            Application.OpenURL("https://effects.zibra.ai/terms-of-servises");
         }
+
+#if ZIBRA_EFFECTS_OTP_VERSION
+        private void OrderHistoryClick()
+        {
+            Application.OpenURL("https://assetstore.unity.com/orders");
+        }
+        private void RegisterClick()
+        {
+            if (!ValidateRegistrationInput())
+            {
+                return;
+            }
+
+            TriedToRegister = true;
+            RegistrationFields.style.display = DisplayStyle.None;
+            HaveKey.style.display = DisplayStyle.None;
+            OrderHistory.style.display = DisplayStyle.None;
+            LabelStyle(StatusMessage, Color.white);
+            StatusMessage.text = "Registering in progress, please wait.";
+            RegistrationManager.Instance.Register(EffectToActivate, OrderNumber.text, Email.text, Name.text);
+            UpdateRegistrationUI();
+        }
+
+        private void ReportError(string error)
+        {
+            LabelStyle(StatusMessage, LIGHT_RED);
+            StatusMessage.text = error;
+        }
+
+        private bool ValidateRegistrationInput()
+        {
+            const string ORDER_NUMBER_REGEX = "^(\\d{13,14})|(IN\\d{12})$";
+            const string EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]+$";
+            const string NAME_REGEX = "^[a-zA-Z\\- ]+$";
+
+            OrderNumber.value = OrderNumber.text.Trim();
+            Email.value = Email.text.Trim();
+            Name.value = Name.text.Trim();
+
+            if (!Regex.IsMatch(OrderNumber.text, ORDER_NUMBER_REGEX))
+            {
+                ReportError(OrderNumber.text == "" ? "Please enter Order number or Invoice number." : "Invalid Order number or Invoice number.");
+                return false;
+            }
+            if (!Regex.IsMatch(Email.text, EMAIL_REGEX))
+            {
+                ReportError(Email.text == "" ? "Please enter your Email." : "Invalid Email. Please ensure you enter a valid email address.");
+                return false;
+            }
+            if (!Regex.IsMatch(Name.text, NAME_REGEX) || Name.text == "Name")
+            {
+                ReportError(Name.text == "" || Name.text == "Name" ? "Please enter your Name." : "Please ensure you have entered your name correctly.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void UpdateRegistrationUI()
+        {
+            if (LicensingManager.Instance.IsLicenseVerified(EffectToActivate))
+            {
+                TriedToVerify = true;
+                CurrentUXMLGUID = AUTHORIZATION_GUID;
+                OnEnable();
+                ReportActivationStart();
+                return;
+            }
+            else if (TriedToRegister && RegistrationManager.Instance.CurrentStatus == RegistrationManager.Status.OK)
+            {
+                TriedToRegister = false;
+                TriedToVerify = true;
+                CurrentUXMLGUID = AUTHORIZATION_GUID;
+                OnEnable();
+                ReportActivationStart();
+            }
+            else if (!TriedToRegister || RegistrationManager.Instance.CurrentStatus == RegistrationManager.Status.InProgress)
+            {
+                // NOOP
+            }
+            else
+            {
+                ReportError(RegistrationManager.Instance.ErrorMessage);
+                RegistrationFields.style.display = DisplayStyle.Flex;
+                HaveKey.style.display = DisplayStyle.Flex;
+                OrderHistory.style.display = DisplayStyle.Flex;
+                TriedToRegister = false;
+            }
+        }
+#endif
 
         private void ActivateClick()
         {
-            string keys = AuthKeyInputField.text;
+            string key = AuthKeyInputField.text;
 
-            if (!ServerAuthManager.CheckKeysFormat(keys))
+            if (key == "")
             {
-                AuthMessageStyle(AuthMessage, Color.red);
-                AuthMessage.text = ("Incorrect key format.");
+                LabelStyle(StatusMessage, LIGHT_RED);
+                StatusMessage.text = ("Please enter your license key.");
+                return;
+            }
+
+            if (!LicensingManager.ValidateKeyFormat(key))
+            {
+                LabelStyle(StatusMessage, LIGHT_RED);
+                StatusMessage.text = ("Invalid license key.");
                 return;
             }
 
             TriedToVerify = true;
-            ServerAuthInstance.RegisterKey(keys);
+
+#if !ZIBRA_EFFECTS_OTP_VERSION
+            LicensingManager.Instance.ValidateLicense(key, new Effect[] { Effect.Liquid, Effect.Smoke, Effect.ZibraVDB });
+#else
+            LicensingManager.Instance.ValidateLicense(key, EffectToActivate);
+#endif
+            ReportActivationStart();
+        }
+
+        private void ReportActivationStart()
+        {
+            StatusMessage.style.display = DisplayStyle.Flex;
+            BackElement.style.display = DisplayStyle.None;
+            BodyMessage.style.display = DisplayStyle.None;
             AuthKeyInputField.style.display = DisplayStyle.None;
             ActivateButton.style.display = DisplayStyle.None;
-            AuthMessage.text = ServerAuthInstance.GetErrorMessage(LIQUIDS);
+            LabelStyle(StatusMessage, Color.white);
+            StatusMessage.text = LicensingManager.Instance.GetErrorMessage(EffectToActivate);
+        }
+        private void AssetStoreClick()
+        {
+            EditorApplication.ExecuteMenuItem(Effects.BaseMenuBarPath + "Browse Assets on Unity Asset Store");
         }
 
-        private void GetStartedClick()
+        private void UserGuideClick()
         {
-            EditorApplication.ExecuteMenuItem(Effects.BaseMenuBarPath + "Open User Guide");
-            CloseWindow();
+            EditorApplication.ExecuteMenuItem(Effects.BaseMenuBarPath + "Open Documentation");
         }
 
-        private void BackToRegistrationClick()
+        private void BackClick()
         {
+#if !ZIBRA_EFFECTS_OTP_VERSION
+            CurrentUXMLGUID = ONBOARDING_GUID;
+#else
             CurrentUXMLGUID = REGISTRATION_GUID;
+#endif
             OnEnable();
         }
 
-        private void AuthMessageStyle(Label authMessage, Color color, bool useMargin = true)
+        private void LabelStyle(Label authMessage, Color color)
         {
-            if (useMargin)
-                authMessage.style.marginTop = 58;
-
             authMessage.style.color = new StyleColor(color);
-            authMessage.style.unityFontStyleAndWeight = FontStyle.Bold;
         }
 
-        private void Update()
+        private void UpdateLicensingUI()
         {
-            if (TriedToVerify)
+            if (TriedToVerify && CurrentUXMLGUID == AUTHORIZATION_GUID)
             {
-
-                if (ServerAuthInstance.GetStatus(LIQUIDS) == LatestStatusLiquids &&
-                    ServerAuthInstance.GetStatus(SMOKE) == LatestStatusSmoke)
-                    return;
-
-                LatestStatusLiquids = ServerAuthManager.GetInstance().GetStatus(LIQUIDS);
-                LatestStatusSmoke = ServerAuthManager.GetInstance().GetStatus(SMOKE);
-
-                if (!IsKeyValidated())
-                {
-                    if (ServerAuthInstance.GetStatus(LIQUIDS) != ServerAuthManager.Status.NotRegistered &&
-                        ServerAuthInstance.GetStatus(LIQUIDS) != ServerAuthManager.Status.KeyValidationInProgress &&
-                        ServerAuthInstance.GetStatus(SMOKE) != ServerAuthManager.Status.NotRegistered &&
-                        ServerAuthInstance.GetStatus(SMOKE) != ServerAuthManager.Status.KeyValidationInProgress)
-                    {
-                        AuthMessage.style.display = DisplayStyle.None;
-                        AuthMessageStyle(AuthMessageLiquids, Color.red, false);
-                        AuthMessageLiquids.text = ServerAuthInstance.GetErrorMessage(LIQUIDS);
-                        AuthMessageStyle(AuthMessageSmoke, Color.red, false);
-                        AuthMessageSmoke.text = ServerAuthInstance.GetErrorMessage(SMOKE);
-                        ValidationMessages.style.display = DisplayStyle.Flex;
-                        AuthKeyInputField.style.display = DisplayStyle.Flex;
-                        ActivateButton.style.display = DisplayStyle.Flex;
-                    }
-                    else if (ServerAuthInstance.GetStatus(LIQUIDS) != ServerAuthManager.Status.NotRegistered &&
-                             ServerAuthInstance.GetStatus(LIQUIDS) != ServerAuthManager.Status.KeyValidationInProgress)
-                    {
-                        AuthMessageStyle(AuthMessage, Color.red);
-                        AuthMessage.text = ServerAuthInstance.GetErrorMessage(LIQUIDS);
-                        AuthKeyInputField.style.display = DisplayStyle.Flex;
-                        ActivateButton.style.display = DisplayStyle.Flex;
-                    }
-                    else if (ServerAuthInstance.GetStatus(SMOKE) != ServerAuthManager.Status.NotRegistered &&
-                             ServerAuthInstance.GetStatus(SMOKE) != ServerAuthManager.Status.KeyValidationInProgress)
-                    {
-                        AuthMessageStyle(AuthMessage, Color.red);
-                        AuthMessage.text = ServerAuthInstance.GetErrorMessage(SMOKE);
-                        AuthKeyInputField.style.display = DisplayStyle.Flex;
-                        ActivateButton.style.display = DisplayStyle.Flex;
-                    }
-                    else
-                    {
-                        if (ServerAuthInstance.GetErrorMessage(LIQUIDS) != "" &&
-                            ServerAuthInstance.GetErrorMessage(SMOKE) != "")
-                        {
-                            if (ServerAuthInstance.GetErrorMessage(LIQUIDS) ==
-                                ServerAuthInstance.GetErrorMessage(SMOKE))
-                            {
-                                ValidationMessages.style.display = DisplayStyle.None;
-                                AuthMessageStyle(AuthMessage, Color.white);
-                                AuthMessage.text = ServerAuthInstance.GetErrorMessage(LIQUIDS);
-                                AuthMessage.style.display = DisplayStyle.Flex;
-                            }
-                            else
-                            {
-                                AuthMessage.style.display = DisplayStyle.None;
-                                AuthMessageStyle(AuthMessageLiquids, Color.white, false);
-                                AuthMessageLiquids.text = ServerAuthInstance.GetErrorMessage(LIQUIDS);
-                                AuthMessageStyle(AuthMessageSmoke, Color.white, false);
-                                AuthMessageSmoke.text = ServerAuthInstance.GetErrorMessage(SMOKE);
-                                ValidationMessages.style.display = DisplayStyle.Flex;
-                            }
-                        }
-                        else if (ServerAuthInstance.GetErrorMessage(LIQUIDS) != "")
-                        {
-                            AuthMessageStyle(AuthMessage, Color.white);
-                            AuthMessage.text = ServerAuthInstance.GetErrorMessage(LIQUIDS);
-                        }
-                        else if (ServerAuthInstance.GetErrorMessage(SMOKE) != "")
-                        {
-                            AuthMessageStyle(AuthMessage, Color.white);
-                            AuthMessage.text = ServerAuthInstance.GetErrorMessage(SMOKE);
-                        }
-                    }
-                }
+                UpdateActivationUI();
             }
+
+#if ZIBRA_EFFECTS_OTP_VERSION
+            if (CurrentUXMLGUID == REGISTRATION_GUID)
+            {
+                UpdateRegistrationUI();
+            }
+#endif
         }
-        private bool IsKeyValidated()
+        private void UpdateActivationUI()
         {
-            if (ServerAuthInstance.IsLicenseVerified(LIQUIDS) && ServerAuthInstance.IsLicenseVerified(SMOKE))
+            LicensingManager.Status status = LicensingManager.Instance.GetStatus(EffectToActivate);
+            if (LicensingManager.Instance.IsLicenseVerified(EffectToActivate))
             {
-                ValidationMessages.style.display = DisplayStyle.None;
-                AuthMessageStyle(AuthMessage, Color.green);
-                AuthMessage.text = "License validated successfully";
-                AuthKeyInputField.style.display = DisplayStyle.None;
-                ActivateButton.style.display = DisplayStyle.None;
-                AuthMessage.style.display = DisplayStyle.Flex;
-                GetStartedButton.style.display = DisplayStyle.Flex;
-                return true;
+                CurrentUXMLGUID = SUCCESS_GUID;
+                OnEnable();
+                return;
             }
-            else if (ServerAuthInstance.IsLicenseVerified(LIQUIDS))
+            else if (!TriedToVerify || status == LicensingManager.Status.ValidationInProgress)
             {
-                AuthMessage.style.display = DisplayStyle.None;
-                AuthKeyInputField.style.display = DisplayStyle.None;
-                ActivateButton.style.display = DisplayStyle.None;
-                AuthMessageStyle(AuthMessageLiquids, Color.green, false);
-                AuthMessageLiquids.text = "Liquids license validated successfully";
-                AuthMessageStyle(AuthMessageSmoke, Color.white, false);
-                AuthMessageSmoke.text = "Your license doesn't include Smoke & Fire";
-                ValidationMessages.style.display = DisplayStyle.Flex;
-                GetStartedButton.style.display = DisplayStyle.Flex;
-                return true;
+                // NOOP
             }
-            else if (ServerAuthInstance.IsLicenseVerified(SMOKE))
+            else
             {
-                AuthMessage.style.display = DisplayStyle.None;
-                AuthKeyInputField.style.display = DisplayStyle.None;
-                ActivateButton.style.display = DisplayStyle.None;
-                AuthMessageStyle(AuthMessageLiquids, Color.white, false);
-                AuthMessageLiquids.text = "Your license doesn't include Liquids";
-                AuthMessageStyle(AuthMessageSmoke, Color.green, false);
-                AuthMessageSmoke.text = "Smoke & Fire license validated successfully";
-                ValidationMessages.style.display = DisplayStyle.Flex;
-                GetStartedButton.style.display = DisplayStyle.Flex;
-                return true;
+                LabelStyle(StatusMessage, LIGHT_RED);
+                StatusMessage.text = LicensingManager.Instance.GetErrorMessage(EffectToActivate);
+                BackElement.style.display = DisplayStyle.Flex;
+                BodyMessage.style.display = DisplayStyle.Flex;
+                StatusMessage.style.display = DisplayStyle.Flex;
+                AuthKeyInputField.style.display = DisplayStyle.Flex;
+                ActivateButton.style.display = DisplayStyle.Flex;
+                TriedToVerify = false;
             }
-            return false;
         }
+
     }
 }

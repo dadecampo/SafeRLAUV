@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e6b416ac6b016654ca597ab0d5351dbe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Scripts/Timeline/ZibraControlTrack.cs
+  uploadId: 663749

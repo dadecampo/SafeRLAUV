@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['validatekeyformat_0',['ValidateKeyFormat',['../a00529.html#abd9b5dc289a628a372f474cb28120587',1,'com::zibra::common::Editor::Licensing::LicensingManager']]],
+  ['validatelicense_1',['ValidateLicense',['../a00529.html#af9cd97523b731f56621d86897dcf80ea',1,'com.zibra.common.Editor.Licensing.LicensingManager.ValidateLicense(string key, Effect effect)'],['../a00529.html#aa80ae575cdce58e2927e5391a5d0f0e0',1,'com.zibra.common.Editor.Licensing.LicensingManager.ValidateLicense(string key, Effect[] effects)'],['../a00529.html#aadc73f8f0fd7f882e2134b2ca1f9f4c3',1,'com.zibra.common.Editor.Licensing.LicensingManager.ValidateLicense()']]]
+];

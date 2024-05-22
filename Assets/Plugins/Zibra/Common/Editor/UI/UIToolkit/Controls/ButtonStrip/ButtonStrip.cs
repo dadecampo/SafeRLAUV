@@ -1,13 +1,12 @@
-#if UNITY_2019_4_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using com.zibra.liquid.Foundation.Editor;
+using com.zibra.common.Foundation.Editor;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace com.zibra.liquid.Foundation.UIElements
+namespace com.zibra.common.Foundation.UIElements
 {
     /// <summary>
     /// The button strip component let's you place buttons group with the labels or images.
@@ -178,11 +177,7 @@ namespace com.zibra.liquid.Foundation.UIElements
                 else
                     button.AddToClassList(k_ButtonMidClassName);
 
-#if UNITY_2019_3_OR_NEWER
                 button.clicked += () =>
-#else
-                button.clickable.clicked += () =>
-#endif
                 { SetValue(choice); };
 
                 m_Buttons.Add(button);
@@ -216,4 +211,3 @@ namespace com.zibra.liquid.Foundation.UIElements
         }
     }
 }
-#endif

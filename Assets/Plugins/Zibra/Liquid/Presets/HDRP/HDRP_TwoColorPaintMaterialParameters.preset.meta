@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1f01c4b10bcfde04487241ae6a82cc9b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Presets/HDRP/HDRP_TwoColorPaintMaterialParameters.preset
+  uploadId: 663749

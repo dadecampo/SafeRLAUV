@@ -15,7 +15,7 @@ namespace com.zibra.common.SDFObjects
     ///     Terrain SDF is an SDF approximation based on the terrain's heightmap.
     ///     Since this is an approximation it might be worse in quality in some cases compared to other SDF types.
     /// </remarks>
-    [AddComponentMenu("Zibra Effects - SDFs/Zibra Terrain SDF")]
+    [AddComponentMenu(Effects.SDFsComponentMenuPath + "Zibra Terrain SDF")]
     [DisallowMultipleComponent]
     public class TerrainSDF : SDFObject
     {

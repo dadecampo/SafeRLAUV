@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace com.zibra.liquid.Foundation.Editor
+namespace com.zibra.common.Foundation.Editor
 {
     /// <summary>
     /// Editor related UI Toolkit utility methods.

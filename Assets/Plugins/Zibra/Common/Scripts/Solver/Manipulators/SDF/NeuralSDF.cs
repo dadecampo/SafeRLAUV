@@ -28,7 +28,7 @@ namespace com.zibra.common.SDFObjects
     ///     </para>
     /// </remarks>
     [ExecuteInEditMode]
-    [AddComponentMenu("Zibra Effects - SDFs/Zibra Neural SDF")]
+    [AddComponentMenu(Effects.SDFsComponentMenuPath + "Zibra Neural SDF")]
     [DisallowMultipleComponent]
     public class NeuralSDF : SDFObject
     {

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72d049167a5204c4ca54e30ccc062910
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Presets/HDRP/HDRP_BloodMaterialParameters.preset
+  uploadId: 663749

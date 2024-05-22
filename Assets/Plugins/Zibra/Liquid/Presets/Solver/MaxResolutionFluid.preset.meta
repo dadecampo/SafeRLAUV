@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba0446b0c1bca8941b0ae5bb46a02c7b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Presets/Solver/MaxResolutionFluid.preset
+  uploadId: 663749

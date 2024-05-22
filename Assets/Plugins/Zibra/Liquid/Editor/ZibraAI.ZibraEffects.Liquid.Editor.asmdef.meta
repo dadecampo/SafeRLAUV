@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e9f112ee6b2f8c549bd6998d69c45bbc
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Editor/ZibraAI.ZibraEffects.Liquid.Editor.asmdef
+  uploadId: 663749

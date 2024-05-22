@@ -1,0 +1,26 @@
+#pragma kernel CS_CopyDepth COPY_DEPTH
+
+#define DEPTH_COPY_WORKGROUP 16
+
+#ifdef COPY_DEPTH
+
+float2 Resolution;
+
+Texture2D<float> _CameraDepthTexture;
+RWTexture2D<float> DepthOUT;
+
+[numthreads(DEPTH_COPY_WORKGROUP, DEPTH_COPY_WORKGROUP, 1)]
+void CS_CopyDepth(uint3 id : SV_DispatchThreadID)
+{
+    if (any(float2(id.xy) > Resolution))
+    {
+        return;
+    }
+    float sceneDepth = _CameraDepthTexture.Load(int3(id.xy, 0));
+#if !UNITY_REVERSED_Z
+    sceneDepth = 1.0 - sceneDepth;
+#endif
+    DepthOUT[id.xy] = sceneDepth;
+}
+
+#endif

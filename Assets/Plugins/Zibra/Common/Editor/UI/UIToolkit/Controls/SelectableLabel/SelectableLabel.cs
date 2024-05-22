@@ -1,9 +1,8 @@
-#if UNITY_2019_4_OR_NEWER
-using com.zibra.liquid.Foundation.Editor;
+using com.zibra.common.Foundation.Editor;
 using JetBrains.Annotations;
 using UnityEngine.UIElements;
 
-namespace com.zibra.liquid.Foundation.UIElements
+namespace com.zibra.common.Foundation.UIElements
 {
     /// <summary>
     /// A selectable label field.
@@ -66,4 +65,3 @@ namespace com.zibra.liquid.Foundation.UIElements
         }
     }
 }
-#endif

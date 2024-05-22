@@ -10,7 +10,7 @@
 
         <ui:VisualElement class="tabs-bar">
             <ui:VisualElement class="toolbar__flexible-space" />
-            <com.zibra.liquid.Foundation.UIElements.ButtonStrip name="tabs" view-data-key="header-tabs" />
+            <com.zibra.common.Foundation.UIElements.ButtonStrip name="tabs" view-data-key="header-tabs" />
             <ui:VisualElement class="toolbar__flexible-space" />
         </ui:VisualElement>
         <ui:ScrollView name="tabs-container" class="tabs-container" view-data-key="tabs-container-scroll"/>

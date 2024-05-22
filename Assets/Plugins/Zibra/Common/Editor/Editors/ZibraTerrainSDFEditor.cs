@@ -3,7 +3,7 @@ using UnityEditor;
 using com.zibra.common.SDFObjects;
 using com.zibra.common.Analytics;
 
-namespace com.zibra.liquid.Editor.SDFObjects
+namespace com.zibra.common.Editor.SDFObjects
 {
     [CustomEditor(typeof(TerrainSDF))]
     [CanEditMultipleObjects]
@@ -31,8 +31,6 @@ namespace com.zibra.liquid.Editor.SDFObjects
 
         public override void OnInspectorGUI()
         {
-            EditorGUI.BeginChangeCheck();
-
             serializedObject.Update();
 
             bool missingTerrainComponent = false;
@@ -73,11 +71,6 @@ namespace com.zibra.liquid.Editor.SDFObjects
             EditorGUILayout.PropertyField(SurfaceDistance);
 
             serializedObject.ApplyModifiedProperties();
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                ZibraEffectsAnalytics.TrackConfiguration("SDF");
-            }
         }
     }
 }

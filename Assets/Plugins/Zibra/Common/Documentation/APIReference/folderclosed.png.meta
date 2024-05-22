@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a48769820c2205d48934adb2ec3078c7
+guid: 46db49d01bc956b4a83c97e0211bd4a9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -133,3 +133,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Documentation/APIReference/folderclosed.png
+  uploadId: 663749

@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 7f05ab5b9baf56545a5c785e04729909
+guid: e6a3f072971ae46448fe991c3241da19
 DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Documentation/APIReference/search/search.css
+  uploadId: 663749

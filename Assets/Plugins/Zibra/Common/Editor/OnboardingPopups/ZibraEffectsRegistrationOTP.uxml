@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/ZibraEffectsOnboarding.uss?fileID=7433441132597879392&amp;guid=664ce6fd278825c4fa4798d5a1079a0d&amp;type=3#ZibraEffectsOnboarding" />
+    <ui:VisualElement name="VisualElement" class="BackgroundAuth root" style="height: 100%;">
+        <ui:VisualElement name="VisualElement" style="position: relative; width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/icons/1.png?fileID=2800000&amp;guid=2f4e7ece3133b8243955d1d56f1a9980&amp;type=3#1&apos;);">
+            <ui:Label text="Activate !ProductName" display-tooltip-when-elided="true" class="HeaderTextStyle" style="margin-top: 35px; margin-bottom: 8px;" />
+            <ui:Label text="Enter purchase information to unlock the full functionality. You can find your order and invoice numbers in the Unity Asset Store Order History." display-tooltip-when-elided="true" name="StatusMessage" class="MessageTextStyle" style="padding-left: 32px; padding-right: 32px; display: flex; visibility: visible; height: 80px;" />
+            <ui:VisualElement style="margin-bottom: 16px; flex-direction: row; justify-content: center;">
+                <ui:Button text="Asset Store Order History" display-tooltip-when-elided="true" name="OrderHistory" class="hyperlink" style="width: auto; font-size: 14px; color: rgb(93, 188, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="RegistrationFields">
+                <ui:TextField name="OrderNumber" readonly="false" is-delayed="false" multiline="false" text="Order number or Invoice number" style="width: 70%; left: 15%; height: 25px; padding-top: 0; margin-top: 15px; margin-bottom: 0; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; color: rgb(149, 149, 149); -unity-text-outline-width: 0; -unity-text-outline-color: rgb(144, 144, 144); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(77, 77, 77); border-right-color: rgb(77, 77, 77); border-top-color: rgb(77, 77, 77); border-bottom-color: rgb(77, 77, 77);" />
+                <ui:TextField name="Email" readonly="false" is-delayed="false" multiline="false" text="E-mail" style="width: 70%; left: 15%; height: 25px; padding-top: 0; margin-top: 15px; margin-bottom: 0; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; color: rgb(149, 149, 149); -unity-text-outline-width: 0; -unity-text-outline-color: rgb(144, 144, 144); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(77, 77, 77); border-right-color: rgb(77, 77, 77); border-top-color: rgb(77, 77, 77); border-bottom-color: rgb(77, 77, 77);" />
+                <ui:TextField name="Name" readonly="false" is-delayed="false" multiline="false" text="Name" style="width: 70%; left: 15%; height: 25px; padding-top: 0; margin-top: 15px; margin-bottom: 0; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; color: rgb(149, 149, 149); -unity-text-outline-width: 0; -unity-text-outline-color: rgb(144, 144, 144); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(77, 77, 77); border-right-color: rgb(77, 77, 77); border-top-color: rgb(77, 77, 77); border-bottom-color: rgb(77, 77, 77);" />
+                <ui:Button name="Register" text="Register" class="ButtonRadius" style="height: 30px; width: 30%; left: 35%; right: auto; bottom: auto; top: auto; margin-top: 25px; margin-bottom: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="margin-top: 20px; flex-direction: row; justify-content: center;">
+                <ui:Button text="Already have a license key?" display-tooltip-when-elided="true" name="HaveKey" class="hyperlink" style="width: auto; font-size: 14px; color: rgb(93, 188, 255);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

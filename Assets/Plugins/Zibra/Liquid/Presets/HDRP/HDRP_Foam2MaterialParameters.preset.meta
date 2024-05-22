@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 19f9c91b3e720ee45ae9bca8d8af1f36
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Presets/HDRP/HDRP_Foam2MaterialParameters.preset
+  uploadId: 663749

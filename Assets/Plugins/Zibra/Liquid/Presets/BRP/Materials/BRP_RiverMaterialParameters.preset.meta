@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eb7c3da92e75fd14f9447a38226269ce
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Presets/BRP/Materials/BRP_RiverMaterialParameters.preset
+  uploadId: 663749

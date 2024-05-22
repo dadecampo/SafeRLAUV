@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3f59ea0f76d84b34ab5a764e1004a29c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Editor/Solver/ZibraLiquidDetectorEditor.cs
+  uploadId: 663749

@@ -1,10 +1,9 @@
-﻿#if UNITY_2019_4_OR_NEWER
-using com.zibra.liquid.Foundation.Editor;
+﻿using com.zibra.common.Foundation.Editor;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace com.zibra.liquid.Foundation.UIElements
+namespace com.zibra.common.Foundation.UIElements
 {
     internal class Hyperlink : BindableElement
     {
@@ -63,4 +62,3 @@ namespace com.zibra.liquid.Foundation.UIElements
         }
     }
 }
-#endif

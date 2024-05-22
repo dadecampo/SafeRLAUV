@@ -8,9 +8,13 @@ namespace com.zibra.common.Editor
 {
     internal class ZibraEffectsUpdateChecker : EditorWindow
     {
-        public static GUIContent WindowTitle => new GUIContent("Zibra Effects Check Version");
+        public static GUIContent WindowTitle => new GUIContent("Zibra Effects Update Checker");
 
+#if !ZIBRA_EFFECTS_OTP_VERSION
         const string URL = "https://generation.zibra.ai/api/pluginVersion?effect=effects&engine=unity&sku=pro";
+#else
+        const string URL = "https://generation.zibra.ai/api/pluginVersion?effect=effects&engine=unity&sku=otp";
+#endif
 
         private const string UPDATE_CHECK_PREFS_KEY = "ZibraEffectsAutomaticallyCheckForUpdates";
         private const string UPDATE_CHECKED_SESSION_STATE_KEY = "ZibraEffectsUpdateChecked";
@@ -33,7 +37,7 @@ namespace com.zibra.common.Editor
         private static Button UpdateButton;
         private static Toggle Checkbox;
 
-        private bool OnlyShowOutdated = false;
+        private bool IsAutomaticCheck = false;
         private bool IsLatestVersion = false;
 
         [InitializeOnLoadMethod]
@@ -71,11 +75,11 @@ namespace com.zibra.common.Editor
             ShowWindow(false);
         }
 
-        public static void ShowWindow(bool onlyShowOutdated)
+        public static void ShowWindow(bool isAutomaticCheck)
         {
-            Instance.OnlyShowOutdated = onlyShowOutdated;
+            Instance.IsAutomaticCheck = isAutomaticCheck;
 
-            if (!onlyShowOutdated)
+            if (!isAutomaticCheck)
             {
                 Instance.Show();
             }
@@ -87,8 +91,8 @@ namespace com.zibra.common.Editor
 
             var root = rootVisualElement;
 
-            int width = 480;
-            int height = 360;
+            int width = 400;
+            int height = 240;
 
             minSize = maxSize = new Vector2(width, height);
 
@@ -99,10 +103,6 @@ namespace com.zibra.common.Editor
             var commonUSSAssetPath = AssetDatabase.GUIDToAssetPath("20c4b12a1544dac44b6c04777afe69db");
             var commonStyleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(commonUSSAssetPath);
             root.styleSheets.Add(commonStyleSheet);
-
-            var versionSpecificUSSAssetPath = AssetDatabase.GUIDToAssetPath("6cc12d310d0c4244f91750a8f28911fb");
-            var versionSpecificStyleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(versionSpecificUSSAssetPath);
-            root.styleSheets.Add(versionSpecificStyleSheet);
 
             UpdateButton = root.Q<Button>("UpdateButton");
             UpdateButton.visible = false;
@@ -132,16 +132,15 @@ namespace com.zibra.common.Editor
             {
                 return;
             }
-#if UNITY_2020_2_OR_NEWER
             if (Request.webRequest.result != UnityWebRequest.Result.Success)
-#else
-            if (request.webRequest.isHttpError || request.webRequest.isNetworkError)
-#endif
             {
-                string errorMessage = $"Update check failed: {Request.webRequest.error}";
-                Debug.LogError(errorMessage);
-                LabelMessage.text = errorMessage;
-                if (OnlyShowOutdated)
+                if (!IsAutomaticCheck)
+                {
+                    string errorMessage = $"Update check failed: {Request.webRequest.error}";
+                    Debug.LogError(errorMessage);
+                    LabelMessage.text = errorMessage;
+                }
+                else
                 {
                     DestroyImmediate(Instance);
                 }
@@ -149,11 +148,14 @@ namespace com.zibra.common.Editor
             }
             if (Request.webRequest.responseCode != 200)
             {
-                string errorMessage =
+                if (!IsAutomaticCheck)
+                {
+                    string errorMessage =
                     $"Update check failed: {Request.webRequest.responseCode} - {Request.webRequest.downloadHandler.text}";
-                Debug.LogError(errorMessage);
-                LabelMessage.text = errorMessage;
-                if (OnlyShowOutdated)
+                    Debug.LogError(errorMessage);
+                    LabelMessage.text = errorMessage;
+                }
+                else
                 {
                     DestroyImmediate(Instance);
                 }
@@ -170,16 +172,16 @@ namespace com.zibra.common.Editor
 #pragma warning disable 0162
             if (Effects.IsPreReleaseVersion)
             {
-                LabelMessage.text = $"You have the Pre-release version of the Zibra Effects: {Effects.Version}";
-                if (OnlyShowOutdated)
+                LabelMessage.text = $"You have the Pre-release version: {Effects.Version}";
+                if (IsAutomaticCheck)
                 {
                     DestroyImmediate(Instance);
                 }
             }
             else if (IsLatestVersion)
             {
-                LabelMessage.text = $"You have the latest version of the Zibra Effects: {Effects.Version}";
-                if (OnlyShowOutdated)
+                LabelMessage.text = $"You have the latest version: {Effects.Version}";
+                if (IsAutomaticCheck)
                 {
                     DestroyImmediate(Instance);
                 }
@@ -187,10 +189,10 @@ namespace com.zibra.common.Editor
             else
             {
                 LabelMessage.text =
-                    $"New Zibra Effects version available. Please consider updating. Latest version: \"{pluginVersion.version}\". Current version: \"{Effects.Version}\"";
+                    $"New version available. Please consider updating. Latest version: \"{pluginVersion.version}\". Current version: \"{Effects.Version}\"";
                 UpdateButton.visible = true;
                 UpdateButton.clicked += UpdatePluginPageClick;
-                if (OnlyShowOutdated)
+                if (IsAutomaticCheck)
                 {
                     Show();
                 }
@@ -257,9 +259,12 @@ namespace com.zibra.common.Editor
             return true;
         }
 
+        // C# doesn't know we use it with JSON deserialization
+#pragma warning disable 0649
         private struct ZibraEffectsVersion
         {
             public string version;
         }
+#pragma warning restore 0649
     }
 }

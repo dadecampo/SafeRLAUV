@@ -20,6 +20,13 @@ namespace com.zibra.common.SDFObjects
 }
 
 /// <summary>
+///     Namespace that contains simulation logic shared between effects.
+/// </summary>
+namespace com.zibra.common.Solver
+{
+}
+
+/// <summary>
 ///     Namespace that contains miscellaneous utilities.
 /// </summary>
 namespace com.zibra.common.Utilities
@@ -54,7 +61,7 @@ namespace com.zibra.common.Manipulators
 }
 
 /// <summary>
-///     Namespace that contains all Liquids classes.
+///     Namespace that contains all Liquid classes.
 /// </summary>
 namespace com.zibra.liquid
 {

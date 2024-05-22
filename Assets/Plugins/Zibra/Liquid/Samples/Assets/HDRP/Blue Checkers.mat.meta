@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d4e0666b07425a9488384b9e5c21faed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Samples/Assets/HDRP/Blue Checkers.mat
+  uploadId: 663749

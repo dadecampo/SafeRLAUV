@@ -1,9 +1,7 @@
-﻿#if UNITY_2019_4_OR_NEWER
-
-using com.zibra.liquid.Foundation.Editor;
+﻿using com.zibra.common.Foundation.Editor;
 using UnityEngine.UIElements;
 
-namespace com.zibra.liquid.Plugins.Editor
+namespace com.zibra.common.Plugins.Editor
 {
     /// <summary>
     /// Base window tab implementation for <see cref="PackageSettingsWindow{TWindow}" />
@@ -25,4 +23,3 @@ namespace com.zibra.liquid.Plugins.Editor
         public VisualElement Root => this;
     }
 }
-#endif

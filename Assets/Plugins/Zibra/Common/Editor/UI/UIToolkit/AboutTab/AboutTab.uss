@@ -7,6 +7,10 @@ SettingsBlock {
     flex-shrink: 0;
 }
 
+.licenseStatus {
+    color: #d2d2d2;
+}
+
 .icon {
     width: 16px;
     height: 16px;

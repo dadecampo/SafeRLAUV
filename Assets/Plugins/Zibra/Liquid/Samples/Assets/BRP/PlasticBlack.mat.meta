@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bbd38b6317de9704097d29a3f586ad2e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Samples/Assets/BRP/PlasticBlack.mat
+  uploadId: 663749

@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEditor;
 using com.zibra.common.SDFObjects;
-using com.zibra.common.Editor.SDFObjects;
-using com.zibra.common;
 using com.zibra.common.Analytics;
+using com.zibra.common.Editor.Licensing;
 
-namespace com.zibra.liquid.Editor.SDFObjects
+namespace com.zibra.common.Editor.SDFObjects
 {
     [CustomEditor(typeof(NeuralSDF))]
     [CanEditMultipleObjects]
@@ -27,14 +26,15 @@ namespace com.zibra.liquid.Editor.SDFObjects
                 return;
             }
 
-            if (!ServerAuthManager.GetInstance().IsGenerationAvailable())
+            if (!GenerationManager.Instance.IsGenerationAvailable())
             {
-                Debug.LogWarning("Licence key validation in process");
+                Debug.LogWarning("Neural SDF Generation requires license verification.");
+                Debug.LogWarning(GenerationManager.Instance.GetErrorMessage());
                 return;
             }
 
             // Find all neural colliders in the scene
-            NeuralSDF[] allNeuralSDF = FindObjectsOfType<NeuralSDF>();
+            NeuralSDF[] allNeuralSDF = FindObjectsByType<NeuralSDF>(FindObjectsSortMode.None);
 
             if (allNeuralSDF.Length == 0)
             {
@@ -63,7 +63,7 @@ namespace com.zibra.liquid.Editor.SDFObjects
 
         protected void Awake()
         {
-            ServerAuthManager.GetInstance();
+            LicensingManager.Instance.ValidateLicense();
         }
         protected void OnEnable()
         {
@@ -109,34 +109,21 @@ namespace com.zibra.liquid.Editor.SDFObjects
 
         public override void OnInspectorGUI()
         {
-            EditorGUI.BeginChangeCheck();
-
             serializedObject.Update();
 
-            bool isGenerationDisabled = false;
+            GenerationGUI();
 
-            if (EditorApplication.isPlaying)
-            {
-                GUILayout.Label("Generation is disabled during playmode");
-                GUILayout.Space(20);
-                isGenerationDisabled = true;
-            }
-            else if (!ServerAuthManager.GetInstance().IsGenerationAvailable())
-            {
-                GUILayout.Label("Error validating license key: " +
-                                ServerAuthManager.GetInstance().GetGenerationErrorMessage());
-                if (!ServerAuthManager.GetInstance().IsGenerationAvailable())
-                {
-                    if (GUILayout.Button("Open Info window"))
-                    {
-                        EditorApplication.ExecuteMenuItem(Effects.BaseMenuBarPath + "Info");
-                    }
-                }
-                GUILayout.Space(20);
-                isGenerationDisabled = true;
-            }
+            EditorGUILayout.PropertyField(InvertSDF);
+            EditorGUILayout.PropertyField(SurfaceDistance);
 
-            EditorGUI.BeginDisabledGroup(isGenerationDisabled);
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void GenerationGUI()
+        {
+            bool isGenerationAvailable = GenerationAvailabilityGUI();
+
+            EditorGUI.BeginDisabledGroup(!isGenerationAvailable);
             int toGenerateCount = 0;
             int toRegenerateCount = 0;
 
@@ -204,15 +191,37 @@ namespace com.zibra.liquid.Editor.SDFObjects
             }
 
             EditorGUI.EndDisabledGroup();
+        }
 
-            EditorGUILayout.PropertyField(InvertSDF);
-            EditorGUILayout.PropertyField(SurfaceDistance);
-
-            serializedObject.ApplyModifiedProperties();
-
-            if (EditorGUI.EndChangeCheck())
+        private static bool GenerationAvailabilityGUI()
+        {
+            if (EditorApplication.isPlaying)
             {
-                ZibraEffectsAnalytics.TrackConfiguration("SDF");
+                GUILayout.Label("Generation is disabled during playmode");
+                GUILayout.Space(20);
+
+                return false;
+            }
+            else if (!GenerationManager.Instance.IsGenerationAvailable())
+            {
+                GUILayout.Label("Neural SDF Generation requires license verification.\n" +
+                                GenerationManager.Instance.GetErrorMessage());
+
+                if (GenerationManager.Instance.NeedActivation())
+                {
+                    if (GUILayout.Button("Activate license"))
+                    {
+                        ZibraEffectsOnboarding.ShowWindow("neuralSDF_generation");
+                    }
+                }
+
+                GUILayout.Space(20);
+
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

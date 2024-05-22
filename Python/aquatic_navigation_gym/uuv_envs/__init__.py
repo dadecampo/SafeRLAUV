@@ -1,3 +1,3 @@
-from aquatic_navigation_gym.uuv_envs.envs import FirstUuvEnv, SecondUuvEnv, ThirdUuvEnv, UuvEnv
+from aquatic_navigation_gym.uuv_envs.envs import EasyUuvEnv, MediumUuvEnv, HardUuvEnv, UuvEnv
 
 

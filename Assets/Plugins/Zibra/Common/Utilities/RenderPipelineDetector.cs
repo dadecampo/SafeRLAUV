@@ -89,9 +89,9 @@ namespace com.zibra.common.Utilities
                                 return false;
                             }
                         }
+                        return true;
                     }
                 }
-                return true;
             }
             return false;
         }

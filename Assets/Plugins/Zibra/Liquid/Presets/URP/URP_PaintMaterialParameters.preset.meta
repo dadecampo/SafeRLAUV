@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 74cfc0fc834dec240b27ac242b2d7d9f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Presets/URP/URP_PaintMaterialParameters.preset
+  uploadId: 663749

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e1f4a9db62572814aa947f36188b8f99
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Editor/Solver/ZibraAdvancedParametersEditor.cs
+  uploadId: 663749

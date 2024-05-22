@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9e02820185a87944b9f5c7be589df283
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Common/Samples/CombinedEffects/SampleSceneHDRP/LightingData.asset
+  uploadId: 663749

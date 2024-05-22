@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['initializesimulation_0',['InitializeSimulation',['../classcom_1_1zibra_1_1liquid_1_1_solver_1_1_zibra_liquid.html#a484530f9d18e906daf0f5cd5d5516136',1,'com::zibra::liquid::Solver::ZibraLiquid']]],
-  ['isgenerationavailable_1',['IsGenerationAvailable',['../classcom_1_1zibra_1_1common_1_1_editor_1_1_s_d_f_objects_1_1_server_auth_manager.html#ad2e5039aa4da31728b5d4847e918e689',1,'com::zibra::common::Editor::SDFObjects::ServerAuthManager']]],
-  ['islicenseverified_2',['IsLicenseVerified',['../classcom_1_1zibra_1_1common_1_1_editor_1_1_s_d_f_objects_1_1_server_auth_manager.html#a5cccd710313a9659a49c23a2ecd05ed1',1,'com::zibra::common::Editor::SDFObjects::ServerAuthManager']]],
-  ['isurpmissingdepthbuffer_3',['IsURPMissingDepthBuffer',['../classcom_1_1zibra_1_1common_1_1_utilities_1_1_render_pipeline_detector.html#ace552566ee424ce8dc75e0c1fd1180cd',1,'com::zibra::common::Utilities::RenderPipelineDetector']]],
-  ['isvalidbakedliquidheader_4',['IsValidBakedLiquidHeader',['../classcom_1_1zibra_1_1liquid_1_1_solver_1_1_zibra_liquid.html#a60acfdf2246cdd98b4688277796837b6',1,'com::zibra::liquid::Solver::ZibraLiquid']]]
+  ['hascollider_0',['HasCollider',['../a00937.html#aa346086eef93df4b671ad3e0d2c00b99',1,'com::zibra::liquid::Solver::ZibraLiquid']]],
+  ['hasemitter_1',['HasEmitter',['../a00937.html#a4746d9bc10cb2d1892167d68570f20d3',1,'com.zibra.liquid.Solver.ZibraLiquid.HasEmitter()'],['../a01161.html#a4746d9bc10cb2d1892167d68570f20d3',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.HasEmitter()']]],
+  ['hasmaintenance_2',['HasMaintenance',['../a00529.html#a456d7227bd451e8a7c2e02e67b43b61f',1,'com::zibra::common::Editor::Licensing::LicensingManager']]],
+  ['hasmanipulator_3',['HasManipulator',['../a00937.html#aac0ad2411b42670e36cc79a9865e6a95',1,'com.zibra.liquid.Solver.ZibraLiquid.HasManipulator()'],['../a01161.html#aac0ad2411b42670e36cc79a9865e6a95',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.HasManipulator()']]],
+  ['hasrepresentation_4',['HasRepresentation',['../a00705.html#aa59464d29cad43ba1ae6c45765c16bda',1,'com.zibra.common.SDFObjects.NeuralSDF.HasRepresentation()'],['../a00717.html#aa59464d29cad43ba1ae6c45765c16bda',1,'com.zibra.common.SDFObjects.SkinnedMeshSDF.HasRepresentation()']]]
 ];

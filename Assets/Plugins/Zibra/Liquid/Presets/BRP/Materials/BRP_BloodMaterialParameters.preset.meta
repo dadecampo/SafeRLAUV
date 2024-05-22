@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 25c7e390fb0ad5847a8734e3f425821f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 266451
+  packageName: Zibra Liquid
+  packageVersion: 2.1.5
+  assetPath: Assets/Plugins/Zibra/Liquid/Presets/BRP/Materials/BRP_BloodMaterialParameters.preset
+  uploadId: 663749

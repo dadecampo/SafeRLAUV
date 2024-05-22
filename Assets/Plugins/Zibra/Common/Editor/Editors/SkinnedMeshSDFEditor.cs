@@ -4,8 +4,10 @@ using com.zibra.common.Editor.SDFObjects;
 using com.zibra.common.SDFObjects;
 using com.zibra.common;
 using com.zibra.common.Analytics;
+using com.zibra.common.Editor.Licensing;
+using com.zibra.common.Editor;
 
-namespace com.zibra.liquid.Editor.SDFObjects
+namespace com.zibra.common.Editor.SDFObjects
 {
     [CustomEditor(typeof(SkinnedMeshSDF))]
     [CanEditMultipleObjects]
@@ -27,14 +29,15 @@ namespace com.zibra.liquid.Editor.SDFObjects
                 return;
             }
 
-            if (!ServerAuthManager.GetInstance().IsGenerationAvailable())
+            if (!GenerationManager.Instance.IsGenerationAvailable())
             {
-                Debug.LogWarning("Licence key validation in process");
+                Debug.LogWarning("Skinned Mesh SDF Generation requires license verification.");
+                Debug.LogWarning(GenerationManager.Instance.GetErrorMessage());
                 return;
             }
 
             // Find all neural colliders in the scene
-            SkinnedMeshSDF[] skinnedMeshSDFs = FindObjectsOfType<SkinnedMeshSDF>();
+            SkinnedMeshSDF[] skinnedMeshSDFs = FindObjectsByType<SkinnedMeshSDF>(FindObjectsSortMode.None);
 
             if (skinnedMeshSDFs.Length == 0)
             {
@@ -104,26 +107,29 @@ namespace com.zibra.liquid.Editor.SDFObjects
 
         public override void OnInspectorGUI()
         {
-            EditorGUI.BeginChangeCheck();
-
             serializedObject.Update();
 
-            if (EditorApplication.isPlaying)
-            {
-                // Don't allow generation in playmode
-            }
-            else if (!ServerAuthManager.GetInstance().IsGenerationAvailable())
-            {
-                GUILayout.Label("Licence key validation in progress");
+            GenerationGUI();
 
-                GUILayout.Space(20);
-            }
-            else
-            {
-                int toGenerateCount = 0;
-                int toRegenerateCount = 0;
+            if (SkinnedSDFs.Length == 1)
+                EditorGUILayout.PropertyField(BoneSDFList);
+            EditorGUILayout.PropertyField(SurfaceDistance);
 
-                foreach (var instance in SkinnedSDFs)
+            serializedObject.ApplyModifiedProperties();
+        }
+
+
+        private void GenerationGUI()
+        {
+            bool isGenerationAvailable = GenerationAvailabilityGUI();
+
+            EditorGUI.BeginDisabledGroup(!isGenerationAvailable);
+            int toGenerateCount = 0;
+            int toRegenerateCount = 0;
+
+            foreach (var instance in SkinnedSDFs)
+            {
+                if (!GenerationQueue.Contains(instance))
                 {
                     if (instance.HasRepresentation())
                     {
@@ -131,71 +137,91 @@ namespace com.zibra.liquid.Editor.SDFObjects
                     }
                     else
                     {
-                        if (!GenerationQueue.Contains(instance))
-                            toGenerateCount++;
-                    }
-                }
-
-                int inQueueCount = SkinnedSDFs.Length - toGenerateCount - toRegenerateCount;
-                int fullQueueLength = GenerationQueue.GetQueueLength();
-                if (fullQueueLength > 0)
-                {
-                    if (fullQueueLength != inQueueCount)
-                    {
-                        if (inQueueCount == 0)
-                        {
-                            GUILayout.Label($"Generating other SDFs. {fullQueueLength} left in total.");
-                        }
-                        else
-                        {
-                            GUILayout.Label(
-                                $"Generating SDFs. {inQueueCount} left out of selected SDFs. {fullQueueLength} SDFs left in total.");
-                        }
-                    }
-                    else
-                    {
-                        GUILayout.Label(SkinnedSDFs.Length > 1 ? $"Generating SDFs. {inQueueCount} left."
-                                                               : "Generating SDF.");
-                    }
-                    if (GUILayout.Button("Abort"))
-                    {
-                        GenerationQueue.Abort();
-                    }
-                }
-
-                if (toGenerateCount > 0)
-                {
-                    EditorGUILayout.HelpBox(SkinnedSDFs.Length > 1
-                                                ? $"{toGenerateCount} skinned mesh SDFs don't have a representation."
-                                                : "Skinned mesh SDF doesn't have a representation.",
-                                            MessageType.Error);
-                    if (GUILayout.Button("Generate skinned mesh SDF"))
-                    {
-                        GenerateSDFs();
-                    }
-                }
-
-                if (toRegenerateCount > 0)
-                {
-                    GUILayout.Label(SkinnedSDFs.Length > 1 ? $"{toRegenerateCount} skinned mesh SDFs already generated."
-                                                           : "Skinned mesh SDFs already generated.");
-                    if (GUILayout.Button(SkinnedSDFs.Length > 1 ? "Regenerate all selected skinned mesh SDFs"
-                                                                : "Regenerate skinned mesh SDFs"))
-                    {
-                        GenerateSDFs(true);
+                        toGenerateCount++;
                     }
                 }
             }
 
-            if (SkinnedSDFs.Length == 1)
-                EditorGUILayout.PropertyField(BoneSDFList);
-            EditorGUILayout.PropertyField(SurfaceDistance);
-
-            serializedObject.ApplyModifiedProperties();
-
-            if (EditorGUI.EndChangeCheck())
+            int inQueueCount = SkinnedSDFs.Length - toGenerateCount - toRegenerateCount;
+            int fullQueueLength = GenerationQueue.GetQueueLength();
+            if (fullQueueLength > 0)
             {
-                ZibraEffectsAnalytics.TrackConfiguration("SDF");
+                if (fullQueueLength != inQueueCount)
+                {
+                    if (inQueueCount == 0)
+                    {
+                        GUILayout.Label($"Generating other SDFs. {fullQueueLength} left in total.");
+                    }
+                    else
+                    {
+                        GUILayout.Label(
+                            $"Generating SDFs. {inQueueCount} left out of selected SDFs. {fullQueueLength} SDFs left in total.");
+                    }
+                }
+                else
+                {
+                    GUILayout.Label(SkinnedSDFs.Length > 1 ? $"Generating SDFs. {inQueueCount} left."
+                                                          : "Generating SDF.");
+                }
+                if (GUILayout.Button("Abort"))
+                {
+                    GenerationQueue.Abort();
+                }
+            }
+
+            if (toGenerateCount > 0)
+            {
+                EditorGUILayout.HelpBox(SkinnedSDFs.Length > 1 ? $"{toGenerateCount} SDFs don't have representation."
+                                                              : "SDF doesn't have representation.",
+                                        MessageType.Error);
+                if (GUILayout.Button(SkinnedSDFs.Length > 1 ? "Generate SDFs" : "Generate SDF"))
+                {
+                    GenerateSDFs();
+                }
+            }
+
+            if (toRegenerateCount > 0)
+            {
+                GUILayout.Label(SkinnedSDFs.Length > 1 ? $"{toRegenerateCount} SDFs already generated."
+                                                      : "SDF already generated.");
+                if (GUILayout.Button(SkinnedSDFs.Length > 1 ? "Regenerate all selected SDFs" : "Regenerate SDF"))
+                {
+                    GenerateSDFs(true);
+                }
+            }
+
+            EditorGUI.EndDisabledGroup();
+        }
+
+        private static bool GenerationAvailabilityGUI()
+        {
+            if (EditorApplication.isPlaying)
+            {
+                GUILayout.Label("Generation is disabled during playmode");
+                GUILayout.Space(20);
+
+                return false;
+            }
+            else if (!GenerationManager.Instance.IsGenerationAvailable())
+            {
+                GUILayout.Label("Skinned Mesh SDF Generation requires license verification.\n" +
+                                GenerationManager.Instance.GetErrorMessage());
+
+                if (GenerationManager.Instance.NeedActivation())
+                {
+                    if (GUILayout.Button("Activate license"))
+                    {
+                        ZibraEffectsOnboarding.ShowWindow("neuralSDF_generation");
+                    }
+                }
+
+                GUILayout.Space(20);
+
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

@@ -1,6 +1,4 @@
-using com.zibra.common;
-
-namespace com.zibra.liquid
+namespace com.zibra.common
 {
     internal static class ZibraAIPackage
     {

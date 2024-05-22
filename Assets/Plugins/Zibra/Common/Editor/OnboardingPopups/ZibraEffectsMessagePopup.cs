@@ -7,7 +7,7 @@ namespace com.zibra.common.Editor
 {
     internal class ZibraEffectsMessagePopup : EditorWindow
     {
-
+        const string UXML_GUID = "7e8488b56556d8c48a38cd92f80fbd6a";
         public static GUIContent WindowTitle => new GUIContent("Zibra Effects License Message");
 
         private string Url = "";
@@ -29,37 +29,25 @@ namespace com.zibra.common.Editor
 
             minSize = maxSize = new Vector2(width, height);
 
-            var uxmlAssetPath = AssetDatabase.GUIDToAssetPath("7e8488b56556d8c48a38cd92f80fbd6a");
+            var uxmlAssetPath = AssetDatabase.GUIDToAssetPath(UXML_GUID);
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uxmlAssetPath);
             visualTree.CloneTree(root);
 
-            root.Q<Button>("ButtonText").clicked += SubscribeClick;
+            root.Q<Button>("Button").clicked += ButtonClick;
         }
 
-        private void SubscribeClick()
+        private void ButtonClick()
         {
             Application.OpenURL(Url);
         }
 
-        [InitializeOnLoadMethod]
-        static void SetupCallback()
-        {
-            // Don't automatically open any windows in batch mode
-            if (Application.isBatchMode)
-            {
-                return;
-            }
-
-            ServerAuthManager.OnProLicenseWarning = OpenProOnbordengWindow;
-        }
-
-        static void OpenProOnbordengWindow(string headerText, string bodyText, string url, string buttonText)
+        static public void OpenMessagePopup(string headerText, string bodyText, string url, string buttonText)
         {
             ZibraEffectsMessagePopup popup = CreateInstance<ZibraEffectsMessagePopup>();
-            popup.OpenProOnbordengWindowInternal(headerText, bodyText, url, buttonText);
+            popup.OpenMessagePopupInternal(headerText, bodyText, url, buttonText);
         }
 
-        private void OpenProOnbordengWindowInternal(string headerText, string bodyText, string url, string buttonText)
+        private void OpenMessagePopupInternal(string headerText, string bodyText, string url, string buttonText)
         {
             var root = rootVisualElement;
 
@@ -67,11 +55,11 @@ namespace com.zibra.common.Editor
             root.Q<Label>("TextMessage").text = bodyText;
             if (buttonText == "")
             {
-                root.Q<Button>("ButtonText").style.display = DisplayStyle.None;
+                root.Q<Button>("Button").style.display = DisplayStyle.None;
             }
             else
             {
-                root.Q<Button>("ButtonText").text = buttonText;
+                root.Q<Button>("Button").text = buttonText;
             }
 
             Url = url;

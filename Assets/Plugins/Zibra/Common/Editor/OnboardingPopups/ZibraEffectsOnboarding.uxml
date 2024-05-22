@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/ZibraEffectsOnboarding.uss?fileID=7433441132597879392&amp;guid=664ce6fd278825c4fa4798d5a1079a0d&amp;type=3#ZibraLiquidOnboardingPopups" />
+    <ui:VisualElement class="root" style="height: 100%; width: 100%;">
+        <ui:VisualElement style="height: 100%; top: auto; background-image: url(&apos;project://database/Assets/Plugins/Zibra/Common/Editor/OnboardingPopups/icons/1.png?fileID=2800000&amp;guid=2f4e7ece3133b8243955d1d56f1a9980&amp;type=3#1&apos;);">
+            <ui:Label text="Start using Zibra Effects" display-tooltip-when-elided="true" name="PopupTitle" class="HeaderTextStyle" style="margin-top: 32px; margin-bottom: 32px;" />
+            <ui:VisualElement style="margin-top: 32px; margin-left: 32px; margin-right: 32px; margin-bottom: 32px;">
+                <ui:Label text="Thank you for choosing Zibra Effects. Please register to start using Zibra Effects.&#10;&#10;By using Zibra Effects, you agree to our Privacy Policy and Terms of Service." display-tooltip-when-elided="true" name="TexrMessage" style="white-space: normal; -unity-text-align: upper-center; font-size: 14px; -unity-font-style: normal; margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="height: auto; margin-top: 32px; margin-bottom: 32px; margin-left: 32px; margin-right: 32px;">
+                <ui:Button name="GetKey" tabindex="-1" text="View Pricing" class="ButtonRadius" style="height: 30px; font-size: 16px; width: 50%; flex-direction: row; left: 25%; top: auto; justify-content: center; align-items: stretch; position: relative; margin-top: 8px; margin-bottom: 8px; right: 75%; margin-left: 0; margin-right: 0;" />
+                <ui:Button name="HaveKey" usage-hints="None" tabindex="-1" text="Activate License" class="ButtonRadius" style="height: 30px; font-size: 16px; white-space: nowrap; -unity-text-align: middle-center; justify-content: center; flex-direction: row; align-items: stretch; width: 50%; position: relative; right: auto; margin-top: 8px; margin-bottom: 8px; top: auto; left: 25%; margin-left: 0; margin-right: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="margin-top: 16px; flex-direction: row; justify-content: center;">
+                <ui:Button text="Privacy Policy" display-tooltip-when-elided="true" name="PrivacyPolicy" class="hyperlink" style="width: auto; font-size: 14px; color: rgb(93, 188, 255);" />
+                <ui:Button text="Terms of Service" display-tooltip-when-elided="true" name="TermsAndConditions" class="hyperlink" style="width: auto; font-size: 14px; color: rgb(93, 189, 255);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,9 +1,11 @@
 #if UNITY_2019_4_OR_NEWER
-using com.zibra.common;
+using com.zibra.common.Editor;
+using com.zibra.common.Utilities;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace com.zibra.liquid
+namespace com.zibra.common
 {
     /// <summary>
     /// Class that contains code for useful actions for the plugin
@@ -12,14 +14,14 @@ namespace com.zibra.liquid
     /// </summary>
     internal static class EffectsEditorMenu
     {
-        [MenuItem(Effects.BaseMenuBarPath + "Info", false, 15)]
-        internal static void OpenSettings()
+        [MenuItem(Effects.BaseMenuBarPath + "View License Details", false, 2)]
+        static void OpenSettings()
         {
             var windowTitle = EffectsSettingsWindow.WindowTitle;
             EffectsSettingsWindow.ShowTowardsInspector(windowTitle.text, windowTitle.image);
         }
 
-        internal static void OpenFile(string GUID)
+        static void OpenFile(string GUID)
         {
             string dataPath = Application.dataPath;
             string projectPath = dataPath.Replace("/Assets", "");
@@ -27,14 +29,29 @@ namespace com.zibra.liquid
             Application.OpenURL("file://" + projectPath + "/" + filePath);
         }
 
-        [MenuItem(Effects.BaseMenuBarPath + "Open User Guide", false, 30)]
-        internal static void OpenUserGuide()
+        [MenuItem(Effects.BaseMenuBarPath + "Open Documentation", false, 30)]
+        static void OpenUserGuide()
         {
-            OpenFile("09ace81bf2ac0bd4e8c853cda11f7c84");
+#if ZIBRA_EFFECTS_OTP_VERSION
+            if (PluginManager.AvailableCount() >= 2)
+            {
+                Application.OpenURL("https://zibra.notion.site/Zibra-AI-30f5387d28054131a123d124dbf3941f?pvs=4");
+            }
+            else if (PluginManager.IsAvailable(PluginManager.Effect.Liquid))
+            {
+                Application.OpenURL("https://zibra.notion.site/Zibra-Liquid-c0cb383f753a48db8c73b598d71ed68e");
+            }
+            else
+            {
+                Application.OpenURL("https://zibra.notion.site/Zibra-Smoke-Fire-ff523dd66e104179b79ca066586fab18");
+            }
+#else
+            Application.OpenURL("https://zibra.notion.site/Zibra-Effects-0dad2d38da054cbeb6a699a3b2cfb2b1");
+#endif
         }
 
         [MenuItem(Effects.BaseMenuBarPath + "Open API Reference", false, 31)]
-        internal static void OpenAPIDocumentation()
+        static void OpenAPIDocumentation()
         {
             string dataPath = Application.dataPath;
             string projectPath = dataPath.Replace("/Assets", "");
@@ -42,28 +59,41 @@ namespace com.zibra.liquid
             Application.OpenURL("file://" + projectPath + "/" + documentationPath + "/index.html");
         }
 
-        [MenuItem(Effects.BaseMenuBarPath + "Open Changelog", false, 33)]
-        internal static void OpenChangelog()
+        [MenuItem(Effects.BaseMenuBarPath + "Browse Assets on Unity Asset Store", false, 34)]
+        static void OpenAssetStore()
         {
-            OpenFile("b667af1f31c554a3299ea0e7db5ad45a");
-        }
-
-        [MenuItem(Effects.BaseMenuBarPath + "Open Known Issues List", false, 33)]
-        internal static void OpenKnownIssues()
-        {
-            OpenFile("8c104e5e29fc2bc48b6e83e32bb63679");
-        }
+            Application.OpenURL("https://effects.zibra.ai/open");
+        }        
 
         [MenuItem(Effects.BaseMenuBarPath + "Contact us/Discord", false, 1000)]
-        internal static void OpenDiscord()
+        static void OpenDiscord()
         {
             Application.OpenURL("https://discord.gg/QzypP8n7uB");
         }
 
         [MenuItem(Effects.BaseMenuBarPath + "Contact us/Support E-Mail", false, 1010)]
-        internal static void OpenSupportEmail()
+        static void OpenSupportEmail()
         {
             Application.OpenURL("mailto:support@zibra.ai");
+        }
+
+        [MenuItem(Effects.BaseMenuBarPath + "Open Sample Scene/Combined Liquid and Smoke", false, 29)]
+        static void OpenCombinedEffectsSampleScene()
+        {
+            string GUID = "";
+            switch (RenderPipelineDetector.GetRenderPipelineType())
+            {
+                case RenderPipelineDetector.RenderPipeline.BuiltInRP:
+                    GUID = "2eaf9a27e7194a6797736a1b063e581f";
+                    break;
+                case RenderPipelineDetector.RenderPipeline.URP:
+                    GUID = "d9a09277d7d7dc4449a5299b4f122bbb";
+                    break;
+                case RenderPipelineDetector.RenderPipeline.HDRP:
+                    GUID = "f8335ff236204cc468c5c836e4bc180d";
+                    break;
+            }
+            EditorSceneManager.OpenScene(AssetDatabase.GUIDToAssetPath(GUID));
         }
     }
 }
