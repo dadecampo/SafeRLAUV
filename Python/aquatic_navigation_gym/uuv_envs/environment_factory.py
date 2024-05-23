@@ -23,7 +23,7 @@ def _get_side_channels(auvEnum: UuvEnvEnumeration) -> List[SideChannel]:
         
 def _get_easy_env_channels() -> List[SideChannel]:
     engineConfigChannel = EngineConfigurationChannel()
-    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10, capture_frame_rate=60)
+    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=1, capture_frame_rate=60)
     
     environmentParametersChannel = EnvironmentParametersChannel()
     environmentParametersChannel.set_float_parameter("target_x", 33.66)
@@ -39,7 +39,7 @@ def _get_easy_env_channels() -> List[SideChannel]:
 def _get_medium_env_channels() -> List[SideChannel]:
     
     engineConfigChannel = EngineConfigurationChannel()
-    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10, capture_frame_rate=60)
+    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=1, capture_frame_rate=60)
     
     environmentParametersChannel = EnvironmentParametersChannel()
     environmentParametersChannel.set_float_parameter("target_x", 9.38)
@@ -53,7 +53,7 @@ def _get_medium_env_channels() -> List[SideChannel]:
     return [engineConfigChannel, environmentParametersChannel]
 def _get_hard_env_channels() -> List[SideChannel]:
     engineConfigChannel = EngineConfigurationChannel()
-    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=10, capture_frame_rate=60)
+    engineConfigChannel.set_configuration_parameters(width=800, height=800, quality_level=1, time_scale=1, capture_frame_rate=60)
     
     environmentParametersChannel = EnvironmentParametersChannel()
     environmentParametersChannel.set_float_parameter("target_x", 9.38)
