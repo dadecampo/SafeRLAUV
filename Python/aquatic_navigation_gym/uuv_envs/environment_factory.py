@@ -67,7 +67,7 @@ def _get_hard_env_channels() -> List[SideChannel]:
     return [engineConfigChannel, environmentParametersChannel]
 
 def get_env(auvEnum: UuvEnvEnumeration) -> UnityToGymWrapper:
-    unity_env = UnityEnvironment( f"../Builds/{auvEnum.name}/SafeRLAUV", worker_id=np.random.randint(0, 1000), side_channels=_get_side_channels(auvEnum))
+    unity_env = UnityEnvironment( f"aquatic_navigation_gym/uuv_envs/envs/{auvEnum.name}/SafeRLAUV", worker_id=np.random.randint(0, 1000), side_channels=_get_side_channels(auvEnum))
     env = UnityToGymWrapper(unity_env, flatten_branched=True)
     return env
     

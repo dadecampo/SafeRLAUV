@@ -6,13 +6,13 @@ from stable_baselines3 import PPO
 from stable_baselines3.ppo import MlpPolicy
 import aquatic_navigation_gym
 
-model_name= "<insert_model_name>.onnx"
+model_name= "model.onnx"
 n_steps_update = 20_480 
 total_n_steps = 1_000_000
 batch_size = 2048
 
 ### ENVIRONMENT INITIALIZATION ###
-env = gym.make("aquatic_navigation_gym/MediumUuvEnv-v0")
+env = gym.make("aquatic_navigation_gym/EasyUuvEnv-v0")
 
 ### MODEL DEFINITION ###
 model = PPO(MlpPolicy, env, verbose=1, gamma=0.99, n_steps=n_steps_update, batch_size=batch_size)
