@@ -13,17 +13,16 @@ This project aims to create a series of underwater and surface environments in U
 
 2. Install Anaconda
 
-3. Setup enviroment:
+3. Clone SafeRLAUV repository using Git LFS.
+
+   - `git lfs clone https://github.com/dadecampo/SafeRLAUV`
+
+4. Setup enviroment:
    - `conda create --name aquatic_navigation python=3.10.12`
    - `conda activate aquatic_navigation`
-   - `cd aquatic_navigation_envs`
+   - `cd SafeRLAUV\Python\aquatic_navigation_gym`
    - `pip3 install -r requirements.txt`
    - `pip3 install -e .`
-
-
-4. Clone SafeRLAUV repository using Git LFS.
-
-   	- `git lfs clone https://github.com/dadecampo/SafeRLAUV`
 
 # Repository organization
 Inside the 'Trainers' folder, you will find XAML files that define hyperparameters and characteristics of the various training phases, so you will find:
