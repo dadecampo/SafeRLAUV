@@ -14,14 +14,12 @@ This project aims to create a series of underwater and surface environments in U
 2. Install Anaconda
 
 3. Setup enviroment:
-	
-	- `conda create --name safeRLAUV python=3.8.16`
-	- `conda activate safeRLAUV`
-	- `conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.0 -c pytorch`
-	- `pip3 install mlagents==0.30.0`
-	- `pip3 install protobuf==3.19.6`
-	- `pip3 install six`
- 	- `pip3 install --upgrade Pillow`
+   - `conda create --name aquatic_navigation python=3.10.12`
+   - `conda activate aquatic_navigation`
+   - `cd aquatic_navigation_envs`
+   - `pip3 install -r requirements.txt`
+   - `pip3 install -e .`
+
 
 4. Clone SafeRLAUV repository using Git LFS.
 
