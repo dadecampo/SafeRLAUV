@@ -25,7 +25,7 @@ This project aims to create a series of underwater and surface environments in U
    - `pip3 install -e .`
 
 # Repository organization
-Inside the 'Trainers' folder, you will find XAML files that define hyperparameters and characteristics of the various training phases, so you will find:
+Inside the 'TrainerConfig' folder, you will find XAML files that define hyperparameters and characteristics of the various training phases, so you will find:
 
 **AUV's trainers**
  - **trainer_lesson_1.xaml**: the trainer of the first curriculum learning lesson.
