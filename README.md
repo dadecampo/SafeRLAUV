@@ -20,7 +20,7 @@ This project aims to create a series of underwater and surface environments in U
 4. Setup enviroment:
    - `conda create --name aquatic_navigation python=3.10.12`
    - `conda activate aquatic_navigation`
-   - `cd SafeRLAUV\Python\aquatic_navigation_gym`
+   - `cd SafeRLAUV\Python`
    - `pip3 install -r requirements.txt`
    - `pip3 install -e .`
 
@@ -47,7 +47,7 @@ This section has been created to allow you to reproduce the trainings we have co
 
 First of all, let's enter the folder where the training XAML files are located.
 
-	cd Trainers
+	cd TrainerConfig
 ## Underwater Environments
 ### Curriculum Learning
 Curriculum Learning involves a structured approach to training models, where the complexity of the learning tasks is gradually increased over time. Initially, the model is exposed to simpler, more manageable examples before being challenged with progressively more difficult ones.
