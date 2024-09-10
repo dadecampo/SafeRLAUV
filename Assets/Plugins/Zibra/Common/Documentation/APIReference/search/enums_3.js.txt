@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['manipulatortype_0',['ManipulatorType',['../a00893.html#a57c404a5c07698ea543d2d900d60c282',1,'com.zibra.liquid.Manipulators.Manipulator.ManipulatorType()'],['../a01085.html#a57c404a5c07698ea543d2d900d60c282',1,'com.zibra.smoke_and_fire.Manipulators.Manipulator.ManipulatorType()']]]
-];

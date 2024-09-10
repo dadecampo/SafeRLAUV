@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['renderpipelinedetector_0',['RenderPipelineDetector',['../a00757.html',1,'com::zibra::common::Utilities']]]
-];

@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['terrainsdf_0',['TerrainSDF',['../a00721.html',1,'com::zibra::common::SDFObjects']]]
-];

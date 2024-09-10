@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['generationmanager_0',['GenerationManager',['../a00517.html',1,'com::zibra::common::Editor::Licensing']]],
-  ['generationqueue_1',['GenerationQueue',['../a00497.html',1,'com::zibra::common::Editor::SDFObjects']]]
-];

@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['waitload_0',['WaitLoad',['../a00937.html#ad17e4331232fd54c8c9e970a02edfed3',1,'com.zibra.liquid.Solver.ZibraLiquid.WaitLoad()'],['../a01161.html#ad17e4331232fd54c8c9e970a02edfed3',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.WaitLoad()']]]
-];

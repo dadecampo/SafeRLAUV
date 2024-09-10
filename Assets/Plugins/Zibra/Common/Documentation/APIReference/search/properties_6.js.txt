@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['lasttimestep_0',['LastTimestep',['../a01161.html#abe78de671d42526358a0d4fa561437bc',1,'com::zibra::smoke_and_fire::Solver::ZibraSmokeAndFire']]]
-];

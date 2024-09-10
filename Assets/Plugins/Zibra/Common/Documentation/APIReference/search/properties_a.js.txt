@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['simulationguid_0',['SimulationGUID',['../a00937.html#a72093297b7fe913dd4f98193a7d601b7',1,'com.zibra.liquid.Solver.ZibraLiquid.SimulationGUID()'],['../a01161.html#a72093297b7fe913dd4f98193a7d601b7',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.SimulationGUID()']]],
-  ['simulationinternalframe_1',['SimulationInternalFrame',['../a00937.html#ab372eb0691785420d7d9f5f9a6fad33b',1,'com.zibra.liquid.Solver.ZibraLiquid.SimulationInternalFrame()'],['../a01161.html#ab372eb0691785420d7d9f5f9a6fad33b',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.SimulationInternalFrame()']]],
-  ['simulationinternaltime_2',['SimulationInternalTime',['../a00937.html#a7f55e56e8e512bd64f9f5aa3ed880ccb',1,'com.zibra.liquid.Solver.ZibraLiquid.SimulationInternalTime()'],['../a01161.html#a7f55e56e8e512bd64f9f5aa3ed880ccb',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.SimulationInternalTime()']]],
-  ['solverparameters_3',['SolverParameters',['../a00937.html#a74d8bd84ac007c5b1700c503cbdcecaa',1,'com.zibra.liquid.Solver.ZibraLiquid.SolverParameters()'],['../a01161.html#ac2d5cf21aac09e7c5dc9af9be6e11f24',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.SolverParameters()']]]
-];

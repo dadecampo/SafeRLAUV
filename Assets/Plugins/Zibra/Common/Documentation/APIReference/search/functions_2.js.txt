@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['fromjson_3c_20t_20_3e_0',['FromJson&lt; T &gt;',['../a00761.html#a5c48494776de361920b30ecd742b5698',1,'com::zibra::common::Utilities::ZibraJsonUtil']]]
-];

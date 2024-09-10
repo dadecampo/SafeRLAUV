@@ -1,8 +1,0 @@
-var searchData=
-[
-  ['serializecurrentliquidstate_0',['SerializeCurrentLiquidState',['../a00937.html#a53cae94c098143f58dbca8408985f88b',1,'com::zibra::liquid::Solver::ZibraLiquid']]],
-  ['setfadecoefficient_1',['SetFadeCoefficient',['../a00741.html#a763eb32c1ea99dc1998cebfcdd95f7e5',1,'com.zibra.common.Timeline.PlaybackControl.SetFadeCoefficient()'],['../a01161.html#aefad845432cf28664ad8e582df302194',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.SetFadeCoefficient()']]],
-  ['settime_2',['SetTime',['../a00741.html#ab53be9e1f23e6f871a58395d59992c6f',1,'com.zibra.common.Timeline.PlaybackControl.SetTime()'],['../a01161.html#a40c17c6bb720be8ad8f889560b425a46',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.SetTime()']]],
-  ['startplayback_3',['StartPlayback',['../a00741.html#af5ffc1ef142339c92f38bffb2d07afcd',1,'com.zibra.common.Timeline.PlaybackControl.StartPlayback()'],['../a01161.html#aebe81c6d79db2ed8024f09741eabe7ec',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.StartPlayback()']]],
-  ['stopplayback_4',['StopPlayback',['../a00741.html#aedb14e4a4791af7821d778e1282129db',1,'com.zibra.common.Timeline.PlaybackControl.StopPlayback()'],['../a01161.html#a6a27defe1e9e875522dfec4f8f664e62',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.StopPlayback()']]]
-];

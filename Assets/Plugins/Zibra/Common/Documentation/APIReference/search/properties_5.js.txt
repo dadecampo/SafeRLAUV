@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['initialized_0',['Initialized',['../a00937.html#af294bdac784bb625eaf8704ff2e88685',1,'com.zibra.liquid.Solver.ZibraLiquid.Initialized()'],['../a01161.html#af294bdac784bb625eaf8704ff2e88685',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.Initialized()']]],
-  ['instance_1',['Instance',['../a00517.html#a1e910b0f4e300d9ddc7572fba1d9c50a',1,'com.zibra.common.Editor.Licensing.GenerationManager.Instance()'],['../a00521.html#ae90f8aea9bc3f56368f05b0b16785135',1,'com.zibra.common.Editor.Licensing.LicenseInfoQuery.Instance()'],['../a00529.html#ac539d7bda667a7490860a28ab91404d6',1,'com.zibra.common.Editor.Licensing.LicensingManager.Instance()']]]
-];

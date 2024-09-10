@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['materialparameters_0',['MaterialParameters',['../a00937.html#a12e092b6fe70af9ee1f40536505bc440',1,'com.zibra.liquid.Solver.ZibraLiquid.MaterialParameters()'],['../a01161.html#a97915aeb07d51e6a85a84467cb9f3ec1',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.MaterialParameters()']]]
-];

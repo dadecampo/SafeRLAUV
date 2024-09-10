@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['analyticsdf_0',['AnalyticSDF',['../a00697.html',1,'com::zibra::common::SDFObjects']]]
-];

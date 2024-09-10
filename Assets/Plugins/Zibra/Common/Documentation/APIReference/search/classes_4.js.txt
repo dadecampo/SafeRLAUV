@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['forceinteractioncallbacktype_0',['ForceInteractionCallbackType',['../a00905.html',1,'com::zibra::liquid::Manipulators']]],
-  ['forceinteractiondata_1',['ForceInteractionData',['../a00901.html',1,'com::zibra::liquid::Manipulators']]]
-];

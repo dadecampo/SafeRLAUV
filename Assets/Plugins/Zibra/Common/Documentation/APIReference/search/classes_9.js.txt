@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['playbackcontrol_0',['PlaybackControl',['../a00741.html',1,'com::zibra::common::Timeline']]],
-  ['pluginmanager_1',['PluginManager',['../a00537.html',1,'com::zibra::common::Editor']]]
-];

@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['bakedinitialstate_0',['BakedInitialState',['../a00941.html',1,'com::zibra::liquid::Solver::ZibraLiquid']]]
-];

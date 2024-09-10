@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['gridnodecount_0',['GridNodeCount',['../a00937.html#a48de9ab6a131dbf024e002492e2f0722',1,'com::zibra::liquid::Solver::ZibraLiquid']]],
-  ['gridsize_1',['GridSize',['../a00937.html#a9fb3b7b8440479d4a0788152380101cf',1,'com.zibra.liquid.Solver.ZibraLiquid.GridSize()'],['../a01161.html#a9fb3b7b8440479d4a0788152380101cf',1,'com.zibra.smoke_and_fire.Solver.ZibraSmokeAndFire.GridSize()']]]
-];

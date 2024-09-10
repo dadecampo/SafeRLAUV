@@ -1,8 +1,0 @@
-var searchData=
-[
-  ['objectilluminationshadows_0',['ObjectIlluminationShadows',['../a01069.html#a349c1172d9ccb57a1c380e71e5deaca9',1,'com::zibra::smoke_and_fire::DataStructures::ZibraSmokeAndFireMaterialParameters']]],
-  ['objectprimaryshadows_1',['ObjectPrimaryShadows',['../a01069.html#a6289454206261f6c9375f76d7c4238c5',1,'com::zibra::smoke_and_fire::DataStructures::ZibraSmokeAndFireMaterialParameters']]],
-  ['objectshadowintensity_2',['ObjectShadowIntensity',['../a01069.html#a44c852b3e6ec03028f6ab922db39bc70',1,'com::zibra::smoke_and_fire::DataStructures::ZibraSmokeAndFireMaterialParameters']]],
-  ['onlicenseinfoupdate_3',['OnLicenseInfoUpdate',['../a00521.html#acaf4ab56438c0fd78244ac66cd4f0192',1,'com::zibra::common::Editor::Licensing::LicenseInfoQuery']]],
-  ['onlicensestatusupdate_4',['OnLicenseStatusUpdate',['../a00529.html#a43f65f154a7f7c375037f08dc2a4cb12',1,'com::zibra::common::Editor::Licensing::LicensingManager']]]
-];
