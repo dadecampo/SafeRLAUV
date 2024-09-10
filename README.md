@@ -49,6 +49,8 @@ First of all, let's enter the folder where the training XAML files are located.
 
 	cd TrainerConfig
 ## Underwater Environments
+[Here](https://mega.nz/folder/tdlgmaja#osEW6iAcow4gaFUkFyLjeA) you can download the Builds!
+
 ### Curriculum Learning
 Curriculum Learning involves a structured approach to training models, where the complexity of the learning tasks is gradually increased over time. Initially, the model is exposed to simpler, more manageable examples before being challenged with progressively more difficult ones.
 In our approach we subdivide training in 3 different lessons.
