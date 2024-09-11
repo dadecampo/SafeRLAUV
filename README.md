@@ -8,7 +8,8 @@ The full paper is available at this [link](https://rlj.cs.umass.edu/2024/papers/
 *  **Davide Corsi** - dcorsi@uci.edu
 *  **Davide Camponogara** - davide.camponogara.99@gmail.com
 *  **Alessandro Farinelli** - alessandro.farinelli@univr.it
-  
+
+#
 This project aims to create a series of underwater and surface environments in Unity in order to test different Deep Reinforcement Learning approaches to solve the problem of autonomous agents, such as AUVs and surface drones, traversing one of these marine environments. We simulated the water using ZibraAI Liquids Pro and used ML-agents for the agent's training phase.
 
 ![](https://i.imgur.com/oY8Z1El.jpg)
