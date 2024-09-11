@@ -1,5 +1,14 @@
 # Aquatic Navigation: A Challenging Benchmark for Deep Reinforcement Learning
 
+This paper has been accepted by the 1st Reinforcement Learning Conference (RLC), August 9–12, 2024.
+During the conference the project was awarded with one of the "Outstanding Paper Awards".
+The full paper is available at this [link](https://rlj.cs.umass.edu/2024/papers/Paper131.html)
+
+### Authors
+*  **Davide Corsi** - dcorsi@uci.edu
+*  **Davide Camponogara** - davide.camponogara.99@gmail.com
+*  **Alessandro Farinelli** - alessandro.farinelli@univr.it
+  
 This project aims to create a series of underwater and surface environments in Unity in order to test different Deep Reinforcement Learning approaches to solve the problem of autonomous agents, such as AUVs and surface drones, traversing one of these marine environments. We simulated the water using ZibraAI Liquids Pro and used ML-agents for the agent's training phase.
 
 ![](https://i.imgur.com/oY8Z1El.jpg)
