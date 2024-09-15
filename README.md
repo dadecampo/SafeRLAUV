@@ -1,7 +1,7 @@
 # Aquatic Navigation: A Challenging Benchmark for Deep Reinforcement Learning
 
 This paper has been accepted by the 1st Reinforcement Learning Conference (RLC), August 9–12, 2024.
-During the conference the project was awarded with one of the "Outstanding Paper Awards".
+During the conference, the project was awarded one of the "Outstanding Paper Awards".
 The full paper is available at this [link](https://rlj.cs.umass.edu/2024/papers/Paper131.html)
 
 ### Authors
@@ -26,7 +26,7 @@ This project aims to create a series of underwater and surface environments in U
 
    - `git clone https://github.com/dadecampo/SafeRLAUV`
 
-4. Setup enviroment:
+4. Setup environment:
    - `conda create --name aquatic_navigation python=3.10.12`
    - `conda activate aquatic_navigation`
    - `cd SafeRLAUV\Python`
@@ -48,11 +48,11 @@ Inside the 'TrainerConfig' folder, you will find XAML files that define hyperpar
    
 # Training
 
-This section has been created to allow you to reproduce the trainings we have conducted. We will provide you with the commands to execute the different phases of our training.
+This section has been created to allow you to reproduce the training we have conducted. We will provide you with the commands to execute the different phases of our training.
 
 <img src="https://i.imgur.com/Xq0oO3o.jpg" width="678" height="400" align="center">
 
->AUV Training: in terms of the reward obtained at the end of the various training sessions, we did not observe any differences; it was possible to achieve convergence with both training methodologies, however, we will see important improvement in testing phase.
+>AUV Training: in terms of the reward obtained at the end of the various training sessions, we did not observe any differences; it was possible to achieve convergence with both training methodologies, however, we will see an important improvement in the testing phase.
 
 First of all, let's enter the folder where the training XAML files are located.
 
@@ -62,7 +62,7 @@ First of all, let's enter the folder where the training XAML files are located.
 
 ### Curriculum Learning
 Curriculum Learning involves a structured approach to training models, where the complexity of the learning tasks is gradually increased over time. Initially, the model is exposed to simpler, more manageable examples before being challenged with progressively more difficult ones.
-In our approach we subdivide training in 3 different lessons.
+In our approach, we subdivide training into 3 different lessons.
 
 #### Lesson 1
 For the first lesson of curriculum learning, the agent will be placed inside the simplest training cave, where it will have to learn to reach the opposite end of the cave without having to worry about countering the force of the currents, as the water will be disabled.
