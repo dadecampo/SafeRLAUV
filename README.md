@@ -31,7 +31,6 @@ This project aims to create a series of underwater and surface environments in U
    - `conda activate aquatic_navigation`
    - `cd SafeRLAUV\Python`
    - `pip3 install -r requirements.txt`
-   - `pip3 install -e .`
 
 # Repository organization
 Inside the 'TrainerConfig' folder, you will find XAML files that define hyperparameters and characteristics of the various training phases, so you will find:
